@@ -1,0 +1,18 @@
+span.verified.indicator,
+span.not-verified.indicator,
+span.banned.indicator,
+span.not-banned.indicator {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+}
+
+span.verified.indicator,
+span.not-banned.indicator {
+    background: green;
+}
+
+span.not-verified.indicator,
+span.banned.indicator {
+    background: red;
+}

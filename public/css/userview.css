@@ -1,0 +1,56 @@
+.basic-details_header,
+.location-details_header,
+.adminactions_header {
+    font-size: 24px;
+    line-height: 28px;
+    font-weight: 600;
+    padding-bottom: 10px;
+    border-bottom: 1px solid;
+}
+
+.basic-details_body,
+.location-details_body,
+.adminactions_body {
+    padding: 22px 0;
+    margin-bottom: 20px;
+}
+
+.user-full-name,
+.user-email,
+.user-name,
+.user-phone-number,
+.user-nationalid {
+    margin-bottom: 20px;
+}
+
+.fullname,
+.email,
+.username,
+.usertask,
+.usernationalid,
+.userphonenumber {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    color: #333;
+}
+
+.total-tasks,
+.total-tasks-completed,
+.total-ratings {
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 28px;
+}
+
+.user-city,
+.user-locality,
+.user-county,
+.user-postal {
+    padding: 20px 0;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+    color: #333;
+}

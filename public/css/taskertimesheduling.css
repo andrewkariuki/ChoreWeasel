@@ -1,0 +1,121 @@
+.cw-container {
+    padding: 60px 0;
+    /* color: #5A5E69; */
+    color: #242A30;
+}
+
+.task-time-tasker-header-main {
+    font-size: 32px;
+    line-height: 48px;
+}
+
+.task-time-tasker-header-sub {
+    font-size: 20px;
+    font-weight: 300;
+    line-height: 30px;
+}
+
+.tasks-time-tasker_content {
+    padding: 22px;
+    margin-top: 10px;
+}
+
+.task-date-time_header,
+.sort-by_header {
+    font-size: 24px;
+    line-height: 32px;
+    /* border-bottom: 1px solid #DCE0E6; */
+    padding-bottom: 5px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #242A30;
+}
+
+.sort-by {
+    border-bottom: 1px solid #DCE0E6;
+}
+
+.task-date-time {
+    margin-bottom: 22px;
+}
+
+select#sort_by {
+    height: 40px;
+    margin-bottom: 5px;
+}
+
+.tasker-details {
+    padding: 10px;
+}
+
+.name-rates {
+    font-size: 24px;
+    line-height: 32px;
+    /* border-bottom: 1px solid #DCE0E6; */
+    padding-bottom: 5px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: #242A30;
+}
+
+span.pull-right {
+    font-size: 20px;
+}
+
+.success-rates {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #DCE0E6;
+}
+
+.tasker-pitch {
+    padding: 15px 0;
+}
+
+.tasker-pitch-header {
+    font-size: 14px;
+    line-height: 20px;
+    /* border-bottom: 1px solid #DCE0E6; */
+    padding-bottom: 5px;
+    font-weight: 600;
+    /* margin-bottom: 16px; */
+    color: #242A30;
+}
+
+.review {
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: normal;
+    font-style: italic;
+}
+
+.reviewer-name {
+    font-size: 16px;
+    padding: 5px 0;
+}
+
+span.review-date {
+    display: inline-block;
+}
+
+.preview-tasker {
+    margin-bottom: 10px;
+}
+
+.preview-tasker a {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 20px;
+    color: blue;
+}
+
+.tasker-image {
+    width: 200px;
+    height: 200px;
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+img.rounded.img-responsive {
+    max-width: 100%;
+    height: 100%;
+}

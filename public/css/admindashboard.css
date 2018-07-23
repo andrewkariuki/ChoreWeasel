@@ -1,0 +1,13 @@
+.col-sm-2.text-stats {
+    padding-top: 50px;
+}
+
+.card-footer {
+    padding-top: 5px !important;
+    color: #B5bbbf;
+    background: #f5f6f7 !important;
+}
+
+.stat-digit {
+    margin-bottom: 5px;
+}

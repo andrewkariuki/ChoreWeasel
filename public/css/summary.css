@@ -1,0 +1,266 @@
+body {
+    font-family: "Raleway", sans-serif !important;
+}
+
+.card {
+    border: none !important;
+}
+
+.work-title h4 {
+    font-size: 18px !important;
+    line-height: 20px;
+    font-weight: 600;
+}
+
+/* from google */
+
+a,
+a:hover,
+a:focus {
+    outline: none;
+    text-decoration: none;
+}
+
+/* h2{float:left; width:100%; color:#fff; margin-bottom:30px; font-size: 14px;}
+h2 span{ display:block; font-size:45px; text-transform:none; margin-bottom:20px; margin-top:30px; font-weight:700}
+h2 a{color:#fff; font-weight:bold;} */
+
+p span {
+    display: inline-block;
+}
+
+.card {
+    -moz-box-direction: normal;
+    -moz-box-orient: vertical;
+    background-color: #fff;
+    border-radius: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-bottom: 1px;
+    border: none;
+}
+
+.card-header:first-child {
+    border-radius: 0;
+}
+
+.card-header {
+    background-color: #f7f7f9;
+    margin-bottom: 0;
+    padding: 20px 1.25rem;
+    border: none;
+}
+
+.card-header a {
+    color: #ef5b25;
+}
+
+/* .card-header a i{
+    float:left;
+    font-size:25px;
+    padding:5px 0;
+    margin:0 25px 0 0px;
+    color:#195C9D;
+} */
+
+.card-header a i {
+    float: right;
+    font-size: 30px;
+    width: 1%;
+    margin-top: 8px;
+    margin-right: 10px;
+}
+
+.card-header .task-description {
+    width: 97%;
+    float: left;
+    color: #565656;
+}
+
+.card-header p {
+    margin: 0;
+}
+
+.card-header h3 {
+    margin: 0 0 0px;
+    font-size: 20px;
+    line-height: 23px;
+    font-weight: 600;
+}
+
+.card-block {
+    -moz-box-flex: 1;
+    flex: 1 1 auto;
+    padding: 20px 100px;
+    /* color:#232323; */
+    /* box-shadow:inset 0px 4px 5px rgba(0,0,0,0.1); */
+    /* border-top:1px soild #000; */
+    border-radius: 0;
+}
+
+span.rates.pull-right {
+    margin-right: 30px;
+    font-size: 19px;
+    line-height: 23px;
+    font-weight: 500;
+}
+
+.task-description p {
+    padding-bottom: 10px;
+}
+
+h3 span {
+    display: inline-block;
+}
+
+.date .small_insight {
+    margin-right: 10px;
+}
+
+small.small_insights {
+    font-size: 10px;
+    line-height: 13px;
+    color: #B5bbbf;
+    font-style: italic;
+    margin-right: 10px;
+}
+
+span.location,
+span.assigned_by,
+span.assigned_to {
+    margin-right: 10px;
+}
+
+span.location,
+span.assigned_by,
+span.assigned_to,
+span.time,
+span.date {
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 200;
+    /* color: #B5bbbf; */
+}
+
+h3 small.small_insight {
+    margin-left: 10px;
+}
+
+.task-users h3 {
+    font-size: 16px;
+    line-height: 19px;
+    font-weight: 600;
+}
+
+.assigned-by,
+.assigned_to {
+    text-align: start;
+}
+
+.assigned-to {
+    text-align: end;
+}
+
+.action-buttons {
+    padding-bottom: 10px;
+}
+
+.action-buttons button.btn {
+    height: 30px;
+    padding: 5px 16px !important;
+}
+
+button.btn.btn-default.btn-sm.awaiting-completion,
+button.btn.btn-default.btn-sm.task-completed,
+button.btn.btn-default.btn-sm.task-settled,
+button.btn.btn-default.btn-sm.awaiting-payment {
+    border: none;
+    font-weight: 600 !important;
+    color: #333 !important;
+}
+
+.task-info-header {
+    /* height: 15px; */
+    width: 100%;
+    /* margin: 20px 0; */
+    margin-bottom: 15px;
+    background: #222;
+    text-align: center;
+    color: white;
+    font-style: bold;
+    /* font: bold 15px Helvetica, Sans-Serif; */
+    text-decoration: uppercase;
+    letter-spacing: 20px;
+    padding: 8px 0px;
+}
+
+.assigner-identity {
+    width: 250px;
+    height: 150px;
+}
+
+.assigner-identity p {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.choreweasel-logo {
+    text-align: right;
+    margin-top: 80px;
+}
+
+.choreweasel-logo,
+.choreweasel-logo span {
+    font-size: 42px;
+}
+
+span.choreweasel-logo_start {
+    display: inline-block;
+    color: red;
+}
+
+table.table.table-custom {
+    clear: both;
+    width: 100%;
+    margin: 30px 0px;
+    margin-right: 0px;
+    margin-bottom: 30px;
+    margin-left: 0px;
+    border-width: 1px;
+    border-top: 1px;
+    border-style: solid;
+    border-color: black;
+    border-image: initial;
+}
+
+.table-custom th {
+    background: rgb(238, 238, 238);
+}
+
+table td,
+table th {
+    border: 1px;
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+    border-image: initial;
+    padding: 5px;
+}
+
+.table-custom tr.task-row td {
+    vertical-align: top;
+    border-width: 0px;
+    border-style: initial;
+    border-color: initial;
+    border-image: initial;
+}
+
+th {
+    font-weight: bold;
+    text-align: -internal-center;
+}
+
+.task-row td.rates {
+    text-align: center;
+}

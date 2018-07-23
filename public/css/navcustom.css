@@ -1,0 +1,23 @@
+.navbar .navbar-nav .nav-item .dropdown-menu {
+    border-radius: 4px !important;
+    margin-top: 0 !important;
+}
+
+nav.navbar.navbar-expand-md.navbar-light.navbar-cw {
+    height: 30px;
+    /* background-color: #282828; */
+}
+
+.navbar .navbar-brand {
+    font-weight: 400;
+    margin: 5px 0px;
+    font-size: 20px;
+    margin-right: 20px !important;
+    color: #888888;
+}
+
+a.nav-link {
+    text-transform: uppercase;
+    font-size: 14px !important;
+    font-weight: 400;
+}

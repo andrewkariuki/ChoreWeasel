@@ -1,0 +1,118 @@
+/* body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    margin: 0;
+    background: #f9f9f9
+} */
+
+.cw-container_content{
+    width: 990px;
+    margin: 0 auto;
+
+}
+
+.add-payment{
+    background: #ffffff;
+    padding: 14px;
+    margin-top: 14px;
+    border: 1px solid #f9f9f9;
+}
+
+.wallet-cta-top{
+    background: #ffffff;
+    margin-bottom: 14px;
+    border: 1px solid #f9f9f9;
+}
+
+.text-thin{
+    font-weight: 300px;
+    font-size: 14px;
+    line-height: 16px;
+}
+
+.grey-text{
+    color: #B5BBBF;
+}
+
+.deposit{
+    padding: 14px;
+    border: 0.25px solid #f9f9f9;
+}
+
+.deposit-button, .withrawal-form{
+    padding: 14px 0;
+}
+.deposit-button .btn{
+    text-transform: uppercase;
+}
+
+.withdraw{
+    padding: 14px;
+}
+
+button.btn.btn-primary.btn-lg.btn-block.withdraw {
+    height: 30px !important;
+    padding: 5px 16px !important;
+}
+
+.deposit h4, .withdraw h4{
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 19px;
+    margin-bottom: 0;
+}
+
+.add-payment-button{
+    padding-top: 13px;
+
+}
+
+.add-payment-button button,
+.payments h3{
+    text-transform: uppercase;
+}
+
+.payments h3{
+    font-size: 18px;
+    line-height: 23px;
+    font-weight: normal;
+}
+
+.transactions, .payments{
+    padding: 14px;
+}
+
+.transactions_body{
+    padding: 14px;
+    background: #ffffff;
+}
+
+.transactions_body .empty-transactions{
+    padding: 42px 34px 25px;
+    margin-bottom: 42px;
+    text-align: center;
+}
+
+.empty-transactions h3{
+    text-transform: uppercase;
+    margin-top: 50px;
+}
+
+.trasactions_header {
+    padding: 14px;
+    background: #ffffff;
+    border-bottom: 0.25px solid #f9f9f9;
+}
+
+.transactions_header-main{
+    padding: 8px;
+    font-size: 17px;
+    line-height: 20px;
+    font-weight: 700;
+}
+
+textarea {
+    /* overflow: auto; */
+    resize: none !important;
+}

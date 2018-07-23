@@ -1,0 +1,457 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    margin: 0;
+    color: #565E64 !important;
+    background: #f9f9f9;
+}
+
+a.nav-link i {
+    font-size: 24px;
+}
+
+.signup_wrapper {
+    height: auto;
+    width: 800px;
+    background: #FFFFFF;
+    margin: 50px auto
+}
+
+.accounts_wrapper {
+    height: auto;
+    width: 800px;
+    margin: 50px auto
+}
+
+.add_admins {
+    height: auto;
+    width: 500px;
+    background: #FFFFFF;
+    margin: auto;
+    margin-top: -15px;
+}
+
+.home {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 16px 32px;
+    font-size: 12px;
+}
+
+.sign-up_wrapper {
+    padding: 32px;
+}
+
+.top-header {
+    margin-top: 100px;
+    margin-bottom: 60px;
+}
+
+.top-header h2 {
+    color: #282828 !important;
+}
+
+h2 {
+    font-weight: 300;
+    color: #ffffff;
+    font-size: 40px;
+    line-height: 36px;
+}
+
+h3 {
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 25px;
+}
+
+h4 {
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 24px;
+    text-align: left;
+    /* padding: 0 45px; */
+}
+
+.signup-cta h2 {
+    margin-top: 100px;
+}
+
+.signup-cta h4 {
+    position: relative;
+    margin: 35px auto 15px;
+    color: #ffffff;
+}
+
+.heading h4 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #282828;
+    display: inline-block;
+    margin: 0;
+}
+
+.signuin-link {
+    font-size: 12px;
+    color: #282828;
+    display: inline-block;
+    float: right;
+    line-height: 2.2;
+}
+
+a {
+    text-decoration: none;
+    color: #ef5b25;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+a:hover {
+    color: #ef5b25;
+}
+
+.sign-in_wrapper,
+.forgot-password_wrapper {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    margin: 100px auto;
+}
+
+.sign-in_card,
+.forgot-password_card {
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
+    border-radius: 3px;
+    background-color: #ffffff;
+    width: 392px;
+    padding: 16px 32px;
+    position: relative;
+    margin: auto;
+}
+
+.signup-link-container,
+.signin-link-container {
+    font-size: 12px;
+    color: #282828;
+    display: inline-block;
+    float: right;
+    line-height: 2.2;
+}
+
+.sign-in_card .heading h4 {
+    font-size: 18px;
+    font-weight: bold;
+    color: #282828;
+    display: inline-block;
+    margin: 0;
+}
+
+.sign-in_card .heading {
+    padding: 10px 0 24px;
+}
+
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:focus {
+    color: #fff !important;
+    background-color: #f26b3a;
+    border: 1px solid transparent;
+    height: 40px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 16px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 3px;
+}
+
+form label {
+    font-weight: 600;
+    display: block;
+    font-size: 12px;
+    color: #282828;
+    margin-bottom: 8px;
+}
+
+.form-control {
+    font-size: 14px;
+    height: 30px;
+    color: #282828;
+    border-radius: 3px;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -o-box-shadow: none;
+    -webkit-box-shadow: none;
+    border: 1px solid #d4d4d4;
+    padding: 8px;
+    display: block;
+    width: 100%;
+    line-height: 1.42857143;
+    background-color: #fff;
+    background-image: none;
+}
+
+.form-check-label {
+    display: inline;
+}
+
+.forgot-password_card .heading .message {
+    margin: 16px 0 0;
+    line-height: 1.71;
+    color: #808080;
+    text-align: start;
+    opacity: .8;
+}
+
+.forgot-password_card .heading {
+    text-align: center;
+    padding: 80px 0 24px;
+}
+
+.forgot-password_card form {
+    padding-bottom: 16px;
+}
+
+/* .form-control:focus{
+    border-color: #f26b3a;
+} */
+
+a.btn {
+    color: #ffffff !important;
+}
+
+.for-taskers,
+.for-clients {
+    border: 0.5px solid #d4d4d4;
+    border-radius: 3px;
+    padding: 18px;
+}
+
+.for-taskers .btn,
+.for-clients .btn {
+    margin-top: 50px;
+}
+
+.have-account {
+    margin-top: 100px;
+    padding: 50px 0;
+}
+
+.account-details {
+    height: auto;
+    width: 800px;
+    background: #FFFFFF;
+    margin: auto;
+    margin-top: -15px;
+    padding: 18px;
+}
+
+.basic-info,
+.password-change,
+.system-type {
+    height: auto;
+    padding: 20px 10px;
+    border-bottom: 1px solid #f9f9f9;
+}
+
+.user-identity {
+    padding-bottom: 14px;
+    border-bottom: 1px solid #f9f9f9;
+}
+
+.user-billing-address {
+    padding: 14px 0;
+}
+
+.delete-account {
+    height: auto;
+    padding: 20px 10px;
+}
+
+.basic-info_head {
+    padding-top: 30%;
+}
+
+.basic-info_head i,
+.password-change_head i,
+.system-type_head i,
+.delete-account_head i {
+    font-size: 40px;
+    margin-right: 15px;
+    width: 44px;
+    color: #ef5b25;
+    text-align: center;
+    vertical-align: middle;
+    float: left;
+}
+
+.basic-info_head p,
+.password-change_head p,
+.system-type_head p,
+.delete-account_head p {
+    margin: 0;
+    line-height: 40px;
+    font-size: 16px;
+    font-weight: normal;
+    text-transform: uppercase;
+    display: inline-block;
+}
+
+.user-dentity-heading h3,
+.user-billing-address h3,
+.change-password-header h3 {
+    margin: 0 0 10px 0;
+    font-size: 20px;
+    line-height: 23px;
+    font-weight: 400;
+}
+
+span {
+    display: block;
+    line-height: 1.7;
+    font-size: 14px;
+}
+
+.span-heading {
+    font-weight: 600;
+}
+
+.email-field,
+.phone-field,
+.id-field,
+.city-field,
+.locality-field,
+.username-field {
+    padding: 8px 0;
+}
+
+/* span.details {
+    float: left;
+    margin-right: 20px;
+} */
+
+span.edit-button {
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    border: 1px solid #f9f9f9;
+    text-align: center;
+    border-radius: 50%;
+}
+
+span.edit-button i {
+    vertical-align: middle;
+    color: blue;
+}
+
+.profile-details {
+    width: 1000px;
+    height: auto;
+    margin: 0 auto;
+}
+
+.main-attributes {
+    padding: 20px;
+    background: #FFFFFF;
+    margin-bottom: 20px;
+}
+
+span.edit-icon {
+    float: left;
+    margin-right: 20px;
+    height: 30px;
+    width: 30px;
+    border: 1px solid #f9f9f9;
+    text-align: center;
+    border-radius: 50%;
+}
+
+span.edit-desc {
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+span i.nc-icon.nc-ruler-pencil {
+    vertical-align: middle;
+    color: #ef5b25;
+}
+
+.edit {
+    display: inline-block;
+}
+
+.rate-reviews {
+    float: left;
+    margin-right: 50px;
+    text-transform: uppercase;
+}
+
+span.rates {
+    font-size: 32px;
+    margin-bottom: 0;
+    line-height: 1;
+}
+
+span.review-stars {
+    font-size: 24px;
+    margin-bottom: 0;
+    line-height: 1;
+}
+
+.rate {
+    margin-bottom: 20px;
+}
+
+.user-pitch,
+.user-stats,
+.top-ratings {
+    padding: 20px;
+    background: #FFFFFF;
+}
+
+.user-stats {
+    margin-bottom: 10px;
+}
+
+p.user-pitch_pitch {
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+span.user-pitch_header,
+span.user-stats_header,
+span.top-ratings_header {
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.7;
+    margin-bottom: 10px;
+}
+
+span.user-stats_desc {
+    font-size: 12px;
+    line-height: 1;
+}
+
+span.user-stats_numbers {
+    font-size: 32px;
+    color: #ef5b25;
+}

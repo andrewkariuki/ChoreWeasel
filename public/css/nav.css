@@ -1,0 +1,14 @@
+.navbar .navbar-brand {
+    font-weight: 400;
+    margin: 5px 0px;
+    font-size: 20px;
+    /* color: #888888; */
+    color: #333;
+    font-size: 24px;
+    font-family: "Raleway", sans-serif !important;
+}
+span.navbar-brand-red {
+    display: inline-block;
+    font-size: 24px;
+    color: red;
+}

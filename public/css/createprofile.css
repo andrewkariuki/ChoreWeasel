@@ -1,0 +1,131 @@
+.create-profile-container{
+    width: 600px;
+    margin: 0 auto;
+    height: auto;
+    background: #ffffff;
+    border: 1px solid #f9f9f9;
+}
+
+.create-profile-content, .create-profile-side-content{
+    padding: 20px;
+}
+
+.create-profile-side-container{
+    width: 300px;
+    margin: 0 auto;
+    height: auto;
+    background: #ffffff;
+    border: 1px solid #f9f9f9;
+}
+
+.user-hits_body ul{
+    text-align: left;
+
+}
+
+.personal_deatails-header {
+    /* padding: 0px 0; */
+    padding-bottom: 10px;
+    font-size: 20px;
+    line-height: 23px;
+    font-weight: 600;
+    border-bottom: 1px solid;
+    margin-bottom: 20px;
+}
+
+.mobile-no_header,
+.mailing-adress_header,
+.identity-header {
+    font-size: 14px;
+    line-height: 20px;
+    padding-bottom: 10px;
+    font-weight: 600;
+}
+
+.bottom-notice{
+    font-size: 11px;
+    line-height: 13px;
+    color: #B5bbbf;
+    font-style: italic;
+    margin-bottom: 10px;
+}
+
+
+/* add task category */
+
+ul.task-listing {
+    list-style: none;
+    padding: 14px;
+}
+.task_category-container {
+    background: #ffffff;
+    border: 1px solid #f5f6f7;
+
+    width: 800px;
+    margin: 0 auto;
+}
+
+.task-list-top {
+    margin-bottom: 18px;
+}
+
+.task-name {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 23px;
+    padding: 0 0 5px 0;
+}
+.task-description {
+    padding: 5px 0 5px 0;
+}
+
+.task-list-expections {
+    padding: 14px;
+    margin: 5px;
+    background: #f9f9f9;
+    border: 1px solid #f5f6f7;
+}
+
+.set-hourly-rates {
+    margin-top: 20px;
+    padding: 14px;
+    margin: 18px 5px 0 5px;
+    background: #f9f9f9;
+}
+.skills-head {
+    font-size: 16px;
+    line-height: 23px;
+    padding-bottom: 5px;
+    margin-bottom: 8px;
+    border-bottom: 1px solid #f5f6f7;
+}
+
+.skills {
+    margin-bottom: 10px;
+}
+
+.set-hourly-rates-heading {
+    font-size: 16px;
+    line-height: 23px;
+    margin-bottom: 18px;
+}
+
+.set-hourly-rates input.form-control {
+    width: 50px;
+    height: 30px;
+}
+
+.amount, .per-hour, .dollar-sign{
+    display: inline-block
+}
+
+.set-hourly-rates-container {
+    padding: 14px 0;
+}
+.submit{
+    margin-top: 20px;
+}
+.submit .btn{
+    width: 70px;
+}
+

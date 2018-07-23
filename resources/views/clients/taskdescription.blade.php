@@ -1,0 +1,162 @@
+@extends('layouts.usermaster')
+@section('styles')
+<link href="{{ asset('css/taskdescription.css') }}" rel="stylesheet">
+@stop
+@section('content')
+<div class="cw-container">
+    <div class="row">
+        <div class="col-sm-12">
+
+
+            <div class="task-description_wrapper">
+                <div class="desc-header">
+                    <div class="row">
+                        <div class="col-sm-12 text-center">
+                            <div class="desc-header-main">Describe This Task</div>
+                            <div class="desc-header-sub">These Details will be used to match you with the right taskers</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="desc-fill-out_form">
+                    <form action="{{ url('/client/assign/'.$taskcategory->id.'/to') }}" method="post">
+                        @csrf
+                        <input type="hidden" name="task_category_id" value="{{ $taskcategory->id }}">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="taskdate-tasktime">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div class="taskdate-tasktime-header text-uppercase">TASK date and time</div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="form-row">
+                                                <div class="col-4 m-auto">
+                                                    <div class="form-group text-center">
+                                                        <label for="date">Pick date and time</label>
+                                                        <div class='input-group date' id='taskdatetimepicker'>
+                                                            <input type="text" name="taskdatetime" id="taskdatetime" class="form-control">
+                                                            <span class="input-group-addon">
+                                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="location-appartment">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div class="location-appartment-header text-uppercase">TASK Location</div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="form-row">
+                                                <div class="col-3">
+                                                    <div class="form-group">
+                                                        <label class="custom-label" for="city_town">City or Town</label>
+                                                        <input class="form-control" type="text" name="city_town" id="city_town" placeholder="i.e Voi, Meru, Kakamega">
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="form-group">
+                                                        <label class="custom-label" for="locality_street">Locality or Street</label>
+                                                        <input class="form-control" type="text" name="locality_street" id="loaclity_street" placeholder="i.e Kahawa Wendani, Likoni">
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="form-group">
+                                                        <label class="custom-label" for="apartment_unit">Unit or Apt. Name</label>
+                                                        <input class="form-control" type="text" name="apartment_unit" id="apartment_unit" placeholder="i.e Mongoose, Vescon">
+                                                    </div>
+                                                </div>
+                                                <div class="col-3">
+                                                    <div class="form-group">
+                                                        <label class="custom-label" for="apt_unit_no">Apt. or Unit Number</label>
+                                                        <input class="form-control" type="text" name="apt_unit_no" id="apt_unit_no" placeholder="i.e B 14, Court 55">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="task-size time-estimate">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <div class="task-size-header text-uppercase">TASK SIZE</div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="task-size-radios">
+                                                <h3 class="task-size-header">Estimate the task size</h3>
+                                                <div class="task-size-radios_content">
+
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="task_size" id="task_size" value="small">
+                                                        <label class="form-check-label" for="task_size">Small Task about 1hr tops</label>
+                                                    </div>
+
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="task_size" id="task_size" value="medium">
+                                                        <label class="form-check-label" for="task_size">Medium Task - 2-3hrs tops</label>
+                                                    </div>
+
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="task_size" id="task_size" value="large">
+                                                        <label class="form-check-label" for="task_size">Large task - 4hrs+</label>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="task-requirements">
+                                                <h3 class="task-requirements-header">Task Requirement</h3>
+                                                <div class="form-group">
+                                                    <textarea class="form-control" name="task_requirements" id="task_requirements" cols="20" rows="10" placeholder="i.e a car, truck"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="more-details">
+                                    <di class="card">
+                                        <div class="card-header">
+                                            <div class="more-details-header text-uppercase">TASK DESCRIPTION</div>
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="form-group">
+                                                <textarea class="form-control" name="task_description" id="task_description" cols="20" rows="10" placeholder="Describe the task to help the tasker understand it better"></textarea>
+                                            </div>
+                                            <div class="form-group text-center">
+                                                <button class="btn btn-primary" type="submit">Continue</button>
+                                            </div>
+                                        </div>
+                                    </di>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+
+
+        </div>
+
+    </div>
+</div>
+</div>
+@endsection
+
+@section('scripts')
+<script type="text/javascript">
+    $(function () {
+        $('#taskdatetimepicker').datetimepicker();
+    });
+</script>
+@stop

@@ -1,0 +1,28 @@
+/* .review-block{
+    width: 500px;
+    margin: 0 auto;
+    background: #ffffff;
+    padding: 14px 14px 14px 0;
+
+} */
+
+.review-block-review {
+    font-size: 14px;
+    line-height: 16px;
+    font-weight: 300;
+    font-style: italic;
+    padding: 5px 0 5px 0;
+}
+
+img.img-rounded {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+}
+.review-block-reviewer {
+    text-align: right;
+}
+
+.review-time{
+    display: inline-block;
+}

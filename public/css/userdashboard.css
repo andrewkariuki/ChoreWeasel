@@ -1,0 +1,78 @@
+.cw-container-index {
+    /* padding: 90px 0; */
+    padding: 50px !important;
+}
+
+h3.section-header.text-uppercase {
+    margin-bottom: 14px;
+}
+
+.section-header_container {
+    font-size: 17px;
+    line-height: 20px;
+    padding: 0 0 8px 0;
+}
+
+span.small_header {
+    display: inline-block;
+    font-size: 11px;
+    line-height: 13px;
+    color: #B5bbbf;
+    font-style: italic;
+}
+
+.tiny.label,
+.small.value_label {
+    text-align: center;
+    font-size: 11px;
+    line-height: 20px;
+    font-weight: 700;
+}
+
+.thin.value {
+    font-size: 42px;
+    line-height: 42px;
+    font-weight: 100;
+    text-align: center;
+}
+
+h2.if-no-tasks-header.text-uppercase {
+    color: #565E64;
+    font-size: 20px;
+    line-height: 25px;
+    margin-bottom: 5px;
+    font-weight: 300;
+}
+
+p {
+    font-size: 17px;
+    line-height: 23px;
+    margin-bottom: 4px;
+}
+
+.if-no-tasks_container {
+    width: 100%;
+    padding: 100px;
+    background: #ffffff;
+}
+
+.if-no-tasks.text-center {
+    padding: 42px 34px 25px 34px;
+    width: 600px;
+    margin: 0 auto;
+}
+
+.summary-content {
+    /* background: #ffffff; */
+    /* padding: 14px; */
+    margin-top: 14px;
+    border: 1px solid #f5f6f7;
+    /* width: 880px; */
+    /* margin: 0 auto; */
+}
+
+.if-no-tasks_icon i {
+    font-size: 84px;
+    line-height: 24px;
+    color: #2980b9;
+}

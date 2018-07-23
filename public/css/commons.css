@@ -1,0 +1,44 @@
+body {
+    /* font-family: 'Open Sans', sans-serif !important; */
+    font-family: "Raleway", sans-serif !important;
+    font-size: 14px;
+    line-height: 1.42857143;
+    margin: 0;
+    background: #f9f9f9 !important;
+}
+
+.cw-container{
+    padding: 90px 0;
+}
+
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:focus
+.btn-primary:active {
+    color: #fff !important;
+    background-color: #f26b3a !important;
+    border: 1px solid transparent !important;
+    height: 40px !important;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 16px !important;
+    margin-bottom: 0;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+    line-height: 1.42857143 !important;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 3px;
+}

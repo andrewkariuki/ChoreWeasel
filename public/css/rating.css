@@ -1,0 +1,37 @@
+textarea.form-control {
+    height: 150px;
+    resize: none;
+}
+
+.rating-content{
+    padding: 22px;
+}
+
+.rating-heading{
+    text-align: center;
+    text-transform: capitalize;
+    font-size: 24px;
+    font-weight: 600;
+    /* padding-bottom: 5px; */
+    /* border-bottom: 1px solid; */
+    margin-bottom: 10px;
+}
+.rating-description {
+    padding: 10px 0;
+    font-size: 16px;
+    line-height: 18px;
+}
+span.rating-description_task.d-inline-block,
+span.rating-description_tasker.d-inline-block {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 10px;
+    text-decoration: underline;
+}
+label{
+    font-size: 13px;
+    text-transform: capitalize;
+    line-height: 17px;
+    font-weight: 500;
+    color: #242A30;
+}
