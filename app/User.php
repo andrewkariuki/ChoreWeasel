@@ -87,5 +87,16 @@ class User extends Authenticatable
         return $this->hasMany('ChoreWeasel\Models\Rating', 'rated_id');
     }
 
+    public function payer(){
+       return $this->hasMany('ChoreWeasel\Models\SimulatedPayment', 'payer_id');
+    }
+
+    public function payed(){
+        return $this->hasMany('ChoreWeasel\Models\SimulatedPayment', 'paid_id');
+     }
+
+     public function account(){
+         return $this->hasOne('ChoreWeasel\Models\FinancialAccount', 'user_id');
+     }
 
 }

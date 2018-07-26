@@ -11,6 +11,10 @@
 |
 */
 
+Route::get('/test', function(){
+    return view('taskers.uploadprofileimage');
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -18,6 +22,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/chat', function () {
+    return view('chat.messaging');
+});
 
 
 /**
@@ -46,6 +54,16 @@ Route::group(['prefix' => 'account', 'middleware' => ['guest']], function () {
  * End of ChoreWeasel Authentication Routes.
  *
  */
+////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//change password
+ Route::group(['middleware' => ['auth']], function(){
+
+    Route::put('/{username}/changepassword/{id}', 'ProfileController@updateUserPassword');
+
+
+ });
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -67,12 +85,22 @@ Route::group(['prefix' => 'tasker', 'middleware' => ['auth' => 'role:tasker']], 
         'uses' => 'ProfileController@update',
     ]);
 
+    Route::get('/{username}/profile/uploadprofileimage', [
+        'as' => '{username}',
+        'uses' => 'ProfileController@taskeruploadprofileimageform',
+    ]);
+
+    Route::put('/{username}/profile/uploadprofileimage', [
+        'as' => '{username}',
+        'uses' => 'ProfileController@taskerprofileimage',
+    ]);
+
     Route::get('/{username}/profile/addcategory', [
         'as' => '{username}',
         'uses' => 'ProfileController@showAvailableTaskCategories',
     ]);
 
-    Route::put('/{username}/profile/addcategory', [
+    Route::put('/{username}/profile/addcategory/{task_category_id}', [
         'as' => '{username}',
         'uses' => 'ProfileController@updateTaskCategory',
     ]);
@@ -139,6 +167,16 @@ Route::group(['prefix' => 'client', 'middleware' => ['auth' => 'role:client']], 
         'uses' => 'ProfileController@updateClientProfile',
     ]);
 
+    Route::get('/{username}/profile/uploadprofileimage', [
+        'as' => '{username}',
+        'uses' => 'ProfileController@clientuploadprofileimageform',
+    ]);
+
+    Route::put('/{username}/profile//uploadprofileimage', [
+        'as' => '{username}',
+        'uses' => 'ProfileController@clientuploadprofileimage',
+    ]);
+
     //summary page on dashboard
     Route::get('/{username}/summary', [
         'as' => '{username}',
@@ -158,6 +196,9 @@ Route::group(['prefix' => 'client', 'middleware' => ['auth' => 'role:client']], 
     Route::get('/assign/{task_category_id}', 'AssignedTaskController@taskdescription');
     Route::post('/assign/{task_category_id}/to', 'AssignedTaskController@sheduleTaskAndTasker');
     Route::post('/assign/{task_category_id}/to/{assigned_to}', 'AssignedTaskController@assignTask');
+
+    //Pay for a task after it is complete
+    Route::put('/{username}/pay/{assigned_task_id}/for/{task_id}', 'SimulatedPaymentController@payForTask');
 
     // Show users account settings - viewable by other users.
     Route::get('/{username}/account', [
@@ -213,11 +254,36 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth' => 'role:admin']], fu
     Route::get('/taskers', 'UserManagmentController@taskers');
     Route::get('/tasker/{username}', [
         'as' => '{username}',
-        'uses' => 'UserManagmentController@userview',
+        'uses' => 'UserManagmentController@taskerView',
     ]);
+    Route::put('/ban/tasker/{username}/{id}', [
+        'as' => '{username}',
+        'uses' => 'UserManagmentController@banUser',
+    ]);
+    Route::put('/liftban/tasker/{username}/{id}', [
+        'as' => '{username}',
+        'uses' => 'UserManagmentController@liftbanUser',
+    ]);
+    Route::put('/verify/tasker/{username}/{id}', [
+        'as' => '{username}',
+        'uses' => 'UserManagmentController@verifyUser',
+    ]);
+
 
     //Routes for manipulating the Clients
     Route::get('/clients', 'UserManagmentController@clients');
+    Route::get('/client/{username}', [
+        'as' => '{username}',
+        'uses' => 'UserManagmentController@cleintView',
+    ]);
+    Route::put('/ban/client/{username}/{id}', [
+        'as' => '{username}',
+        'uses' => 'UserManagmentController@banUser',
+    ]);
+    Route::put('/liftban/client/{username}/{id}', [
+        'as' => '{username}',
+        'uses' => 'UserManagmentController@liftbanUser',
+    ]);
 
     Route::get('/admins', 'UserManagmentController@admins');
 
@@ -232,7 +298,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth' => 'role:admin']], fu
     // Show users account settings - viewable by other users.
     Route::get('/{username}/account', [
         'as' => '{username}',
-        'uses' => 'ProfileController@showUserAccount',
+        'uses' => 'ProfileController@showAdminAccount',
     ]);
 
     //admin logout

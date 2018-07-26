@@ -32,15 +32,19 @@
                                         <div class="card-body">
                                             <div class="form-row">
                                                 <div class="col-4 m-auto">
+
+
                                                     <div class="form-group text-center">
                                                         <label for="date">Pick date and time</label>
                                                         <div class='input-group date' id='taskdatetimepicker'>
                                                             <input type="text" name="taskdatetime" id="taskdatetime" class="form-control">
                                                             <span class="input-group-addon">
-                                                                <span class="glyphicon glyphicon-calendar"></span>
+                                                                <i class="gylphicon glyphicon-calendar"></i>
                                                             </span>
                                                         </div>
                                                     </div>
+
+
                                                 </div>
                                             </div>
                                         </div>
@@ -154,9 +158,23 @@
 @endsection
 
 @section('scripts')
-<script type="text/javascript">
+<script>
     $(function () {
-        $('#taskdatetimepicker').datetimepicker();
+        $('#taskdatetimepicker .input-group.date').datepicker({
+            todayBtn:"linked",
+            keyboardNavigation:false,
+            forceParse:false,
+            calenderWeeks:true,
+            autoclose:true,
+            locale: 'en'
+        });
+        console.log();
+
     });
 </script>
 @stop
+
+
+
+
+{{--  <div data-notify="container" class="col-11 col-sm-4 alert alert-warning alert-with-icon" role="alert" data-notify-position="top-center" style="display: inline-block; margin: 0px auto; position: fixed; transition: all 0.5s ease-in-out; z-index: 1031; top: 20px; right: 20px;"><button type="button" aria-hidden="true" class="close" data-notify="dismiss" style="position: absolute; right: 10px; top: 50%; margin-top: -13px; z-index: 1033;"><i class="nc-icon nc-simple-remove"></i></button><span data-notify="icon" class="nc-icon nc-app"></span> <span data-notify="title"></span> <span data-notify="message">Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for every web developer.</span><a href="#" target="_blank" data-notify="url"></a></div>  --}}

@@ -2,8 +2,10 @@
 
 namespace ChoreWeasel\Http\Controllers;
 
-use ChoreWeasel\Models\AssignedTask;
+use Carbon\Carbon;
 use ChoreWeasel\User;
+use ChoreWeasel\Models\AssignedTask;
+use ChoreWeasel\Models\FinancialAccount;
 
 class AllTaskController extends Controller
 {
@@ -52,12 +54,28 @@ class AllTaskController extends Controller
         $assignedtasks = AssignedTask::with('assignee', 'assigner', 'taskcategory')->where('assigned_to', '=', $user->id)->get();
         //total tasks assigned to this tasker
         $totaltaskstome = AssignedTask::with('assignee')->where('assigned_to', '=', $user->id)->count();
+        $completedtaks = AssignedTask::with('assignee')->where(
+            [
+                ['assigned_to', '=', $user->id],
+                ['completed', '<>', true],
+            ]
+        )->count();
+        $futuretasks = AssignedTask::with('assignee')->where(
+            [
+                ['assigned_by', '=', $user->id],
+                ['created_at', '>', Carbon::now()],
+            ]
+        )->count();
 
+        $accountbalance = FinancialAccount::where('user_id', '=', $user->id)->first();
 
         $data = [
             'user' => $user,
             'assignedtasks' => $assignedtasks,
             'totaltaskstome' => $totaltaskstome,
+            'completedtaks' => $completedtaks,
+            'futuretasks' => $futuretasks,
+            'accountbalance' => $accountbalance,
             // 'taskcategory' =>
             // 'currentTheme' => $currentTheme,
         ];
@@ -86,12 +104,27 @@ class AllTaskController extends Controller
         $assignedtasks = AssignedTask::with('assignee', 'assigner', 'taskcategory')->where('assigned_to', '=', $user->id)->get();
         //total tasks assigned to this tasker
         $totaltaskstome = AssignedTask::with('assignee')->where('assigned_to', '=', $user->id)->count();
+        $completedtaks = AssignedTask::with('assignee')->where(
+            [
+                ['assigned_by', '=', $user->id],
+                ['completed', '=', true],
+            ]
+        )->count();
+
+        $futuretasks = AssignedTask::with('assignee')->where(
+            [
+                ['assigned_by', '=', $user->id],
+                ['created_at', '>', Carbon::now()],
+            ]
+        )->count();
 
 
         $data = [
             'user' => $user,
             'assignedtasks' => $assignedtasks,
             'totaltaskstome' => $totaltaskstome,
+            'completedtaks' => $completedtaks,
+            'futuretasks' => $futuretasks
             // 'taskcategory' =>
             // 'currentTheme' => $currentTheme,
         ];
@@ -123,6 +156,20 @@ class AllTaskController extends Controller
         //get the count of all the task this user or client has assigned
         $totaltasksbyme = AssignedTask::with('assigner')->where('assigned_by', '=', $user->id)->count();
 
+        $completedtaks = AssignedTask::with('assignee')->where(
+            [
+                ['assigned_by', '=', $user->id],
+                ['completed', '=', true],
+            ]
+        )->count();
+
+        $futuretasks = AssignedTask::with('assignee')->where(
+            [
+                ['assigned_by', '=', $user->id],
+                ['created_at', '>', Carbon::now()],
+            ]
+        )->count();
+
         //get the tasker assigned the task
         // $tasker = User::with('profile')->whereId($assignedbyme->assignee->id);
 
@@ -136,6 +183,8 @@ class AllTaskController extends Controller
             'user' => $user,
             'totaltasksbyme' => $totaltasksbyme,
             'assignedbyme' => $assignedbyme,
+            'completedtaks' => $completedtaks,
+            'futuretasks' =>$futuretasks
         ];
 
         return view('clients.summary')->with($data);

@@ -35,6 +35,12 @@
     color: #333;
 }
 
+.email a{
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 20px;
+}
+
 .total-tasks,
 .total-tasks-completed,
 .total-ratings {
@@ -53,4 +59,18 @@
     font-weight: 500;
     line-height: 20px;
     color: #333;
+}
+
+button.btn.btn-danger {
+    background: red;
+    color: #fff;
+    text-transform: uppercase;
+    border-color: red;
+}
+
+button.btn.btn-success {
+    background: green;
+    color: #fff;
+    text-transform: uppercase;
+    border-color: green;
 }

@@ -22,91 +22,177 @@
                                     <h3>
                                         Your Basic info.
                                         <span class="edit-basic-info pull-right">
-                                            <a href="#">Edit</a>
+                                            <a href="#" id="editbasicinfo">Edit</a>
+                                            <a href="#" id="canceleditbasicinfo" style="display:none">Cancel</a>
                                         </span>
                                     </h3>
                                 </div>
-                                <div class="email-field">
-                                    <span class="span-heading">Email</span>
-                                    <span class="details">
-                                        {{ $user->email}}
-                                    </span>
 
-                                </div>
-
-                                <div class="username-field">
-                                    <span class="span-heading">Username</span>
-                                    <span class="details">
-                                        {{ $user->name}}
-                                    </span>
-
-                                </div>
-
-                                <div class="name-fields">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="firstname-field">
-                                                <span class="span-heading">First Name</span>
-                                                <span class="details">
-                                                    {{ $user->firstname}}
+                                <div id="basic-info">
+                                    <div class="email-field">
+                                        <span class="span-heading">Email</span>
+                                        <span class="details">
+                                                    {{ $user->email}}
                                                 </span>
+
+                                    </div>
+
+                                    <div class="username-field">
+                                        <span class="span-heading">Username</span>
+                                        <span class="details">
+                                                    {{ $user->name}}
+                                                </span>
+
+                                    </div>
+
+                                    <div class="name-fields">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="firstname-field">
+                                                    <span class="span-heading">First Name</span>
+                                                    <span class="details">
+                                                                {{ $user->firstname}}
+                                                            </span>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="secondname-field">
-                                                <span class="span-heading">Second Name</span>
-                                                <span class="details">
-                                                    {{ $user->secondname}}
-                                                </span>
+                                            <div class="col-sm-6">
+                                                <div class="secondname-field">
+                                                    <span class="span-heading">Second Name</span>
+                                                    <span class="details">
+                                                                {{ $user->secondname}}
+                                                            </span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
+
+                                <div id="change-basic-info" style="display:none">
+                                    <form action="" method="post">
+                                        @csrf @method('put')
+                                        <div class="email-field">
+                                            <span class="span-heading">Email</span>
+                                            <span class="details">
+                                                    <input type="text" class="form-control" name="email" value=" {{ $user->email}}">
+                                                </span>
+                                        </div>
+
+                                        <div class="username-field">
+                                            <span class="span-heading">Username</span>
+                                            <span class="details">
+                                                        <input type="text" class="form-control" name="username" value="{{ $user->name}}"/>
+                                                    </span>
+
+                                        </div>
+
+                                        <div class="name-fields">
+                                            <div class="row">
+                                                <div class="col-sm-6">
+                                                    <div class="firstname-field">
+                                                        <span class="span-heading">First Name</span>
+                                                        <span class="details">
+                                                                <input type="text" class="form-control" name="firstname" value="{{ $user->firstname}}"/>
+                                                            </span>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-6">
+                                                    <div class="secondname-field">
+                                                        <span class="span-heading">Second Name</span>
+                                                        <span class="details">
+                                                                    <input type="text" class="form-control" name="firstname" value="{{ $user->secondname}}"/>
+
+                                                            </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" style="margin-top: 10px;">
+                                            <button type="submit" class="btn btn-primary btn-block">Change Primary Details</button>
+                                        </div>
+                                    </form>
+                                </div>
+
+                                @if($user->profile != null)
+
                                 <div class="id-field">
                                     <span class="span-heading">National ID</span>
                                     <span class="details">{{ $user->profile->nationalid }}</span>
                                 </div>
+                                @endif
                             </div>
 
-
+                            @if($user->profile != null)
                             <div class="user-billing-address">
 
                                 <div class="user-billing-address-heading">
                                     <h3>
                                         Your Address
                                         <span class="edit-billing-address pull-right">
-                                            <a href="#">Edit</a>
+                                            <a href="#" id="editaddress">Edit</a>
+                                            <a href="#" id="canceleditaddress" style="display: none">Cancel</a>
                                         </span>
                                     </h3>
                                 </div>
 
-                                <div class="area-of-residence">
-                                    <div class="col-sm-6">
-                                        <div class="city-field">
-                                            <span class="span-heading">City or Town</span> @if ($user->profile->city)
-                                            <span class="details">
-                                                {{ $user->profile->city }}
-                                            </span> @else
-                                            <span class="details">
-                                                No city specified
-                                            </span> @endif
+                                <div id="address">
+                                    <div class="area-of-residence">
+                                        <div class="col-sm-6">
+                                            <div class="city-field">
+                                                <span class="span-heading">City or Town</span> @if ($user->profile->city)
+                                                <span class="details">
+                                                        {{ $user->profile->city }}
+                                                    </span> @else
+                                                <span class="details">
+                                                        No city specified
+                                                    </span> @endif
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <div class="locality-field">
-                                            <span class="span-heading">Locality</span> @if ($user->profile->locality)
-                                            <span class="details">
-                                                {{ $user->profile->locality }}
-                                            </span> @else
-                                            <span class="details">
-                                                No city specified
-                                            </span> @endif
+                                        <div class="col-sm-6">
+                                            <div class="locality-field">
+                                                <span class="span-heading">Locality</span> @if ($user->profile->locality)
+                                                <span class="details">
+                                                        {{ $user->profile->locality }}
+                                                    </span> @else
+                                                <span class="details">
+                                                        No city specified
+                                                    </span> @endif
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
 
+
+                                <div id="edit-address" style="display:none">
+                                    <div class="area-of-residence">
+                                        <div class="col-sm-6">
+                                            <div class="city-field">
+                                                <span class="span-heading">City or Town</span>
+                                                <span class="details">
+                                                    <input type="text" name="city" value="@if($user->profile->city){{ $user->profile->city}}@endif" class="form-control">
+
+                                                </span>
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="locality-field">
+                                                <span class="span-heading">Locality</span>
+                                                <span class="details">
+                                                    <input type="text" value="@if($user->profile->locality){{ $user->profile->locality}}@endif" class="form-control"></span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group" style="margin-top: 10px;">
+                                            <button type="submit" class="btn btn-primary">Change Address Details</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
                             </div>
+                            @endif
 
                         </div>
                     </div>
@@ -127,15 +213,16 @@
                                 <div class="change-password-header">
                                     <h3>Change Password
                                         <span class="change-password pull-right">
-                                                <a href="#">Edit</a>
-                                            </span>
+                                                <a id="edit" href="#">Edit</a>
+                                                <a id="cancel" href="#" style="display: none">Cancel</a>
+                                        </span>
                                     </h3>
                                 </div>
 
-                                <div class="changes-container" style="display: none">
+                                <div class="changes-container" style="display: none" id="change-password">
                                     <div>
-                                        <form action="">
-
+                                        <form action="{{ url('/'.$user->name.'/changepassword/'.$user->id) }}" method="post">
+                                            @csrf @method('put')
                                             <!---user password input --->
                                             <div class="form-group">
                                                 <input id="currentpassword" type="password" class="form-control{{ $errors->has('currentpassword') ? ' is-invalid' : '' }}"
@@ -227,6 +314,40 @@
         </div>
     </div>
     @include('modals.deleteaccount')
+@section('scripts')
+
+    <script type="text/javascript">
+        $( "#edit" ).click(function() {
+        $('#change-password').show();
+        $('#cancel').show();
+        $('#edit').hide();
+    });
+    $( "#cancel" ).click(function() {
+        $('#change-password').hide();
+        $('#cancel').hide();
+        $('#edit').show();
+    });
+
+
+    $( "#editbasicinfo" ).click(function() {
+        $('#change-basic-info').show();
+        $('#canceleditbasicinfo').show();
+        $('#editbasicinfo').hide();
+        $('#basic-info').hide();
+    });
+
+    $( "#canceleditbasicinfo" ).click(function() {
+        $('#basic-info').show();
+        $('#change-basic-info').hide();
+        $('#canceleditbasicinfo').hide();
+        $('#editbasicinfo').show();
+    });
+    </script>
+
+
+
+
+@stop
 
 </div>
 @endsection

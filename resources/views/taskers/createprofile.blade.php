@@ -100,8 +100,12 @@
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="phonenumber_confirmation">Confirm Phone Number</label>
-                                                <input id="phonenumber_confirmation" type="text" class="form-control" name="phonenumber_confirmation" value="{{ old('phonenumber_confirmation') }}"
+                                                <input id="phonenumber_confirmation" type="text" class="form-control{{ $errors->has('phonenumber_confirmation') ? ' is-invalid' : '' }}" name="phonenumber_confirmation" value="{{ old('phonenumber_confirmation') }}"
                                                     required autofocus>
+                                                    @if ($errors->has('phonenumber_confirmation'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $errors->first('phonenumber_confirmation') }}</strong>
+                                                            </span> @endif
                                             </div>
                                         </div>
                                     </div>

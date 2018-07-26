@@ -47,4 +47,7 @@ class AssignedTask extends Model
         return $this->hasOne('ChoreWeasel\Models\Rating', 'rated_task_id');
     }
 
+    public function payment(){
+        return $this->hasOne('ChoreWeasel\Models\SimulatedPayment', 'paid_task_id');
+    }
 }

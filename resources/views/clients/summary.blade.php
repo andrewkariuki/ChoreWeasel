@@ -28,7 +28,12 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="thin value">
-                                        0
+                                        @if ($completedtaks > 0)
+                                            {{ $completedtaks }}
+                                        @else
+                                            0
+                                        @endif
+
                                     </div>
                                     <div class="small value_label">
                                         Tasks Completed
@@ -220,9 +225,13 @@
                                                 Awaiting Completion
                                             </button>
                                         @elseif($assignedbyme->completed == 1 && $assignedbyme->paid == 0)
-                                            <button type="submit" class="btn btn-primary btn-sm pay-now">
-                                                Pay Now
-                                            </button>
+                                            <form action="{{ url('/client/'.$user->name.'/pay/'.$assignedbyme->assignee->id.'/for/'.$assignedbyme->id) }}" method="post" class="d-inline-block">
+                                                @csrf
+                                                @method('put')
+                                                <button type="submit" class="btn btn-primary btn-sm pay-now">
+                                                    Pay Now
+                                                </button>
+                                            </form>
                                             <button disabled="disabled" class="btn btn-default btn-sm task-completed">
                                                 Completed
                                             </button>

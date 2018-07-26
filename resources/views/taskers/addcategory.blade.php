@@ -3,118 +3,134 @@
 <link href="{{ asset('css/createprofile.css') }}" rel="stylesheet">
 @stop
 @section('content')
-    <div class="cw-container">
-        <div class="row">
+<div class="cw-container">
+    <div class="row">
 
-            <div class="col-sm-4">
-                <div class="create-profile-side-container">
-                    <div class="create-profile-side-content">
-                        <div class="user-hints">
-                            <div class="user-hints-header">
-                                Flow of Events
-                            </div>
-                            <div class="user-hits_body">
-                                <ul>
-                                    <li>Create Profile</li>
-                                    <li>Background Check</li>
-                                    <li>Activation</li>
-                                    <li>Start Working</li>
-                                    <li>Constant Reviewing</li>
-                                </ul>
-                            </div>
+        <div class="col-sm-4">
+            <div class="create-profile-side-container">
+                <div class="create-profile-side-content">
+                    <div class="user-hints">
+                        <div class="user-hints-header">
+                            Flow of Events
+                        </div>
+                        <div class="user-hits_body">
+                            <ul>
+                                <li>Create Profile</li>
+                                <li>Background Check</li>
+                                <li>Activation</li>
+                                <li>Start Working</li>
+                                <li>Constant Reviewing</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="col-sm-8">
-                <div class="create-profile-container">
-                    <div class="create-profile-content">
-
-                        <div id="accordion" role="tablist" aria-multiselectable="true">
-
-                                <div class="card">
-                                        <div class="card-header" role="tab" id="headingOne">
-                                            <div class="mb-0">
-                                                <div class="task-description">
-                                                    <h3>
-                                                        Waiting in line
-                                                    </h3>
-                                                    <p>
-                                                        Waiting in line at restaurants, bookstores, ticket counters etc.
-                                                    </p>
-                                                </div>
-                                                <a class="dropIcon" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne" class="collapsed">
-                                                    <i class="fa fa-angle-right" aria-hidden="true"></i>
-                                                </a>
+        <div class="col-sm-8">
+            <div class="create-profile-container">
+                <div class="create-profile-content">
+                    @if (count($tasks) != 0)
+                    <div id="accordion" role="tablist" aria-multiselectable="true">
+                        @foreach ($tasks as $task)
+                        <div class="card">
+                            <div class="card-header" role="tab" id="heading{{ $task->id }}">
+                                <div class="mb-0">
+                                    <div class="task-description">
+                                        <div class="task-list-top">
+                                            <div class="task-name">
+                                                {{ $task->taskname }}
                                             </div>
-                                        </div>
-
-                                        <div id="collapseOne" class="collapse" role="tabpanel" aria-labelledby="headingOne" aria-expanded="false" style="">
-                                            <div class="card-block">
-                                                <div class="assogned-task_info">
-                                                        <div class="task-users">
-                                                            <div class="row">
-                                                                <div class="col-sm-6">
-                                                                    <div class="assigned-by">
-                                                                        <h3>Assigned By:</h3>
-                                                                        <span>User Full Name</span>
-                                                                        <span>Locality, City</span>
-                                                                        <span>House Number</span>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="col-sm-6">
-                                                                    <div class="assigned-to">
-                                                                        <h3>Assigned To:</h3>
-                                                                        <span>User Full Name</span>
-                                                                        <span>Locality, City</span>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-
-                                                        <div class="task-full-description">
-                                                            <table class="table table-striped">
-                                                                <thead>
-                                                                    <tr>
-                                                                        <th scope="col">Task</th>
-                                                                        <th scope="col">Task Description</th>
-                                                                        <th scope="col">Rate/hr</th>
-                                                                    </tr>
-                                                                </thead>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <th scope="row">Task Name</th>
-                                                                        <td>Waiting in line at restaurants and stores</td>
-                                                                        <td>$67</td>
-                                                                    </tr>
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-
-
-                                                    <div class="action-buttons pull-right">
-                                                        <button disabled="disabled" class="btn btn-light">
-                                                            Pending Payment
-                                                        </button>
-                                                        <button disabled="disabled" class="btn btn-light">
-                                                            Mark as Complete
-                                                        </button>
-                                                    </div>
-
-                                                </div>
+                                            <div class="task-description">
+                                                {{ $task->taskdescription }}
                                             </div>
                                         </div>
                                     </div>
+                                    <a class="dropIcon" data-toggle="collapse" data-parent="#accordion" href="#collapse{{ $task->id }}" aria-expanded="false"
+                                        aria-controls="collapse{{ $task->id }}" class="collapsed">
+                                                    <i class="fa fa-angle-right" aria-hidden="true"></i>
+                                                </a>
+                                </div>
+                            </div>
 
+                            <div id="collapse{{ $task->id }}" class="collapse" role="tabpanel" aria-labelledby="heading{{ $task->id }}" aria-expanded="false"
+                                style="">
+                                <div class="card-block">
+
+                                    <div class="task-list-body">
+                                        <div class="task-list-expections">
+                                            <div class="skills-head">
+                                                Skills Expectations
+                                            </div>
+                                            <div class="skills">
+                                                <ul class="skill-listing">
+                                                    <li class="skill-list">
+                                                        The client will specify what he or she expects
+                                                    </li>
+                                                </ul>
+                                            </div>
+
+                                            <div class="user-aggreement">
+                                                By submiting you agree to meet these expectations
+                                            </div>
+                                        </div>
+
+
+                                        <div class="set-hourly-rates">
+                                            <div class="set-hourly-rates-heading">
+                                                Set your Hourly rates
+                                            </div>
+                                            <form action="{{ url('/tasker/'.Auth::user()->name.'/profile/addcategory') }}" method="post">
+                                                @csrf @method('put')
+
+                                                <input type="hidden" value="{{ $task->id }}" name="task_category_id">
+                                                <div class="set-hourly-rates-container">
+                                                    <div class="row">
+                                                        <div class="col-sm-4">
+                                                            <div class="dollar-sign">
+                                                                $
+                                                            </div>
+                                                            <div class="amount">
+                                                                <input type="text" class="form-control" name="rates">
+                                                            </div>
+                                                            <div class="per-hour">
+                                                                /hr
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-4">
+                                                            Choosing a favorable rate means you have higher chances of getting hired
+                                                        </div>
+                                                        <div class="col-sm-4"></div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <textarea class="form-control" name="pitch" id="pitch" placeholder="Your Pitch"></textarea>
+                                                </div>
+
+                                        </div>
+
+
+                                        <div class="submit text-center">
+                                            <button type="submit" class="btn btn-primary">Save</button>
+                                        </div>
+                                        </form>
+                                    </div>
+
+
+                                </div>
+                            </div>
                         </div>
+                        @endforeach
 
                     </div>
+                    @endif
+
                 </div>
             </div>
-
-
         </div>
+
+
     </div>
+</div>
 @endsection

@@ -20,7 +20,11 @@
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="thin value">
-                                        0
+                                        @if ($futuretasks > 0)
+                                            {{ $futuretasks }}
+                                        @else
+                                            0
+                                        @endif
                                     </div>
                                     <div class="small value_label">
                                         Future Tasks
@@ -28,7 +32,11 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="thin value">
-                                        0
+                                         @if ($completedtaks > 0)
+                                            {{ $completedtaks }}
+                                        @else
+                                            0
+                                        @endif
                                     </div>
                                     <div class="small value_label">
                                         Tasks Completed
@@ -36,7 +44,7 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="thin value">
-                                        $0.00
+                                        ${{ $accountbalance->balance }}.00
                                     </div>
                                     <div class="small value_label">
                                         Total Amount
@@ -50,7 +58,13 @@
                             <div class="task_assigned-stats text-uppercase">
                                 <div class="thin value">
 
-                                    {{ $totaltaskstome }}
+                                    @if ($totaltaskstome > 0)
+                                     {{ $totaltaskstome }}
+                                    @else
+                                        0
+                                    @endif
+
+
 
                                 </div>
                                 <div class="tiny label">

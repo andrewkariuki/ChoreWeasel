@@ -1,0 +1,79 @@
+.accounts .alert-success {
+    border-radius: 4px;
+    padding: 8px 35px 8px 14px;
+    border-color: #C4DE95;
+    background-color: #F8FEEE;
+}
+.accounts .alert {
+    color: #333333;
+}
+.alert-success {
+    border-color: #00cf92;
+    box-shadow: 0 2px 8px 0 rgba(0,207,146,0.2);
+}
+.alert {
+    background: transparent;
+    border-bottom: 0;
+    border-left: 3px solid #e4e4e4;
+    border-right: 0;
+    border-top: 0;
+    border-radius: 3px;
+    box-shadow: 0 2px 8px 0 rgba(0,0,0,0.15);
+    color: #1e2021;
+    font-size: .9375rem;
+    font-weight: normal;
+    margin: 1.5rem 0;
+    padding: 1.25rem 1.5rem;
+}
+.alert-success {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #3c763d;
+}
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+
+button.close {
+    padding: 0;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    -webkit-appearance: none;
+}
+.close {
+    color: #6c7378;
+    font-size: 14px;
+    font-weight: 500;
+    opacity: 1;
+    text-shadow: none;
+}
+.close {
+    float: right;
+    font-size: 21px;
+    font-weight: bold;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .2;
+    filter: alpha(opacity=20);
+}
+
+b, strong {
+    font-weight: 400;
+}
+b, strong {
+    font-weight: bold;
+}
+
+.accounts .alert {
+    color: #333333;
+}
+
+
+
+<div id="cloneAccountMsg"><div class="alert alert-success  " id="" role="alert"><button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button><strong>Sandbox account creation in progress.</strong></div></div>

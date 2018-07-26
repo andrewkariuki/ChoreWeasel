@@ -15,12 +15,15 @@
     <script src="{{ asset('jquery/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}" defer></script>
     <script src="{{ asset('moment/moment-with-locales.min.js') }}"></script>
-    <script src="{{ asset('datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
     <script src="{{ asset('dashboard/js/plugins/bootstrap-switch.js') }}"></script>
+    <script src="{{ asset('dashboard/js/plugins/bootstrap-datepicker.js') }}"></script>
+    <script src="{{ asset('datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
+    <script src="{{ asset('dashboard/js/plugins/nouislider.min.js') }}"></script>
     <script src="{{ asset('dashboard/js/plugins/chartist.min.js') }}"></script>
     <script src="{{ asset('dashboard/js/plugins/bootstrap-notify.js') }}"></script>
     <script src="{{ asset('dashboard/js/light-bootstrap-dashboard.js?v=2.0.1s') }}"></script>
+    <script src="{{ asset('dashboard/js/demo.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
     <script src="{{ asset('dashboard/js/demo.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js"></script>
@@ -113,15 +116,13 @@
                 <!-- Right Side Of Navbar -->
                 <ul class="navbar-nav ml-auto">
 
-                    {{-- @role('client') --}} @if(Auth::check() && Auth::user()->hasRole('client')) {{-- user has client role --}} {{-- then
+                    {{-- @role('client') --}}
+                    @if(Auth::check() && Auth::user()->hasRole('client'))
+                    {{-- user has client role --}} {{-- then
                     he or she is able to post a job through explore --}}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/client/explore/allservices') }}">{{ __('Explore') }}</a>
                     </li>
-
-                    {{--  <li class="nav-item">
-                        <a class="nav-link" href="#">{{ __('0.00') }}</a>
-                    </li>  --}}
 
 
                     <li class="nav-item dropdown">
@@ -171,11 +172,6 @@
 
                     @elseif(Auth::check() && Auth::user()->hasRole('tasker'))
 
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">{{ __('0.00') }}</a>
-                    </li>
-
                     <li class="nav-itemdropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
                             aria-expanded="false" v-pre>
@@ -218,52 +214,7 @@
                         </li>
                     </li>
 
-                    @endif {{--
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">{{ __('0.00') }}</a>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
-                            aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
-
-                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-
-                            <span class="dropdown-item">
-                                    Signed in as
-                                    <br/>
-                                    {{ Auth::user()->name }}
-                                </span>
-                            <div class="divider"></div>
-                            <a class="dropdown-item" href="{{ url('/tasker/'.Auth::user()->name.'/profile') }}">
-                                    {{ __('Profile Settings') }}
-                                </a>
-                            <a class="dropdown-item" href="{{ url('/tasker/'.Auth::user()->name.'/account') }}">
-                                    {{ __('Account Settings') }}
-                                </a>
-                        </div>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/tasker/messages') }}">
-                                    <i class="nc-icon nc-email-85"></i>
-                                    <span class="notification">5</span>
-                                    <!--- <span class="">Log out</span> --->
-                                </a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                                    document.getElementById('logout-form').submit();">
-                                    {{ __('Logout') }}
-                                </a>
-
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                @csrf
-                            </form>
-                        </li>
-                    </li> --}}
+                    @endif
 
                 </ul>
 

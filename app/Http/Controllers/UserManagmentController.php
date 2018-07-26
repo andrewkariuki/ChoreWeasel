@@ -2,9 +2,10 @@
 
 namespace ChoreWeasel\Http\Controllers;
 
-use ChoreWeasel\Models\TaskCategory;
-use ChoreWeasel\User;
 use View;
+use ChoreWeasel\User;
+use Illuminate\Http\Request;
+use ChoreWeasel\Models\TaskCategory;
 
 class UserManagmentController extends Controller
 {
@@ -75,7 +76,7 @@ class UserManagmentController extends Controller
         return view('admin.admins')->with($data);
     }
 
-    public function userView($username)
+    public function taskerView($username)
     {
         $user = User::with('profile')->wherename($username)->firstOrFail();
 
@@ -86,6 +87,50 @@ class UserManagmentController extends Controller
             'usertask' => $usertask,
         ];
 
-        return view('admin.userview')->with($data);
+        return view('admin.taskerview')->with($data);
+    }
+
+    public function cleintView($username)
+    {
+        $user = User::with('profile')->wherename($username)->firstOrFail();
+
+        $usertask = TaskCategory::find($user->profile->task_category_id);
+
+        $data = [
+            'user' => $user,
+            'usertask' => $usertask,
+        ];
+
+        return view('admin.clientview')->with($data);
+    }
+
+    public function banUser(Request $request, $username, $id)
+    {
+        $user = User::find($id);
+
+        $user->banned = true;
+        $user->save();
+
+        return back()->with('user-banned', 'The banning process was successful');
+    }
+
+    public function liftbanUser(Request $request, $username, $id)
+    {
+        $user = User::find($id);
+
+        $user->banned = false;
+        $user->save();
+
+        return back()->with('user-ban-lifted', 'The ban lifting process was successful');
+    }
+
+    public function verifyUser(Request $request, $username, $id)
+    {
+        $user = User::find($id);
+
+        $user->verified = true;
+        $user->save();
+
+        return back()->with('user-verified', 'The verification process was successful');
     }
 }

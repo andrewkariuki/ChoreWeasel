@@ -8,7 +8,7 @@
         <div class="card">
             <div class="card-header">
                 <div class="d-inline-block">
-                    <h4 class="card-title">{{ $user->firstname }} {{ $user->secondname }}</h4>
+                    <h4 class="card-title text-capitalize">{{ $user->firstname }} {{ $user->secondname }}</h4>
                 </div>
             </div>
             <div class="card-body">
@@ -34,7 +34,7 @@
                                         <div class="user-email">
                                             <label for="">Email</label>
                                             <div class="email">
-                                                {{ $user->email }}
+                                                <a href="mailto:{{ $user->email }}" title="email {{ $user->email }}">{{ $user->email }}</a>
                                             </div>
                                         </div>
 
@@ -46,14 +46,14 @@
                                         </div>
 
                                         <div class="user-phone-number">
-                                            <label for="">Username</label>
+                                            <label for="">Phone Number</label>
                                             <div class="userphonenumber">
                                                 +254{{ $user->profile->phonenumber }}
                                             </div>
                                         </div>
 
                                         <div class="user-nationalid">
-                                            <label for="">Username</label>
+                                            <label for="">National ID</label>
                                             <div class="usernationalid">
                                                 {{ $user->profile->nationalid }}
                                             </div>
@@ -63,22 +63,11 @@
 
                                     <div class="col-sm-6">
 
-
-                                        <div class="user-task">
-                                            <label for="">Task</label>
-                                            <div class="usertask badge-orange">
-                                                {{ $usertask->taskname }}
-                                            </div>
-                                        </div>
-
                                         <div class="total-tasks">
                                             <label for="">Total Tasks</label> 22
                                         </div>
                                         <div class="total-tasks-completed">
                                             <label for="">Total Completed</label> 22
-                                        </div>
-                                        <div class="total-ratings">
-                                            <label for="">Total Ratings</label> 22
                                         </div>
                                     </div>
 
@@ -146,7 +135,35 @@
                     <div class="adminactions_header">
                         You can perform any action
                     </div>
-                    <div class="adminactions_body"></div>
+
+                    <div class="adminactions_body text-center">
+                        @if($user->verified == false)
+                        <div class="verify-user d-inline-block p-2">
+                            <form action="{{ url('/admin/client/tasker/'.$user->name.'/'.$user->id) }}" method="post" >
+                                <button type="submit" class="btn btn-success">
+                                    Verify User
+                                </button>
+                            </form>
+                        </div>
+                        @endif
+
+                        <div class="ban-unban-user d-inline-block p-2">
+                            @if($user->banned == false)
+                            <form action="{{ url('/admin/ban/client/'.$user->name.'/'.$user->id) }}" method="post" class="d-inline-block">
+                                @csrf
+                                @method('put')
+                                <button type="submit" class="btn btn-danger">Ban User</button>
+                            </form>
+                            @else
+                            <form action="{{ url('/admin/liftban/client/'.$user->name.'/'.$user->id) }}" method="post" class="d-inline-block">
+                                @csrf
+                                @method('put')
+                                <button type="submit" class="btn btn-success">Lift the ban on this user</button>
+                            </form>
+                            @endif
+                        </div>
+
+                    </div>
                 </div>
             </div>
         </div>

@@ -2,13 +2,17 @@
 
 namespace ChoreWeasel\Http\Controllers;
 
-use ChoreWeasel\Models\Profile;
-use ChoreWeasel\User;
-use Faker\Provider\Image;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
+use File;
+use Image;
 use Validator;
+use ChoreWeasel\User;
+use Illuminate\Http\Request;
+use ChoreWeasel\Models\Profile;
+use ChoreWeasel\Models\TaskCategory;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Input;
+use ChoreWeasel\Notifications\ClientAccountCreated;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ProfileController extends Controller
 {
@@ -62,6 +66,33 @@ class ProfileController extends Controller
         ];
 
         return view('users.account')->with($data);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * Display the current user's account settings
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function showAdminAccount($username)
+    {
+        //
+
+        try {
+            $user = $this->getUserByUsername($username);
+        } catch (ModelNotFoundException $exception) {
+            abort(404);
+        }
+
+        // $currentTheme = Theme::find($user->profile->theme_id);
+
+        $data = [
+            'user' => $user,
+            // 'currentTheme' => $currentTheme,
+        ];
+
+        return view('admin.account')->with($data);
     }
 
     /**
@@ -149,20 +180,25 @@ class ProfileController extends Controller
         return Validator::make(
             $data,
             [
-                'pitch' => 'string',
-                'county' => 'string',
-                'city' => 'string',
-                'locality' => 'string',
+                'pitch' => 'string|required',
+                'county' => 'string|required',
+                'city' => 'string|required',
+                'locality' => 'string|required',
                 'postaladdress' => 'numeric|digits:5',
                 'postalcode' => 'numeric|digits:5',
+                'dateofbirth' => '',
                 'phonenumber' => 'unique:profiles',
                 'phonenumber_confirmation' => 'same:phonenumber',
                 'nationalid' => 'unique:profiles|numeric|digits_between:1,10|digits:8',
-                'avatar' => '',
+                // regex:/^(\+36)[0-9]{9}$/
+                //
+                'rates' => 'required|numeric',
+                'avatar' => 'required|mimes:jpeg,jpg,png',
                 'avatar_status' => '',
             ],
             [
-                'same' => 'Your :attribute must match',
+                'phonenumber_confirmation.same' => 'Your phone numbers must match',
+
             ]
         );
     }
@@ -209,13 +245,16 @@ class ProfileController extends Controller
             $user->profile->fill($input)->save();
         }
 
-        return redirect('tasker/' . $user->name . '/profile/addcategory');
+        // return redirect('tasker/' . $user->name . '/profile/addcategory');
+
+        return redirect('tasker/' . $user->name . '/profile/uploadprofileimage');
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  $username
+     *         $task_category_id
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \ChoreWeasel\Models\Profile  $profile
@@ -223,7 +262,7 @@ class ProfileController extends Controller
      *
      * @return mixed
      */
-    public function updateTaskCategory(Request $request, $username)
+    public function updateTaskCategory(Request $request, $username, $task_category_id)
     {
         //
 
@@ -308,7 +347,7 @@ class ProfileController extends Controller
             abort(404);
         }
 
-        $tasks = TaskCategory::get()->first();
+        $tasks = TaskCategory::all();
 
         $data = [
             'user' => $user,
@@ -316,6 +355,8 @@ class ProfileController extends Controller
         ];
 
         return view('taskers.choosecategory')->with($data);
+
+        // return view('taskers.addcategory')->with($data);
     }
 
     /**
@@ -330,7 +371,7 @@ class ProfileController extends Controller
         if (Input::hasFile('file')) {
             $currentUser = \Auth::user();
             $avatar = Input::file('file');
-            $filename = 'avatar.' . $avatar->getClientOriginalExtension();
+            $filename = 'avatar' .'-'.rand().'.'.$avatar->getClientOriginalExtension();
             $save_path = storage_path() . '/users/id/' . $currentUser->id . '/uploads/images/avatar/';
             $path = $save_path . $filename;
             $public_path = '/images/profile/' . $currentUser->id . '/avatar/' . $filename;
@@ -343,6 +384,7 @@ class ProfileController extends Controller
 
             // Save the public image path
             $currentUser->profile->avatar = $public_path;
+            $currentUser->profile->avatar_status = true;
             $currentUser->profile->save();
 
             return response()->json(['path' => $path], 200);
@@ -353,15 +395,136 @@ class ProfileController extends Controller
 
     /**
      *
-     * show a list of all the available task categories
+     * show the form for uploading the profile image
      *
      * @param  $username
      * @return \Illuminate\Http\Response
      */
 
-    public function uploadAvatar()
+    public function taskeruploadprofileimageform($username)
     {
-        return view('users.avatar');
+
+        try {
+            $user = $this->getUserByUsername($username);
+        } catch (ModelNotFoundException $exception) {
+            abort(404);
+        }
+
+        $data = [
+            'user' => $user,
+            // 'currentTheme' => $currentTheme,
+        ];
+
+        return view('taskers.uploadprofileimage')->with($data);
+
+    }
+
+    public function taskerprofileimage(Request $request, $username)
+    {
+        try {
+            $user = $this->getUserByUsername($username);
+        } catch (ModelNotFoundException $exception) {
+            abort(404);
+        }
+
+        $profile_validator = $this->profile_validator($request->all());
+
+        if ($profile_validator->fails()) {
+            return back()->withErrors($profile_validator)->withInput();
+        }
+
+        if (Input::hasFile('avatar')) {
+            $currentUser = \Auth::user();
+
+            $avatar = Input::file('avatar');
+
+            $filename = 'avatar' .'-'.rand().'.'. $avatar->getClientOriginalExtension();
+
+            $save_path = storage_path() . '/users/id/' . $currentUser->id . '/uploads/images/avatar/';
+
+            $path = $save_path . $filename;
+
+            $public_path = '/images/profile/' . $currentUser->id . '/avatar/' . $filename;
+
+            // Make the user a folder and set permissions
+            File::makeDirectory($save_path, $mode = 0755, true, true);
+
+            // Save the file to the server
+            // Image::make($avatar)->resize(300, 300)->save($save_path . $filename);
+
+            // Save the public image path
+            $currentUser->profile->avatar = $public_path;
+            $currentUser->profile->avatar_status = true;
+            $currentUser->profile->save();
+
+            return redirect('tasker/' . $user->name . '/profile/addcategory');
+
+        } else {
+
+            return back()->with('profileuploaderror', 'Your profile picture could not be uploaded please try again');
+
+        }
+
+    }
+
+    /**
+     *
+     * show the form for uploading the profile image
+     *
+     * @param  $username
+     * @return \Illuminate\Http\Response
+     */
+
+    public function clientuploadprofileimageform($username)
+    {
+        try {
+            $user = $this->getUserByUsername($username);
+        } catch (ModelNotFoundException $exception) {
+            abort(404);
+        }
+
+        try {
+            $user = $this->getUserByUsername($username);
+        } catch (ModelNotFoundException $exception) {
+            abort(404);
+        }
+
+        $profile_validator = $this->profile_validator($request->all());
+
+        if ($profile_validator->fails()) {
+            return back()->withErrors($profile_validator)->withInput();
+        }
+
+        if (Input::hasFile('avatar')) {
+            $currentUser = \Auth::user();
+
+            $avatar = Input::file('avatar');
+
+            $filename = 'avatar' .'-'.rand().'.'. $avatar->getClientOriginalExtension();
+
+            $save_path = storage_path() . '/users/id/' . $currentUser->id . '/uploads/images/avatar/';
+
+            $path = $save_path . $filename;
+
+            $public_path = '/images/profile/' . $currentUser->id . '/avatar/' . $filename;
+
+            // Make the user a folder and set permissions
+            File::makeDirectory($save_path, $mode = 0755, true, true);
+
+            // Save the file to the server
+            // Image::make($avatar)->resize(300, 300)->save($save_path . $filename);
+
+            // Save the public image path
+            $currentUser->profile->avatar = $public_path;
+            $currentUser->profile->avatar_status = true;
+            $currentUser->profile->save();
+
+            $currentUser->notify(new ClientAccountCreated($currentUser));
+
+            return redirect('client/' . $user->name . '/summary');
+        } else {
+            return back()->with('profileuploaderror', 'Your profile picture could not be uploaded please try again');
+        }
     }
 
     /**
@@ -377,17 +540,47 @@ class ProfileController extends Controller
         return Image::make(storage_path() . '/users/id/' . $id . '/uploads/images/avatar/' . $image)->response();
     }
 
-    // /**
-    //  * Update the specified resource in storage.
-    //  *
-    //  * @param  \Illuminate\Http\Request  $request
-    //  * @param  \ChoreWeasel\Models\Profile  $profile
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function update(Request $request, Profile $profile)
-    // {
-    //     //
-    // }
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param int                      $id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function updateUserPassword(Request $request, $username, $id)
+    {
+        $currentUser = \Auth::user();
+        $user = User::findOrFail($id);
+
+        $validator = Validator::make($request->all(),
+            [
+                'currentpassword' => 'required',
+                'password' => 'required|min:6|confirmed',
+                'password_confirmation' => 'required|same:password',
+            ]
+        );
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator)->withInput();
+        }
+
+        //if the password matches the current password in the database
+        if (Hash::check($request->input('currentpassword'), $user->password) && $request->input('password') != null) {
+
+            $user->password = Hash::make($request->input('password'));
+
+            $user->save();
+
+            return back()->with('password-change', 'You have successfully changed your password!');
+        }
+
+        //if the password does not match the current password in the database
+        else {
+            return back()->with('password-change-warning', 'Invalid Credentials please try agian or contact our Help Center!');
+        }
+
+    }
 
     public function deleteUserAccount(Request $request, $id)
     {

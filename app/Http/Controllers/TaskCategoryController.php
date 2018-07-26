@@ -2,9 +2,10 @@
 
 namespace ChoreWeasel\Http\Controllers;
 
-use ChoreWeasel\Models\TaskCategory;
-use Illuminate\Http\Request;
 use Validator;
+use Illuminate\Http\Request;
+use ChoreWeasel\Models\TaskCategory;
+use ChoreWeasel\Models\TaskCategoryGroup;
 
 class TaskCategoryController extends Controller
 {
@@ -55,23 +56,11 @@ class TaskCategoryController extends Controller
     public function store(Request $request)
     {
         //
-
-        // $input = Input::only('task_category_group_id', 'taskname', 'taskdescription');
-
         $category_validator = $this->category_validator($request->all());
 
         if ($category_validator->fails()) {
             return back()->withErrors($category_validator)->withInput();
         }
-
-        // if ($request->hasFile('taskimage')) {
-        //     $taskimage = $request->file('taskimage');
-        //     $filename = 'taskimage.' . $taskimage->getClientOriginalExtension();
-
-        //     $request->file->storeAs('public/images/taskcategory', $filename);
-        // }
-
-        // $taskimage = $request->file('taskimage')->getClientOriginalName();
 
         $taskimageextention = $request->file('taskimage')->getClientOriginalExtension();
 
@@ -89,8 +78,6 @@ class TaskCategoryController extends Controller
         $taskCategory->taskdescription = $request->input('taskdescription');
         $taskCategory->taskimage = $taskimage;
 
-        // $taskCategory->fill($input)->save();
-        // $taskCategory->taskimage = $filename;
         $taskCategory->save();
 
         return back();

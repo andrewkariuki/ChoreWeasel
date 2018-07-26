@@ -81,6 +81,11 @@ class AssignedTaskController extends Controller
 
         $taskcategory = TaskCategory::find($task_category_id);
 
+        $taskertaskcategory = function ($query)
+        {
+            $query->where('task_category_id', $task_category_id);
+        };
+
         $taskers = User::whereHas('roles', function ($q) {
             $q->where('name', 'tasker');
         })->with('profile')->get();
