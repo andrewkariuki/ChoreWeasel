@@ -44,7 +44,11 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="thin value">
+                                        @if($accountbalance == null)
+                                        $0.00
+                                        @else
                                         ${{ $accountbalance->balance }}.00
+                                        @endif
                                     </div>
                                     <div class="small value_label">
                                         Total Amount

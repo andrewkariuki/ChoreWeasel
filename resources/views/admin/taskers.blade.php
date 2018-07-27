@@ -17,6 +17,27 @@
 
 
             <div class="card-body table-full-width table-responsive">
+                <div class="table-action">
+                    <div class="row">
+                        <div class="col-sm-7">
+                            <div class="export-excel">
+                                <form action="">
+                                    <div class="form-group">
+                                        <button class="btn btn-primary" type="submit">Export to Excel</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="col-sm-5">
+                            <div class="search">
+                                <div class="input-group">
+                                    <input name="search" id="search" type="text" class="form-control" placeholder="search...">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
                 <table id="taskerstable " class="table table-hover">
                     <thead>
                         <th>Username</th>

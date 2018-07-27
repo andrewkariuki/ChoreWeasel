@@ -37,10 +37,19 @@
                                                     <div class="form-group text-center">
                                                         <label for="date">Pick date and time</label>
                                                         <div class='input-group date' id='taskdatetimepicker'>
-                                                            <input type="text" name="taskdatetime" id="taskdatetime" class="form-control">
+                                                            <input type="date" name="taskdatetime" id="taskdatetime" class="form-control"
+                                                            required pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])
+                                                            " min="28-07-2018"
+                                                            >
                                                             <span class="input-group-addon">
                                                                 <i class="gylphicon glyphicon-calendar"></i>
                                                             </span>
+
+                                                            @if (Session::has('dateerror'))
+                                                                <span style="color:red;">
+                                                                    <strong>{{ Session::get('dateerror') }}</strong>
+                                                                </span>
+                                                            @endif
                                                         </div>
                                                     </div>
 
@@ -61,7 +70,7 @@
                                                 <div class="col-3">
                                                     <div class="form-group">
                                                         <label class="custom-label" for="city_town">City or Town</label>
-                                                        <input class="form-control" type="text" name="city_town" id="city_town" placeholder="i.e Voi, Meru, Kakamega">
+                                                        <input class="form-control" type="text" name="city_town" id="city_town" placeholder="i.e Voi, Meru, Kakamega" value=" "> }}
                                                     </div>
                                                 </div>
                                                 <div class="col-3">

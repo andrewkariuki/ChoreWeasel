@@ -40,9 +40,9 @@ class ClientAccountCreated extends Notification
      */
     public function toMail($notifiable)
     {
-        $currentUserName = $this->currentUser->name;
+
         return (new MailMessage)
-                    -greetings('Hello,', $currentUserName, '! Welcome to ChoreWeasel')
+                    ->greeting('Hello! Welcome to ChoreWeasel')
                     ->line('You have just created a new account under the client category')
                     ->line('Visit our site to start assigning tasks')
                     ->action('ASSIGN NOW', url('/'))

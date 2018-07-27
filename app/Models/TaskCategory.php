@@ -16,7 +16,7 @@ class TaskCategory extends Model
      */
     public function profile()
     {
-        return $this->hasOne('ChoreWeasel\Models\Profile');
+        return $this->hasOne('ChoreWeasel\Models\Profile', 'task_category_id');
     }
 
     /**

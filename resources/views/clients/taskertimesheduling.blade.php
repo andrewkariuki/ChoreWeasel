@@ -20,6 +20,29 @@
                 </div>
 
 
+                <div class="sort-by">
+                        <div class="row">
+                            <div class="col-sm-4 m-auto">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="form-group">
+
+                                            <label for="sortby text-center">Sort by:</label>
+                                            <select name="sortby" id="sortby" class="form-control">
+                                                <option value="0">Recomended</option>
+                                                <option value="1">Highest Prices</option>
+                                                <option value="2">Lowest Prices</option>
+                                                <option value="4">Highest Ratings</option>
+                                                <option value="5">Lowest Ratings</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                 <div class="tasks-time-tasker_content">
                     <div class="row">
                         {{--
@@ -92,7 +115,7 @@
                                                             <a href="#">Profile and Review</a>
                                                         </div>
 
-                                                        <form action="{{ url('/client/assign/'.$task_category_id.'/to/'.$tasker->id) }}" method="post">
+                                                        <form action="{{ url('/client/assign/'.$task_category_id.'/to/'.$tasker->user->id) }}" method="post">
                                                             @csrf
                                                             <input type="hidden" name="task_category_id" id="" value="{{{ $task_category_id }}}">
                                                             <input type="hidden" name="task_date_time" id="task_date_time" value="{{ $taskdatetime }}">
@@ -103,9 +126,9 @@
                                                             <input type="hidden" name="city_town" id="city_town" value="{{ $city_town }}">
                                                             <input type="hidden" name="task_size" id="task_size" value="{{ $task_size }}">
                                                             <input type="hidden" name="task_description" id="task_description" value="{{ $task_description }}">
-                                                            <input type="hidden" name="assigned_to" id="assigned_to" value="{{ $tasker->id }}">
+                                                            <input type="hidden" name="assigned_to" id="assigned_to" value="{{ $tasker->user->id }}">
                                                             <input type="hidden" name="assigned_by" id="assigned_by" value="{{ Auth::user()->id }}">
-                                                            <input type="hidden" name="rates" id="rates" value="{{ $tasker->profile->rates }}">
+                                                            <input type="hidden" name="rates" id="rates" value="{{ $tasker->rates }}">
 
                                                             <div class="select-tasker">
                                                                 <div class="form-group">
@@ -117,9 +140,9 @@
                                                 </div>
                                                 <div class="col-sm-8">
                                                     <div class="tasker-primary-attributes">
-                                                        <div class="name-rates">
-                                                            {{ $tasker->firstname }} {{ $tasker->secondname }}
-                                                            <span class="pull-right">${{ $tasker->profile->rates }}/hr</span>
+                                                        <div class="name-rates text-capitalize">
+                                                            {{ $tasker->user->firstname }} {{ $tasker->user->secondname }}
+                                                            <span class="pull-right">${{ $tasker->rates }}/hr</span>
                                                         </div>
                                                         <div class="success-rates">
                                                             <div class="tasks-complete">
@@ -135,7 +158,7 @@
                                                                 How I can Help
                                                             </div>
                                                             <div class="tasker-pitch-body">
-                                                                {{ $tasker->profile->pitch }}
+                                                                {{ $tasker->pitch }}
                                                             </div>
                                                         </div>
 
@@ -145,14 +168,20 @@
                                                                     <div class="reviewer-image"></div>
                                                                 </div>
                                                                 <div class="col-sm-8">
+                                                                    @if($tasker->user->ratingstome() == null)
                                                                     <div class="review">
-                                                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit molestias eos dolorem provident deleniti unde deserunt temporibus
-                                                                        sint cumque! Magnam fuga nostrum rerum perspiciatis
-                                                                        saepe at blanditiis. Molestiae, magnam aspernatur.
+                                                                        Not yet review - you can review this tasker after assigning tasks to improve their chances of being assign in the future.
+                                                                    </div>
+                                                                    @else
+                                                                    {{-- @if($tasker->user->ratingstome->first) --}}
+                                                                    <div class="review">
+                                                                         {{-- {{ $tasker->user->ratingstome()->comment }} --}}
                                                                     </div>
                                                                     <div class="reviewer-name">
                                                                         John Man - <span class="review-date">30-10-2018</span>
                                                                     </div>
+                                                                    {{-- @endif --}}
+                                                                    @endif
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -189,6 +218,7 @@
     });
 
 </script>
+
 
 
 

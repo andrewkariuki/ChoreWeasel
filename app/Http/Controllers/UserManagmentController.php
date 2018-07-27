@@ -133,4 +133,9 @@ class UserManagmentController extends Controller
 
         return back()->with('user-verified', 'The verification process was successful');
     }
+
+
+    public function searchTasker(Request $request){
+
+    }
 }

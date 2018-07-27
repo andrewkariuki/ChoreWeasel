@@ -21,6 +21,7 @@ class CreateSimulatedPaymentsTable extends Migration
             $table->foreign('paid_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('paid_task_id')->unsigned()->index();
             $table->foreign('paid_task_id')->references('id')->on('assigned_tasks')->onDelete('cascade');
+            $table->string('type')->nullable();
             $table->double('amount_paid')->nullable();
             $table->timestamps();
         });

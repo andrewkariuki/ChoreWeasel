@@ -31,6 +31,7 @@ class AdminController extends Controller
      */
     public function index()
     {
+
         $totaltaskers = User::whereHas('roles', function ($q) {
             $q->where('name', 'tasker');
         })->count();

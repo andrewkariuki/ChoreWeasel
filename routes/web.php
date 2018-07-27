@@ -1,5 +1,8 @@
 <?php
 
+use ChoreWeasel\User;
+use ChoreWeasel\Models\AssignedTask;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,9 +18,7 @@ Route::get('/test', function(){
     return view('taskers.uploadprofileimage');
 });
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'WelcomeController@index');
 
 Auth::routes();
 
@@ -49,6 +50,46 @@ Route::group(['prefix' => 'account', 'middleware' => ['guest']], function () {
     Route::get('/admin', "Auth\RegisterAdminController@adminRegistrationForm");
     Route::post('/admin', "Auth\RegisterAdminController@register");
 });
+
+
+/***
+ *
+ * public urls
+ *
+ */
+
+    Route::get('explore/allservices', 'ExploreController@index');
+    Route::get('/about', function() {
+        return view('public.about');
+    });
+
+    Route::get('/terms', function() {
+        return view('public.terms');
+    });
+
+    Route::get('/help center', function() {
+        return view('public.about');
+    });
+
+    Route::get('/invoice', function(){
+        $invoicedtask = AssignedTask::with('assignee', 'assigner', 'taskcategory')->whereId(4)->first();
+        $user = User::with('profile')->first();
+        $data = [
+            'invoicedtask' => $invoicedtask,
+            'user' => $user
+        ];
+        return view('invoice.invoice')->with($data);
+    });
+
+    Route::get('/charts', 'Charts@charts');
+
+/**
+ *
+ * end public
+ *
+ */
+
+
 /**
  *
  * End of ChoreWeasel Authentication Routes.
@@ -61,9 +102,16 @@ Route::group(['prefix' => 'account', 'middleware' => ['guest']], function () {
  Route::group(['middleware' => ['auth']], function(){
 
     Route::put('/{username}/changepassword/{id}', 'ProfileController@updateUserPassword');
+    Route::get('/{username}/finance', 'SimulatedPaymentController@wallet');
+    Route::get('/{username}/finance', 'SimulatedPaymentController@wallet');
+
+    Route::get('/live/chat', function () {
+        return view('chat.messaging');
+    });
 
 
  });
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -185,6 +233,11 @@ Route::group(['prefix' => 'client', 'middleware' => ['auth' => 'role:client']], 
 
     //activity page on dashboard
     Route::get('/{username}/activity', [
+        'as' => '{username}',
+        'uses' => 'AllTaskController@clientActivityDashboard',
+    ]);
+
+    Route::get('/{username}/wallet', [
         'as' => '{username}',
         'uses' => 'AllTaskController@clientActivityDashboard',
     ]);

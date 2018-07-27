@@ -33,7 +33,7 @@
 
 
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> --}}
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
@@ -86,7 +86,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/client/'.Auth::user()->name.'/wallet') }}">{{ __('Wallet') }}</a>
+                        <a class="nav-link" href="{{ url('/'.Auth::user()->name.'/finance') }}">{{ __('Wallet') }}</a>
                     </li>
 
                     <li class="nav-item">
@@ -148,7 +148,7 @@
                         </div>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/client/messages') }}">
+                            <a class="nav-link" href="{{ url('/live/chat') }}">
                                         <i class="nc-icon nc-email-85"></i>
                                         <span class="notification">5</span>
                                         <!--- <span class="">Log out</span> --->
@@ -195,7 +195,7 @@
                         </div>
 
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url('/tasker/messages') }}">
+                            <a class="nav-link" href="{{ url('/live/chat') }}">
                                         <i class="nc-icon nc-email-85"></i>
                                         <span class="notification">5</span>
                                         <!--- <span class="">Log out</span> --->
@@ -216,6 +216,25 @@
 
                     @endif
 
+
+                    @guest
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('explore/allservices') }}">{{ __('Explore') }}</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/account/choose')  }}">{{ __('Register') }}</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url('/account/tasker') }}">{{ __('Become a Tasker') }}</a>
+                        </li>
+                    @endguest
+
                 </ul>
 
             </div>
@@ -227,11 +246,10 @@
         @yield('content')
     </div>
 
+@yield('scripts')
 
-
-    @yield('scripts')
-
-
+<script src=//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js charset=utf-8></script>
+{{-- {!! $chart->script() !!} --}}
 </body>
 
 </html>

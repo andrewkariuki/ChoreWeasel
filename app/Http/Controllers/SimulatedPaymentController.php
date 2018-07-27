@@ -5,8 +5,9 @@ namespace ChoreWeasel\Http\Controllers;
 use ChoreWeasel\User;
 use Illuminate\Http\Request;
 use ChoreWeasel\Models\AssignedTask;
-use ChoreWeasel\Models\SimulatedPayment;
+use Illuminate\Support\Facades\Auth;
 use ChoreWeasel\Models\FinancialAccount;
+use ChoreWeasel\Models\SimulatedPayment;
 
 
 class SimulatedPaymentController extends Controller
@@ -72,5 +73,15 @@ class SimulatedPaymentController extends Controller
 
         return back()->with('paymentsuccess', 'Task payment was successful');
 
+    }
+
+
+    public function wallet($username){
+        $currentUser = \Auth::user();
+        $clienttransactions = SimulatedPayment::where('payer_id', '=', $currentUser->id)->get();
+        $data = [
+            'clienttransactions' => $clienttransactions,
+        ];
+        return view('users.wallet')->with($data);
     }
 }

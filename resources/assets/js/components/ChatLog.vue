@@ -14,4 +14,7 @@
 .chat-log .chat-message:nth-child(even){
     background-color: #ccc;
 }
+.chat-log{
+    height: 100%;
+}
 </style>

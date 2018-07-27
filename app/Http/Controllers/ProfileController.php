@@ -180,24 +180,22 @@ class ProfileController extends Controller
         return Validator::make(
             $data,
             [
-                'pitch' => 'string|required',
-                'county' => 'string|required',
-                'city' => 'string|required',
-                'locality' => 'string|required',
-                'postaladdress' => 'numeric|digits:5',
-                'postalcode' => 'numeric|digits:5',
-                'dateofbirth' => '',
-                'phonenumber' => 'unique:profiles',
-                'phonenumber_confirmation' => 'same:phonenumber',
-                'nationalid' => 'unique:profiles|numeric|digits_between:1,10|digits:8',
-                // regex:/^(\+36)[0-9]{9}$/
-                //
-                'rates' => 'required|numeric',
-                'avatar' => 'required|mimes:jpeg,jpg,png',
-                'avatar_status' => '',
+                // 'pitch' => 'string|required',
+                // 'county' => 'string|required',
+                // 'city' => 'string|required',
+                // 'locality' => 'string|required',
+                // 'postaladdress' => 'numeric|digits:5',
+                // 'postalcode' => 'numeric|digits:5',
+                // 'dateofbirth' => '',
+                // 'phonenumber' => 'unique:profiles',
+                // 'phonenumber_confirmation' => 'same:phonenumber',
+                // 'nationalid' => 'unique:profiles|numeric|digits_between:1,10|digits:8',
+                // 'rates' => 'required|numeric',
+                // 'avatar' => 'required|mimes:jpeg,jpg,png',
+                // 'avatar_status' => '',
             ],
             [
-                'phonenumber_confirmation.same' => 'Your phone numbers must match',
+                // 'phonenumber_confirmation.same' => 'Your phone numbers must match',
 
             ]
         );
@@ -329,6 +327,8 @@ class ProfileController extends Controller
             $user->profile->fill($input)->save();
         }
 
+        $user->notify(new ClientAccountCreated());
+
         return redirect('client/' . $user->name . '/summary');
     }
 
@@ -450,7 +450,7 @@ class ProfileController extends Controller
             File::makeDirectory($save_path, $mode = 0755, true, true);
 
             // Save the file to the server
-            // Image::make($avatar)->resize(300, 300)->save($save_path . $filename);
+            Image::make($avatar)->resize(300, 300)->save($save_path . $filename);
 
             // Save the public image path
             $currentUser->profile->avatar = $public_path;
@@ -512,7 +512,7 @@ class ProfileController extends Controller
             File::makeDirectory($save_path, $mode = 0755, true, true);
 
             // Save the file to the server
-            // Image::make($avatar)->resize(300, 300)->save($save_path . $filename);
+            Image::make($avatar)->resize(200, 200)->save($save_path . $filename);
 
             // Save the public image path
             $currentUser->profile->avatar = $public_path;

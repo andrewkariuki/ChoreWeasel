@@ -4,14 +4,30 @@ namespace ChoreWeasel\Http\Controllers;
 
 use Carbon\Carbon;
 use ChoreWeasel\User;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Http\Request;
+use ChoreWeasel\Models\Profile;
 use ChoreWeasel\Models\AssignedTask;
 use ChoreWeasel\Models\TaskCategory;
 use Illuminate\Support\Facades\Input;
+use ChoreWeasel\Models\TaskCategoryGroup;
+use ChoreWeasel\Notifications\TaskComplete;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class AssignedTaskController extends Controller
 {
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
+
 
     /**
      * Fetch user
@@ -36,9 +52,11 @@ class AssignedTaskController extends Controller
     {
         //
         $taskcategories = TaskCategory::all();
+        $taskcategorygroups = TaskCategoryGroup::with('taskcategories')->get();
 
         $data = [
             'taskcategories' => $taskcategories,
+            'taskcategorygroups' => $taskcategorygroups
         ];
 
         return view('chores.allchores')->with($data);
@@ -69,28 +87,40 @@ class AssignedTaskController extends Controller
      */
     public function sheduleTaskAndTasker(Request $request, $taskcategory_id)
     {
-        $task_category_id = $request->input('task_category_id');
-        $taskdatetime = $request->input('taskdatetime');
-        $task_requirements = $request->input('task_requirements');
-        $apt_unit_no = $request->input('apt_unit_no');
-        $apartment_unit = $request->input('apartment_unit');
-        $locality_street = $request->input('locality_street');
-        $city_town = $request->input('city_town');
-        $task_size = $request->input('task_size');
-        $task_description = $request->input('task_description');
+        $entereddate = $request->input('taskdatetime');
 
-        $taskcategory = TaskCategory::find($task_category_id);
+        if(Carbon::parse($entereddate)->format('Y/m/d') < Carbon::tomorrow()->format('Y/m/d')){
+            return back()->with('dateerror', 'You can not pick a past date! Please pick a date from tommorrow');
+        }
+        else{
+            $task_category_id = $request->input('task_category_id');
+            $taskdatetime = Carbon::parse($entereddate)->format('Y/m/d');
+            $task_requirements = $request->input('task_requirements');
+            $apt_unit_no = $request->input('apt_unit_no');
+            $apartment_unit = $request->input('apartment_unit');
+            $locality_street = $request->input('locality_street');
+            $city_town = $request->input('city_town');
+            $task_size = $request->input('task_size');
+            $task_description = $request->input('task_description');
 
-        $taskertaskcategory = function ($query)
-        {
-            $query->where('task_category_id', $task_category_id);
-        };
+            $taskcategory = TaskCategory::find($task_category_id);
 
-        $taskers = User::whereHas('roles', function ($q) {
-            $q->where('name', 'tasker');
-        })->with('profile')->get();
+            $taskers = Profile::with('user', 'taskcategory')->where([
+            ['task_category_id', $task_category_id], ['city', '=', $city_town]
+            ])->get();
 
-        $data = [
+            // return dd($taskers);
+
+            // $taskertaskcategory = function ($query)
+            // {
+            //     $query->where('task_category_id', $task_category_id);
+            // };
+
+            // $taskers = User::whereHas('roles', function ($q) {
+            //     $q->where('name', 'tasker');
+            // })->with('profile')->get();
+
+            $data = [
             'task_category_id' => $task_category_id,
             'taskdatetime' => $taskdatetime,
             'task_description' => $task_description,
@@ -104,7 +134,8 @@ class AssignedTaskController extends Controller
             'taskers' => $taskers,
         ];
 
-        return view('clients.taskertimesheduling')->with($data);
+            return view('clients.taskertimesheduling')->with($data);
+        }
     }
 
     /**
@@ -141,6 +172,40 @@ class AssignedTaskController extends Controller
         return redirect('client/' . $user->name . '/summary');
     }
 
+    /**
+     * start a task.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+
+     public function startTask(Request $request, $username, $assigned_task_id){
+        try {
+            $user = $this->getUserByUsername($username);
+        } catch (ModelNotFoundException $exception) {
+            abort(404);
+        }
+
+        $assignedtask = AssignedTask::find($task_category_id);
+
+        if( $assignedtask){
+            $task_date_time = $assignedtask->task_date_time;
+
+             // incase the task is a future task
+             if ($task_date_time > Carbon::today()){
+                return back()->with('cantstarttask', "You can't start future, only today tasks allowed.");
+            }
+
+
+            $startedate = Carbon::now();
+            $assignedtask->started_at = $startedate;
+            $assignedtask->started = true;
+            $assignedtask->save();
+
+
+            return back()->with('taskstarted', 'You have started a task.');
+        }
+     }
 
     /**
      * complete a task.
@@ -164,9 +229,11 @@ class AssignedTaskController extends Controller
             $task_date_time = $assignedtask->task_date_time;
             $ratesperhour = $assignedtask->rates;
 
+
+
             // incase the task is a future task
             if ($task_date_time >= Carbon::now()){
-                return back()->with('futuretask', "you can't complete future, wait and execute it first.");
+                return back()->with('futuretask', "You can't complete future, wait and execute it first.");
             }
 
             $completedAt = Carbon::now();
@@ -184,6 +251,26 @@ class AssignedTaskController extends Controller
             $assignedtask->hours_worked = $hoursWorked;
             $assignedtask->total_payable = $total_payable;
             $assignedtask->save();
+
+
+
+            $invoicedtask = AssignedTask::with('assignee', 'assigner', 'taskcategory')->whereId($assigned_task_id)->first();
+            $data = [
+                'invoicedtask' => $invoicedtask,
+                'user' => $user
+            ];
+
+            $pdf = PDF::loadView('invoice.invoice', $data);
+
+            // $pdf->save(storage_path().'_filename.pdf');
+
+            return $pdf->download('invoice.pdf')->save(public_path().'/invoices/' .$user->id.'/firstinvoice.pdf');
+
+            $client = $assignedtask->assigner()->first();
+
+
+
+            $client->notify(new TaskComplete());
 
             return back()->with('taskcompleted', 'Task Successfuly completed, And is now pending payment and review.');
         }
