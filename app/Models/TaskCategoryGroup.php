@@ -7,6 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class TaskCategoryGroup extends Model
 {
     //
+
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'task_category_groups';
+
       /**
      *
      * Fillable Fields for a User's Profile

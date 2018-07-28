@@ -8,6 +8,14 @@ class Profile extends Model
 {
     //
     /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'profiles';
+
+
+    /**
      *
      * Fillable Fields for a User's Profile
      *
@@ -48,5 +56,9 @@ class Profile extends Model
     public function taskcategory()
     {
         return $this->belongsTo('ChoreWeasel\Models\TaskCategory', 'task_category_id');
+    }
+
+    public function ratings(){
+        return $this->hasMany('ChoreWeasel\Models\Rating', 'profile_id');
     }
 }

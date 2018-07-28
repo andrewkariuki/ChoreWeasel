@@ -7,6 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 class SimulatedPayment extends Model
 {
     //
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'simulated_payments';
+
+
     protected $fillable = [
         'payer_id',
         'paid_id',

@@ -7,6 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class TaskCategory extends Model
 {
     //
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'task_categories';
+
     /***
      * One Task Category can be used by multiple users
      *

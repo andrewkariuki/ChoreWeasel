@@ -19,6 +19,8 @@ class CreateRatingsTable extends Migration
             $table->foreign('rater_id')->references('id')->on('users')->onDelete('cascade');
             $table->integer('rated_id')->unsigned()->index();
             $table->foreign('rater_id')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('profile_id')->unsigned()->index();
+            $table->foreign('profile_id')->references('id')->on('profiles')->onDelete('cascade');
             $table->integer('rated_task_id')->unsigned()->index();
             $table->foreign('rated_task_id')->references('id')->on('assigned_tasks')->onDelete('cascade');
             $table->text('comment')->nullable();

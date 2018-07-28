@@ -7,6 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class AssignedTask extends Model
 {
     //
+    /**
+     * The database table used by the model.
+     *
+     * @var string
+     */
+    protected $table = 'assigned_tasks';
 
     protected $fillable = [
         'assigned_by',
@@ -49,5 +55,9 @@ class AssignedTask extends Model
 
     public function payment(){
         return $this->hasOne('ChoreWeasel\Models\SimulatedPayment', 'paid_task_id');
+    }
+
+    public function dispute(){
+        return $this->hasMany('ChoreWeasel\Models\Dispute', 'assigned_task_id');
     }
 }

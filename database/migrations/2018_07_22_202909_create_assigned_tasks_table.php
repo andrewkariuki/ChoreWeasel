@@ -30,8 +30,6 @@ class CreateAssignedTasksTable extends Migration
             $table->text('task_requirements')->nullable();
             $table->text('task_description')->nullable();
             $table->datetime('task_date_time')->nullable();
-            $table->boolean('started')->default(false);
-            $table->datetime('started_at')->nullable();
             $table->datetime('completed_at')->nullable();
             $table->boolean('completed')->default(false);
             $table->double('hours_worked')->nullable();
