@@ -270,7 +270,7 @@ Route::group(['prefix' => 'client', 'middleware' => ['auth' => 'role:client']], 
 
     Route::delete('/account/delete/{id}', [
         'as' => '{id}',
-        'uses' => 'ProfileController@eleteUserAccount',
+        'uses' => 'ProfileController@deleteUserAccount',
     ]);
 
     Route::get('/{username}/explore', [

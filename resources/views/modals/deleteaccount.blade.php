@@ -17,8 +17,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Changed my mind</button>
-                <form action="{{ url('client/account/delete/'.Auth::user()->id) }}" method="post"> @method('delete') @csrf
-                    <button type="button" class="btn btn-primary">DELETE</button>
+                <form action="{{ url('client/account/delete/'.Auth::user()->id) }}" method="post">
+                    @csrf
+                    @method('delete')
+                    <button type="submit" class="btn btn-primary">DELETE</button>
                 </form>
 
             </div>

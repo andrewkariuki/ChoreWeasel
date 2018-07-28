@@ -52,7 +52,7 @@
                             <!---user second name input --->
                             <div class="col">
                                 <label for="secondname">Second Name</label>
-                                <input id="secondname" type="text" class="form-control{{ $errors->has('secondname') ? ' is-invalid' : '' }}" name="secondname" value="{{ old('secondname') }}" required autofocus>
+                                <input id="secondname" type="text" class="form-control{{ $errors->has('secondname') ? ' is-invalid' : '' }}" name="secondname" value="{{ old('secondname') }}" required autofocus  onkeypress="return onlyAlphabets(event,this);">
 
                                 @if ($errors->has('secondname'))
                                     <span class="invalid-feedback" role="alert">
@@ -142,3 +142,45 @@
     </div>
 
 @endsection
+@section('scripts')
+<script language="Javascript" type="text/javascripts">
+    function onlyAlphabets(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            }
+            else if (e) {
+                var charCode = e.which;
+            }
+            else { return true; }
+            if ((charCode > 64 && charCode < 91) || (charCode > 96 && charCode < 123))
+                return true;
+            else
+                return false;
+        }catch (err) {
+            alert(err.Description);
+        }
+    }
+
+
+    function onlyNos(e, t) {
+        try {
+            if (window.event) {
+                var charCode = window.event.keyCode;
+            }
+            else if (e) {
+                var charCode = e.which;
+            }
+            else { return true; }
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                return false;
+            }
+            return true;
+        }
+        catch (err) {
+            alert(err.Description);
+        }
+
+    }
+</script>
+@stop

@@ -299,11 +299,9 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="email-field">
-                                <form action="">
                                     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#deleteAccount">
                                         DELETE
                                     </button>
-                                </form>
                             </div>
                         </div>
                     </div>

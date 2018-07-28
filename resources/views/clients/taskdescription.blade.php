@@ -33,23 +33,12 @@
                                             <div class="form-row">
                                                 <div class="col-4 m-auto">
 
-
                                                     <div class="form-group text-center">
-                                                        <label for="date">Pick date and time</label>
-                                                        <div class='input-group date' id='taskdatetimepicker'>
-                                                            <input type="date" name="taskdatetime" id="taskdatetime" class="form-control"
-                                                            required pattern="[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])
-                                                            " min="28-07-2018"
-                                                            >
-                                                            <span class="input-group-addon">
-                                                                <i class="gylphicon glyphicon-calendar"></i>
+                                                        <div class='input-group date' id='taskedate'>
+                                                            <input type='text' class="form-control" />
+                                                            <span class="input-group-addon" style="padding: 5px; background:darkgray; ">
+                                                                <i class="fa fa-calendar"></i>
                                                             </span>
-
-                                                            @if (Session::has('dateerror'))
-                                                                <span style="color:red;">
-                                                                    <strong>{{ Session::get('dateerror') }}</strong>
-                                                                </span>
-                                                            @endif
                                                         </div>
                                                     </div>
 
@@ -70,7 +59,7 @@
                                                 <div class="col-3">
                                                     <div class="form-group">
                                                         <label class="custom-label" for="city_town">City or Town</label>
-                                                        <input class="form-control" type="text" name="city_town" id="city_town" placeholder="i.e Voi, Meru, Kakamega" value=" "> }}
+                                                        <input class="form-control" type="text" name="city_town" id="city_town" placeholder="i.e Voi, Meru, Kakamega" value=" ">
                                                     </div>
                                                 </div>
                                                 <div class="col-3">
@@ -167,23 +156,31 @@
 @endsection
 
 @section('scripts')
-<script>
+<script type="text/javascript">
     $(function () {
-        $('#taskdatetimepicker .input-group.date').datepicker({
-            todayBtn:"linked",
-            keyboardNavigation:false,
-            forceParse:false,
-            calenderWeeks:true,
-            autoclose:true,
-            locale: 'en'
+        $(function () {
+            $('#taskedate').datetimepicker({
+                icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-arrow-up",
+                    down: "fa fa-arrow-down"
+                },
+                minDate: new Date()
+            });
         });
-        console.log();
 
     });
 </script>
+
 @stop
 
 
-
-
-{{--  <div data-notify="container" class="col-11 col-sm-4 alert alert-warning alert-with-icon" role="alert" data-notify-position="top-center" style="display: inline-block; margin: 0px auto; position: fixed; transition: all 0.5s ease-in-out; z-index: 1031; top: 20px; right: 20px;"><button type="button" aria-hidden="true" class="close" data-notify="dismiss" style="position: absolute; right: 10px; top: 50%; margin-top: -13px; z-index: 1033;"><i class="nc-icon nc-simple-remove"></i></button><span data-notify="icon" class="nc-icon nc-app"></span> <span data-notify="title"></span> <span data-notify="message">Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for every web developer.</span><a href="#" target="_blank" data-notify="url"></a></div>  --}}
+{{--
+<div data-notify="container" class="col-11 col-sm-4 alert alert-warning alert-with-icon" role="alert" data-notify-position="top-center"
+    style="display: inline-block; margin: 0px auto; position: fixed; transition: all 0.5s ease-in-out; z-index: 1031; top: 20px; right: 20px;"><button type="button" aria-hidden="true" class="close" data-notify="dismiss" style="position: absolute; right: 10px; top: 50%; margin-top: -13px; z-index: 1033;"><i class="nc-icon nc-simple-remove"></i></button>
+    <span
+        data-notify="icon" class="nc-icon nc-app"></span> <span data-notify="title"></span> <span data-notify="message">Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for every web developer.</span>
+        <a
+            href="#" target="_blank" data-notify="url"></a>
+</div> --}}
