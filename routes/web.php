@@ -229,7 +229,7 @@ Route::group(['prefix' => 'client', 'middleware' => ['auth' => 'role:client']], 
         'uses' => 'ProfileController@clientuploadprofileimageform',
     ]);
 
-    Route::put('/{username}/profile//uploadprofileimage', [
+    Route::put('/{username}/profile/uploadprofileimage', [
         'as' => '{username}',
         'uses' => 'ProfileController@clientuploadprofileimage',
     ]);

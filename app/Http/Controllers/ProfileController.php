@@ -168,6 +168,46 @@ class ProfileController extends Controller
         return view('clients.createprofile')->with($data);
     }
 
+      /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param array $data
+     *
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    public function create_profile_validator(array $data){
+        return Validator::make(
+            $data,
+            [
+                'county' => 'string|required|alpha',
+                'city' => 'string|required|alpha',
+                'locality' => 'string|required|alpha',
+                'postaladdress' => 'numeric|digits:5',
+                'postalcode' => 'numeric|digits:5',
+                'dateofbirth' => '',
+                'phonenumber' => 'unique:profiles|regex:/(07)[0-9]{8}/',
+                'phonenumber_confirmation' => 'same:phonenumber',
+                'nationalid' => 'unique:profiles|numeric|digits_between:1,10|digits:8',
+
+            ]);
+    }
+
+
+    /**
+     * Get a validator for an incoming registration request.
+     *
+     * @param array $data
+     *
+     * @return \Illuminate\Contracts\Validation\Validator
+     */
+    public function avatar_validator(array $data){
+        return Validator::make(
+            $data,
+            [
+                'avatar' => 'required|mimes:jpeg,jpg,png',
+            ]);
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -180,25 +220,9 @@ class ProfileController extends Controller
         return Validator::make(
             $data,
             [
-                // 'pitch' => 'string|required',
-                // 'county' => 'string|required',
-                // 'city' => 'string|required',
-                // 'locality' => 'string|required',
-                // 'postaladdress' => 'numeric|digits:5',
-                // 'postalcode' => 'numeric|digits:5',
-                // 'dateofbirth' => '',
-                // 'phonenumber' => 'unique:profiles',
-                // 'phonenumber_confirmation' => 'same:phonenumber',
-                // 'nationalid' => 'unique:profiles|numeric|digits_between:1,10|digits:8',
-                // 'rates' => 'required|numeric',
-                // 'avatar' => 'required|mimes:jpeg,jpg,png',
-                // 'avatar_status' => '',
-            ],
-            [
-                // 'phonenumber_confirmation.same' => 'Your phone numbers must match',
-
-            ]
-        );
+                'rates' => 'required|numeric|digits_between:1,10',
+                'pitch' => 'required|string'
+            ]);
     }
 
     /**
@@ -225,11 +249,10 @@ class ProfileController extends Controller
             'locality',
             'postaladdress',
             'postalcode',
-            'phonenumber',
-            'avatar_status'
+            'phonenumber'
         );
 
-        $profile_validator = $this->profile_validator($request->all());
+        $profile_validator = $this->create_profile_validator($request->all());
 
         if ($profile_validator->fails()) {
             return back()->withErrors($profile_validator)->withInput();
@@ -309,11 +332,10 @@ class ProfileController extends Controller
             'locality',
             'postaladdress',
             'postalcode',
-            'phonenumber',
-            'avatar_status'
+            'phonenumber'
         );
 
-        $profile_validator = $this->profile_validator($request->all());
+        $profile_validator = $this->create_profile_validator($request->all());
 
         if ($profile_validator->fails()) {
             return back()->withErrors($profile_validator)->withInput();
@@ -327,9 +349,9 @@ class ProfileController extends Controller
             $user->profile->fill($input)->save();
         }
 
-        $user->notify(new ClientAccountCreated());
+        // $user->notify(new ClientAccountCreated());
 
-        return redirect('client/' . $user->name . '/summary');
+        return redirect('client/' . $user->name . '/profile/uploadprofileimage');
     }
 
     /**
@@ -360,38 +382,31 @@ class ProfileController extends Controller
     }
 
     /**
-     * Upload and Update user avatar.
      *
-     * @param $file
+     * show the form for uploading the profile image
      *
-     * @return mixed
+     * @param  $username
+     * @return \Illuminate\Http\Response
      */
-    public function upload()
+
+    public function clientuploadprofileimageform($username)
     {
-        if (Input::hasFile('file')) {
-            $currentUser = \Auth::user();
-            $avatar = Input::file('file');
-            $filename = 'avatar' .'-'.rand().'.'.$avatar->getClientOriginalExtension();
-            $save_path = storage_path() . '/users/id/' . $currentUser->id . '/uploads/images/avatar/';
-            $path = $save_path . $filename;
-            $public_path = '/images/profile/' . $currentUser->id . '/avatar/' . $filename;
 
-            // Make the user a folder and set permissions
-            File::makeDirectory($save_path, $mode = 0755, true, true);
-
-            // Save the file to the server
-            Image::make($avatar)->resize(300, 300)->save($save_path . $filename);
-
-            // Save the public image path
-            $currentUser->profile->avatar = $public_path;
-            $currentUser->profile->avatar_status = true;
-            $currentUser->profile->save();
-
-            return response()->json(['path' => $path], 200);
-        } else {
-            return response()->json(false, 200);
+        try {
+            $user = $this->getUserByUsername($username);
+        } catch (ModelNotFoundException $exception) {
+            abort(404);
         }
+
+        $data = [
+            'user' => $user,
+            // 'currentTheme' => $currentTheme,
+        ];
+
+        return view('clients.uploadprofileimage')->with($data);
+
     }
+
 
     /**
      *
@@ -427,7 +442,7 @@ class ProfileController extends Controller
             abort(404);
         }
 
-        $profile_validator = $this->profile_validator($request->all());
+        $profile_validator = $this->avatar_validator($request->all());
 
         if ($profile_validator->fails()) {
             return back()->withErrors($profile_validator)->withInput();
@@ -475,7 +490,7 @@ class ProfileController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function clientuploadprofileimageform($username)
+    public function clientuploadprofileimage(Request $request, $username)
     {
         try {
             $user = $this->getUserByUsername($username);
@@ -489,7 +504,7 @@ class ProfileController extends Controller
             abort(404);
         }
 
-        $profile_validator = $this->profile_validator($request->all());
+        $profile_validator = $this->avatar_validator($request->all());
 
         if ($profile_validator->fails()) {
             return back()->withErrors($profile_validator)->withInput();

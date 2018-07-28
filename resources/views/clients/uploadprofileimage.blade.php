@@ -52,7 +52,7 @@
                                     </div>
                                     @endif --}}
                                     <div class="image-preview"></div>
-                                    <form action="{{ url('/tasker/'.Auth::user()->name.'/profile/uploadprofileimage') }}" method="POST" enctype="multipart/form-data">
+                                    <form action="{{ url('/client/'.Auth::user()->name.'/profile/uploadprofileimage') }}" method="POST" enctype="multipart/form-data">
                                         @csrf @method('put')
 
                                         <div class="form-group">
