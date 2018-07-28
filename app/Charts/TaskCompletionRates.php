@@ -4,7 +4,7 @@ namespace ChoreWeasel\Charts;
 
 use ConsoleTVs\Charts\Classes\Chartjs\Chart;
 
-class SampleChart extends Chart
+class TaskCompletionRates extends Chart
 {
     /**
      * Initializes the chart.
@@ -14,8 +14,6 @@ class SampleChart extends Chart
     public function __construct()
     {
         parent::__construct();
-
-    $this->labels(['One', 'Two', 'Three', 'Four', 'Five']);
-    $this->title("Total Taskers");
+        $this->labels(['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']);
     }
 }

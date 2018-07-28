@@ -2,19 +2,6 @@
 @section('content')
     @include('admin.scripts.addtaskcategory')
 
-<script>
-    $(document).ready(function(){
-
-            var auto_refresh = setInterval(
-            function(){
-                $("#availablecategories").load('<?php echo url('/admin/taskcategories/availablecategories'); ?>').fadeIn("slow");
-            }, 1000);
-
-
-        });
-
-</script>
-
 <div class="row">
     <div class="col-sm-4">
 
@@ -153,3 +140,17 @@
     </div>
 </div>
 @endsection
+@section('scripts')
+<script>
+        $(document).ready(function(){
+
+                var auto_refresh = setInterval(
+                function(){
+                    $("#availablecategories").load('<?php echo url('/admin/taskcategories/availablecategories'); ?>').fadeIn("slow");
+                }, 1000);
+
+
+            });
+
+    </script>
+@stop

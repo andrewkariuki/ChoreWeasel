@@ -83,6 +83,15 @@ Route::group(['prefix' => 'account', 'middleware' => ['guest']], function () {
 
     Route::get('/charts', 'Charts@charts');
 
+
+    Route::get('/data', function(){
+        $users = User::all();
+        $data = [
+            'users' => $users
+        ];
+        return view('datatables.datatable')->with($data);
+    });
+
 /**
  *
  * end public

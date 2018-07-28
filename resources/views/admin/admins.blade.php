@@ -1,16 +1,6 @@
 @extends('admin.master')
 
 @section('content')
-
-<script>
-    $(document).ready(function() {
-        $('#adminstable').DataTable( {
-            "scrollY": 200,
-            "scrollX": true
-        } );
-    } );
-</script>
-
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -26,10 +16,6 @@
                             <th>second Name</th>
                             <th>Email</th>
                             <th>Verified</th>
-                            <th>Status</th>
-                            <th>Task Category</th>
-                            <th>Rates</th>
-                            <th>Location</th>
                         </thead>
                         <tbody>
                             @foreach ($admins as $user)
@@ -56,3 +42,15 @@
     </div>
 
 @endsection
+@section('scripts')
+<script>
+        $(document).ready(function() {
+            $('#adminstable').DataTable( {
+                dom: 'Bfrtip',
+                buttons: [
+                { extend:'copy', attr: { id: 'allan' } }, 'csv', 'excel', 'pdf', 'print'
+                ]
+            } );
+        } );
+    </script>
+@stop

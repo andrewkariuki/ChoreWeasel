@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Validator;
 use jeremykenedy\LaravelRoles\Models\Role;
 use Illuminate\Support\Carbon;
 use ChoreWeasel\Models\AssignedTask;
+use ChoreWeasel\Charts\TaskersToClientsChart;
+use ChoreWeasel\Charts\TaskCompletionRates;
 class AdminController extends Controller
 {
     //
@@ -58,6 +60,32 @@ class AdminController extends Controller
 
         $alltimetasks = AssignedTask::all()->count();
 
+        $januarytasks = AssignedTask::whereMonth('created_at', '=', 01)->count();
+        $januarycompletedtasks = AssignedTask::where([
+            ['created_at', '=', 01],
+            ['completed', true]
+        ])->count();
+
+        $julytasks = AssignedTask::whereMonth('created_at', '=', 07)->count();
+        $julycompletedtasks = AssignedTask::where([
+            ['created_at', '=', 07],
+            ['completed', true]
+        ])->count();
+
+
+
+        $ratiochart = new TaskersToClientsChart();
+        $ratiochart->dataset('highcharts', 'doughnut',
+        [$totaltaskers, $totalclients])
+        ->backgroundColor(
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)'
+        );
+
+        $taskcompletionrates = new TaskCompletionRates();
+        $taskcompletionrates->dataset('highcharts', 'bar', [0,0,0,0,0,0,0,0,0,0,0,0])->color('#00ff00');
+//         $taskcompletionrates->dataset('Sample Test', 'line', [1,4,3])->color('#ff0000');
+
 
 
         $data = [
@@ -69,6 +97,8 @@ class AdminController extends Controller
             'tatolataskersignup' => $tatolataskersignup,
             'alltimetasks' => $alltimetasks,
             'totalactivetasks' => $totalactivetasks,
+            'ratiochart' => $ratiochart,
+            'taskcompletionrates' => $taskcompletionrates
         ];
         return view('admin.index')->with($data);
     }

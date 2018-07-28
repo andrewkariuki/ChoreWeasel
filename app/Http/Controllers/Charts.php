@@ -21,9 +21,13 @@ class Charts extends Controller
             $q->where('name', 'tasker');
         })->count();
 
-        $chart->dataset('Sample', 'pie', [$totaltaskers, 65, 84, 45, 90])
-        ->color('#ff0000')
-        ->labels(['total taskers', 'that', 'those', 'these', 'that']);
+        $chart->dataset('highcharts', 'doughnut',  [$totaltaskers, 65, 84, 45, 90])->backgroundColor(
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)'
+        );
+
 
         return view('charts.firsttest', ['chart' => $chart]);
     }

@@ -2,6 +2,22 @@
 @section('styles')
 <link href="{{ asset('css/userlisting.css') }}" rel="stylesheet">
 @stop
+
+
+@section('scripts')
+<script>
+    $(document).ready(function() {
+        $('#taskerstable').DataTable( {
+            dom: 'Bfrtip',
+            buttons: [
+            { extend:'copy', attr: { id: 'allan' } }, 'csv', 'excel', 'pdf', 'print'
+            ]
+        } );
+    } );
+</script>
+@stop
+
+
 @section('content')
 
 <div class="row">
@@ -17,44 +33,27 @@
 
 
             <div class="card-body table-full-width table-responsive">
-                <div class="table-action">
-                    <div class="row">
-                        <div class="col-sm-7">
-                            <div class="export-excel">
-                                <form action="">
-                                    <div class="form-group">
-                                        <button class="btn btn-primary" type="submit">Export to Excel</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-sm-5">
-                            <div class="search">
-                                <div class="input-group">
-                                    <input name="search" id="search" type="text" class="form-control" placeholder="search...">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
-                </div>
-                <table id="taskerstable " class="table table-hover">
+                <table id="taskerstable" class="table table-hover">
                     <thead>
-                        <th>Username</th>
+                        <th class="hidden-xs">Full Name</th>
                         <th class="hidden-xs">Email</th>
-                        <th class="hidden-xs">First Name</th>
-                        <th class="hidden-xs">Last Name</th>
+                        <th class="hidden-xs">National Id</th>
+                        <th>Postal Address</th>
+                        <th class="hidden-xs">Location</th>
                         <th>Status</th>
                         <th></th>
+                        <th>Registration Dates</th>
                         <th>Action</th>
                     </thead>
                     <tbody>
                         @foreach ($taskers as $user)
                         <tr>
-                            <td>{{ $user -> name }}</td>
+                            <td>{{ $user -> firstname }} {{ $user -> secondname }}</td>
                             <td class="hidden-xs"><a href="mailto:{{ $user->email }}" title="email {{ $user->email }}">{{ $user->email }}</a></td>
-                            <td>{{ $user -> firstname }}</td>
-                            <td>{{ $user -> secondname }}</td>
+                            <td>{{ $user->profile->nationalid }}</td>
+                            <td>{{ $user->profile->postaladdress }}, {{ $user->profile->postalcode }}</td>
+                            <td>{{ $user->profile->city }}, {{ $user->profile->locality }}</td>
                             <td>
                                 @if ($user->verified==0)
                                 <div class="badge badge-danger text-uppercase p-1">
@@ -78,6 +77,7 @@
                                 </div>
                                 @endif
                             </td>
+                            <td>{{ \Carbon\Carbon::parse($user->created_at)->format('Y/m/d') }}</td>
                             <td>
                                 <a class="btn btn-sm btn-primary" href="{{ url('admin/tasker/'.$user->name) }}" data-toggle="tooltip" title="Show">
                                     <i class="fa fa-eye fa-fw" aria-hidden="true"></i>
@@ -96,81 +96,3 @@
 </div>
 @endsection
 
-@section('scripts')
-<script>
-    $(document).ready(function() {
-        $('taskerstable').DataTable( {
-            "scrollY": 200,
-            "scrollX": true
-        } );
-    } );
-
-</script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-@stop

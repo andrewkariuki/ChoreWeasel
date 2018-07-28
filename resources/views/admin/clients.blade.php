@@ -5,8 +5,10 @@
 <script>
     $(document).ready(function() {
         $('#clientstable').DataTable( {
-            "scrollY": 200,
-            "scrollX": true
+            dom: 'Bfrtip',
+            buttons: [
+            { extend:'copy', attr: { id: 'allan' } }, 'csv', 'excel', 'pdf', 'print'
+            ]
         } );
     } );
 </script>
