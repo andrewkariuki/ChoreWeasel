@@ -1,11 +1,11 @@
-@extends('layouts.usermaster')
+@extends('layouts.profilemaster')
 @section('styles')
 <link href="{{ asset('css/createprofile.css') }}" rel="stylesheet">
 @stop
 @section('content')
 <div class="cw-container">
-    <div class="cw-container-createprofile">
-
+    <div class="cw-container-createprofile text-center" style="font-size: 32px;">
+        Upload Your Profile Pic
     </div>
     <div class="row">
 

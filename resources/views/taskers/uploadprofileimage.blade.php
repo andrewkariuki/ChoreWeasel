@@ -1,11 +1,11 @@
-@extends('layouts.usermaster')
+@extends('layouts.profilemaster')
 @section('styles')
 <link href="{{ asset('css/createprofile.css') }}" rel="stylesheet">
 @stop
 @section('content')
 <div class="cw-container">
-    <div class="cw-container-createprofile">
-
+    <div class="cw-container-createprofile text-center" style="font-size: 32px;">
+        Upload Your Profile Pic
     </div>
     <div class="row">
 
@@ -56,8 +56,8 @@
                                         @csrf @method('put')
 
                                         <div class="form-group">
-                                            <input type="file" name="avatar" id="avatar" class="form-control{{ $errors->has('avatar') ? ' is-invalid' : '' }}"
-                                                required autofocus> @if ($errors->has('avatar'))
+                                            <input type="file" name="avatar" id="avatar" class="form-control{{ $errors->has('avatar') ? ' is-invalid' : '' }}" required
+                                                autofocus> @if ($errors->has('avatar'))
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $errors->first('avatar') }}</strong>
                                             </span> @endif

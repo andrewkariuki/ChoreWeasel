@@ -1,4 +1,4 @@
-@extends('layouts.usermaster')
+@extends('layouts.profilemaster')
 @section('styles')
 <link href="{{ asset('css/createprofile.css') }}" rel="stylesheet">
 <link href="{{ asset('css/summary.css') }}" rel="stylesheet">
@@ -6,8 +6,8 @@
 @section('content')
 
 <div class="cw-container">
-    <div class="cw-container-createprofile">
-
+    <div class="cw-container-createprofile text-center" style="font-size: 32px;">
+        Create Your Profile
     </div>
 
 
@@ -85,8 +85,7 @@
                                             </div>
 
                                             <form action="{{ url('/tasker/'.Auth::user()->name.'/profile/addcategory/'.$task->id) }}" method="post">
-                                                @csrf
-                                                @method('put')
+                                                @csrf @method('put')
                                                 <div class="set-hourly-rates">
                                                     <div class="set-hourly-rates-heading">
                                                         Set your Hourly rates
