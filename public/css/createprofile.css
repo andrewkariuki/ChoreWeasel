@@ -5,6 +5,9 @@
     background: #ffffff;
     border: 1px solid #f9f9f9;
 }
+.cw-container{
+    padding: 0 !important;
+}
 
 .create-profile-content, .create-profile-side-content{
     padding: 20px;

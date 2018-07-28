@@ -1,11 +1,11 @@
-@extends('layouts.usermaster')
+@extends('layouts.profilemaster')
 @section('styles')
 <link href="{{ asset('css/createprofile.css') }}" rel="stylesheet">
 @stop
 @section('content')
 <div class="cw-container">
-    <div class="cw-container-createprofile">
-
+    <div class="cw-container-createprofile text-center" style="font-size: 32px;">
+        Create Your Profile
     </div>
     <div class="row">
 
@@ -64,13 +64,21 @@
                                         <div class="col-6">
                                             <div class="form-group">
                                                 <label for="dateofbirth">Date of Birth</label>
-                                                <input id="dateofbirth" type="text" class="form-control{{ $errors->has('dateofbirth') ? ' is-invalid' : '' }}" name="dateofbirth"
-                                                    value="{{ old('dateofbirth') }}" required autofocus>                                                @if ($errors->has('dateofbirth'))
-                                                <span class="invalid-feedback" role="alert">
-                                                            <strong>{{ $errors->first('dateofbirth') }}</strong>
-                                                        </span> @endif
-
+                                                <div class='input-group date' id='dateofbirth'>
+                                                        <input type="text" class="form-control{{ $errors->has('dateofbirth') ? ' is-invalid' : '' }}" name="dateofbirth" value="{{ old('dateofbirth') }}"
+                                                        required autofocus>
+                                                    <span class="input-group-addon" style="padding: 4px; background:darkgray; ">
+                                                                {{-- <span class="glyphicon glyphicon-calendar"> --}}
+                                                                    <i class="fa fa-calendar"></i>
+                                                                {{-- </span>                                                    --}}
+                                                    </span>
+                                                    @if ($errors->has('dateofbirth'))
+                                                    <span class="invalid-feedback" role="alert">
+                                                                <strong>{{ $errors->first('dateofbirth') }}</strong>
+                                                            </span> @endif
+                                                </div>
                                             </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -206,3 +214,25 @@
     </div>
 </div>
 @endsection
+
+@section('scripts')
+<script type="text/javascript">
+    $(function () {
+        $(function () {
+            $('#dateofbirth').datetimepicker({
+                icons: {
+                    time: "fa fa-clock-o",
+                    date: "fa fa-calendar",
+                    up: "fa fa-arrow-up",
+                    down: "fa fa-arrow-down"
+                },
+                minDate: new Date()
+            });
+        });
+
+    });
+
+</script>
+
+
+@stop

@@ -12,8 +12,7 @@
     <title>{{ config('app.name', 'ChoreWeasel') }}</title>
 
     <!-- Scripts -->
-    {{-- <script src="{{ asset('jquery/jquery-3.3.1.min.js') }}"></script>
-    <script src="{{ asset('js/app.js') }}" defer></script> --}}
+    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
 
 
     <!-- Fonts -->
@@ -25,17 +24,14 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('datetimepicker/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/accounts.css') }}" rel="stylesheet">
     <link href="{{ asset('css/commons.css') }}" rel="stylesheet">
     <link href="{{ asset('css/nav.css') }}" rel="stylesheet">
     <link href="{{ asset('css/userdashboard.css') }}" rel="stylesheet">
     <link href="{{ asset('css/navcustom.css') }}" rel="stylesheet">
-    <link href="{{ asset('datetimepicker/css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
     <link href="{{ asset('dashboard/css/light-bootstrap-dashboard.css?v=2.0.1') }}" rel="stylesheet">
     <link href="{{ asset('dashboard/css/demo.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('datatables/datatables.css') }}">
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-    <link rel="stylesheet" href="{{ asset('css/simple-line-icons.css') }}">
      @yield('styles')
 
 </head>
@@ -126,13 +122,13 @@
                                     </a>
                         </div>
 
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link" href="{{ url('/live/chat') }}">
                                         <i class="nc-icon nc-email-85"></i>
                                         <span class="notification">5</span>
                                         <!--- <span class="">Log out</span> --->
                                     </a>
-                        </li>
+                        </li> --}}
 
 
                         <li class="nav-item">
@@ -173,13 +169,13 @@
                                     </a>
                         </div>
 
-                        <li class="nav-item">
+                        {{-- <li class="nav-item">
                             <a class="nav-link" href="{{ url('/live/chat') }}">
                                         <i class="nc-icon nc-email-85"></i>
                                         <span class="notification">5</span>
                                         <!--- <span class="">Log out</span> --->
                                     </a>
-                        </li>
+                        </li> --}}
 
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault();
@@ -220,25 +216,22 @@
         </div>
     </nav>
 
-
     <div class="container">
         @yield('content')
     </div>
 
+<script src="{{ asset('jquery/jquery-3.3.1.min.js') }}"></script>
 
-<script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+{{-- <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script> --}}
+{{-- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script> --}}
 <script src="{{ asset('moment/moment-with-locales.min.js') }}"></script>
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 <script src="{{ asset('dashboard/js/plugins/bootstrap-datepicker.js') }}"></script>
 <script src="{{ asset('datetimepicker/js/bootstrap-datetimepicker.min.js') }}"></script>
 <script src="{{ asset('dashboard/js/plugins/bootstrap-switch.js') }}"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jqc-1.12.4/jszip-2.5.0/dt-1.10.18/af-2.3.0/b-1.5.2/b-colvis-1.5.2/b-flash-1.5.2/b-html5-1.5.2/b-print-1.5.2/cr-1.5.0/fc-3.2.5/fh-3.1.4/kt-2.4.0/r-2.2.2/rg-1.0.3/rr-1.2.4/sc-1.5.0/sl-1.2.6/datatables.min.js"></script>
-<script src="{{ asset('dashboard/js/plugins/nouislider.min.js') }}"></script>
-<script src="{{ asset('dashboard/js/plugins/chartist.min.js') }}"></script>
 <script src="{{ asset('dashboard/js/plugins/bootstrap-notify.js') }}"></script>
 <script src="{{ asset('dashboard/js/light-bootstrap-dashboard.js?v=2.0.1s') }}"></script>
 <script src="{{ asset('dashboard/js/demo.js') }}"></script>
@@ -246,8 +239,7 @@
 
 @yield('scripts')
 
-<script src=//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js charset=utf-8></script>
-{{-- {!! $chart->script() !!} --}}
+
 </body>
 
 </html>

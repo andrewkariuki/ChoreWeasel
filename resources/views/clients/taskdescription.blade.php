@@ -33,11 +33,13 @@
                                             <div class="form-row">
                                                 <div class="col-4 m-auto">
 
-                                                    <div class="form-group text-center">
-                                                        <div class='input-group date' id='taskedate'>
+                                                    <div class="form-group">
+                                                        <div class='input-group date' id='datetimepicker1'>
                                                             <input type='text' class="form-control" />
                                                             <span class="input-group-addon" style="padding: 5px; background:darkgray; ">
-                                                                <i class="fa fa-calendar"></i>
+                                                                {{-- <span class="glyphicon glyphicon-calendar"> --}}
+                                                                    <i class="fa fa-calendar"></i>
+                                                                {{-- </span> --}}
                                                             </span>
                                                         </div>
                                                     </div>
@@ -159,7 +161,7 @@
 <script type="text/javascript">
     $(function () {
         $(function () {
-            $('#taskedate').datetimepicker({
+            $('#datetimepicker1').datetimepicker({
                 icons: {
                     time: "fa fa-clock-o",
                     date: "fa fa-calendar",
@@ -169,18 +171,10 @@
                 minDate: new Date()
             });
         });
-
     });
 </script>
 
 @stop
 
 
-{{--
-<div data-notify="container" class="col-11 col-sm-4 alert alert-warning alert-with-icon" role="alert" data-notify-position="top-center"
-    style="display: inline-block; margin: 0px auto; position: fixed; transition: all 0.5s ease-in-out; z-index: 1031; top: 20px; right: 20px;"><button type="button" aria-hidden="true" class="close" data-notify="dismiss" style="position: absolute; right: 10px; top: 50%; margin-top: -13px; z-index: 1033;"><i class="nc-icon nc-simple-remove"></i></button>
-    <span
-        data-notify="icon" class="nc-icon nc-app"></span> <span data-notify="title"></span> <span data-notify="message">Welcome to <b>Light Bootstrap Dashboard</b> - a beautiful freebie for every web developer.</span>
-        <a
-            href="#" target="_blank" data-notify="url"></a>
-</div> --}}
+
