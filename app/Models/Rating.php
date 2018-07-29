@@ -19,6 +19,7 @@ class Rating extends Model
         'rater_id',
         'rated_id',
         'rated_task_id',
+        'profile_id',
         'comment',
         'rating',
     ];

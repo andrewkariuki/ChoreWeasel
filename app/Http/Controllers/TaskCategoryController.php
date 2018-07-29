@@ -68,6 +68,8 @@ class TaskCategoryController extends Controller
 
         $path = public_path().'/images/taskcategory/';
 
+        $publicpath = '/images/taskcategory/'.$taskimage;
+
         $request->file('taskimage')->move($path, $taskimage);
 
         // add a new task category to the database
@@ -76,7 +78,7 @@ class TaskCategoryController extends Controller
         $taskCategory->task_category_group_id = $request->input('task_category_group_id');
         $taskCategory->taskname = $request->input('taskname');
         $taskCategory->taskdescription = $request->input('taskdescription');
-        $taskCategory->taskimage = $taskimage;
+        $taskCategory->taskimage = $publicpath;
 
         $taskCategory->save();
 

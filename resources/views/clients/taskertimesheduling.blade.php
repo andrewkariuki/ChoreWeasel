@@ -20,32 +20,41 @@
                 </div>
 
 
-                {{-- <div class="sort-by">
-                        <div class="row">
-                            <div class="col-sm-4 m-auto">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="form-group">
+                {{--
+                <div class="sort-by">
+                    <div class="row">
+                        <div class="col-sm-4 m-auto">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="form-group">
 
-                                            <label for="sortby text-center">Sort by:</label>
-                                            <select name="sortby" id="sortby" class="form-control">
+                                        <label for="sortby text-center">Sort by:</label>
+                                        <select name="sortby" id="sortby" class="form-control">
                                                 <option value="0">Recomended</option>
                                                 <option value="1">Highest Prices</option>
                                                 <option value="2">Lowest Prices</option>
                                                 <option value="4">Highest Ratings</option>
                                                 <option value="5">Lowest Ratings</option>
                                             </select>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
+                </div> --}}
 
 
                 <div class="tasks-time-tasker_content">
                     <div class="row">
                         <div class="col-sm-8 m-auto">
+                            @if ($taskers == null)
+                            <div class="card" style="height: 500px;">
+                                <div class="card-body justify-content-center">
+                                    <h4 class="text-bold">Sorry there seem to be not taskers in this Task Category.</h4>
+                                    <p>You can pick another! Sorry for the inconviniency.</p>
+                                </div>
+                            </div>
+                            @else
                             <div class="available-takers">
 
                                 @foreach ($taskers as $tasker)
@@ -57,10 +66,8 @@
                                                     <div class="tasker-secondary-attributes ">
                                                         <div class="tasker-image">
                                                             @if($tasker->avatar_status == true)
-                                                            <img src="{{ $tasker->avatar }}" alt="{{ $tasker->user->firstname }}-{{ $tasker->user->secondname }}-profile-image">
-                                                            @else
-                                                            <img height="200px" width="200px" src="{{ $user->profile->avatar }}" alt="{{ $tasker->user->firstname }}-{{ $tasker->user->secondname }}-profile-image">
-                                                            @endif
+                                                            <img src="{{ $tasker->avatar }}" alt="{{ $tasker->user->firstname }}-{{ $tasker->user->secondname }}-profile-image">                                                            @else
+                                                            <img height="200px" width="200px" src="{{ $user->profile->avatar }}" alt="{{ $tasker->user->firstname }}-{{ $tasker->user->secondname }}-profile-image">                                                            @endif
                                                         </div>
                                                         <div class="preview-tasker">
                                                             <a href="#">Profile and Review</a>
@@ -123,16 +130,14 @@
                                                                     <div class="review">
                                                                         Not yet review - you can review this tasker after assigning tasks to improve their chances of being assign in the future.
                                                                     </div>
-                                                                    @else
-                                                                    {{-- @if($tasker->user->ratingstome->first) --}}
+                                                                    @else {{-- @if($tasker->user->ratingstome->first) --}}
                                                                     <div class="review">
-                                                                         {{-- {{ $tasker->user->ratingstome()->comment }} --}}
+                                                                        {{-- {{ $tasker->user->ratingstome()->comment }} --}}
                                                                     </div>
                                                                     <div class="reviewer-name">
                                                                         John Man - <span class="review-date">30-10-2018</span>
                                                                     </div>
-                                                                    {{-- @endif --}}
-                                                                    @endif
+                                                                    {{-- @endif --}} @endif
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -151,6 +156,11 @@
 
 
                             </div>
+                            @endif
+
+
+
+
                         </div>
                     </div>
                 </div>
@@ -159,16 +169,23 @@
         </div>
     </div>
 </div>
+{{-- 2018-07-29 15:42:13 --}}
 @endsection
 
 @section('scripts')
 <script type="text/javascript">
     $(function () {
-        $('#datetimepicker7').datetimepicker();
+        $('#datetimepicker7').datetimepicker({
+
+            minDate: new Date()
+            format : "YYYY-MM-DD HH:mm"
+
+        });
 
     });
 
 </script>
+
 
 
 

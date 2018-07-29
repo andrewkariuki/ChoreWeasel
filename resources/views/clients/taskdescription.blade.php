@@ -35,8 +35,8 @@
 
                                                     <div class="form-group">
                                                         <div class='input-group date' id='datetimepicker1'>
-                                                            <input type='text' class="form-control" />
-                                                            <span class="input-group-addon" style="padding: 5px; background:darkgray; ">
+                                                            <input type='text' class="form-control" name="taskdatetime"/>
+                                                            <span class="input-group-addon" style="padding: 5px; background:darkgray;" >
                                                                 {{-- <span class="glyphicon glyphicon-calendar"> --}}
                                                                     <i class="fa fa-calendar"></i>
                                                                 {{-- </span> --}}
@@ -168,7 +168,8 @@
                     up: "fa fa-arrow-up",
                     down: "fa fa-arrow-down"
                 },
-                minDate: new Date()
+                minDate: new Date(),
+                format : "YYYY-MM-DD HH:mm"
             });
         });
     });

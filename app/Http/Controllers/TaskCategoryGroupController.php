@@ -53,13 +53,15 @@ class TaskCategoryGroupController extends Controller
 
         $path = public_path().'/images/taskcategorygroup/';
 
+        $publicpath = '/images/taskcategorygroup/'.$groupimagename;
+
         // $request->file('groupimage')->move($path, $groupimagename);
 
         $request->file('groupimage')->move($path, $groupimagename);
 
         $taskCategorygroup = new TaskCategoryGroup();
         $taskCategorygroup->groupname = $request->input('groupname');
-        $taskCategorygroup->goupimage = $groupimagename;
+        $taskCategorygroup->goupimage = $publicpath;
         $taskCategorygroup ->groupdescription = $request->input('groupdescription');
 
 

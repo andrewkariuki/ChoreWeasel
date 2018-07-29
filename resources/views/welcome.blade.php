@@ -121,7 +121,7 @@
                         <div class="card">
                             <img class="card-img-top" style="height: 200px; vertical-align: middle;" src="
                             @if($topcategory->taskimage  != null)
-                            {{ asset('/images/taskcategory/'.$topcategory->taskimage ) }}
+                            {{ $topcategory->taskimage}}
                             @else
                             ../images/mounting.jpg
                             @endif" alt="$topcategory->taskname">

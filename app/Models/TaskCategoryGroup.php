@@ -34,6 +34,6 @@ class TaskCategoryGroup extends Model
      */
     public function taskcategories()
     {
-        return $this->hasMany('ChoreWeasel\Models\TaskCategory');
+        return $this->hasMany('ChoreWeasel\Models\TaskCategory', 'task_category_group_id');
     }
 }

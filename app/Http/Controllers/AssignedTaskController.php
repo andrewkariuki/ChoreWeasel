@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Input;
 use ChoreWeasel\Models\TaskCategoryGroup;
 use ChoreWeasel\Notifications\TaskComplete;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use ChoreWeasel\Notifications\YouHaveBeenAssignedATask;
 
 class AssignedTaskController extends Controller
 {
@@ -87,14 +88,15 @@ class AssignedTaskController extends Controller
      */
     public function sheduleTaskAndTasker(Request $request, $taskcategory_id)
     {
+        // return dd($request->all());
         $entereddate = $request->input('taskdatetime');
 
-        if(Carbon::parse($entereddate)->format('Y/m/d') < Carbon::tomorrow()->format('Y/m/d')){
+        if(Carbon::parse($entereddate)->format('Y-m-d') < Carbon::tomorrow()->format('Y-m-d')){
             return back()->with('dateerror', 'You can not pick a past date! Please pick a date from tommorrow');
         }
         else{
             $task_category_id = $request->input('task_category_id');
-            $taskdatetime = Carbon::parse($entereddate)->format('Y/m/d');
+            $taskdatetime = $entereddate;
             $task_requirements = $request->input('task_requirements');
             $apt_unit_no = $request->input('apt_unit_no');
             $apartment_unit = $request->input('apartment_unit');
@@ -147,7 +149,7 @@ class AssignedTaskController extends Controller
     public function assignTask(Request $request, $task_category_id, $assigned_to)
     {
         //
-        $user = User::find($assigned_to);
+        $user = User::with('profile')->whereId($assigned_to)->first();
 
         $input = Input::only(
             'assigned_by',
@@ -168,6 +170,8 @@ class AssignedTaskController extends Controller
 
         $assignedTask = new AssignedTask();
         $assignedTask->fill($input)->save();
+
+        $user->notify(new YouHaveBeenAssignedATask());
 
         return redirect('client/' . $user->name . '/summary');
     }

@@ -31,6 +31,6 @@ class TaskCategory extends Model
      */
     public function group()
     {
-        return $this->belongsTo('ChoreWeasel\Models\TaskCategoryGroup');
+        return $this->belongsTo('ChoreWeasel\Models\TaskCategoryGroup', 'task_category_group_id');
     }
 }

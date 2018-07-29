@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use ChoreWeasel\Models\Rating;
 use ChoreWeasel\Models\AssignedTask;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use ChoreWeasel\Notifications\YouHaveJustBeenRated;
 
 class RatingController extends Controller
 {
@@ -98,15 +99,20 @@ class RatingController extends Controller
             return back()->withErrors($rating_validator)->withInput();
         }
 
+        $tasker = User::with('profile')->whereId($assigned_to)->first();
+
         $rating = new Rating();
 
         $rating->rater_id = $user->id;
+        $rating->profile_id = $tasker->profile->id;
         $rating->rated_id = $assigned_to;
         $rating->rated_task_id = $assigned_task_id;
         $rating->rating = $request->input('rating');
         $rating->comment = $request->input('comment');
 
         $rating->save();
+
+        $tasker->notify(new YouHaveJustBeenRated());
 
         return redirect('client/' . $user->name . '/summary');
     }

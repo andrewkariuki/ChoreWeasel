@@ -2,6 +2,7 @@
 
 use ChoreWeasel\User;
 use ChoreWeasel\Models\AssignedTask;
+use ChoreWeasel\Models\TaskCategory;
 
 /*
 |--------------------------------------------------------------------------
@@ -316,7 +317,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth' => 'role:admin']], fu
     Route::post('/taskcategories/addtaskcategorygroup', 'TaskCategoryGroupController@store');
 
     Route::view('/taskcategories/availablecategories', 'admin.availablecategories', [
-        'categories' => ChoreWeasel\Models\TaskCategory::All(),
+        // 'categories' => TaskCategory::with('group')->get(),
+        'categories' => TaskCategory::all(),
     ]);
 
     //Routes for manipulating the Taskers
