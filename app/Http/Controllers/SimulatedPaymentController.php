@@ -45,14 +45,17 @@ class SimulatedPaymentController extends Controller
             abort(404);
         }
 
+        $type = 'payment';
+
         $tasker = User::with('account')->whereId($tasker_id)->first();
 
         $task = AssignedTask::whereId($assigned_task_id)->first();
 
         $payment = new SimulatedPayment();
         $payment->payer_id = $user->id;
-        $payment->paid_id = $assigned_task_id;
-        $payment->paid_task_id = $tasker_id;
+        $payment->paid_id = $tasker_id;
+        $payment->type = $type;
+        $payment->paid_task_id = $assigned_task_id;
         $payment->amount_paid = $task->total_payable;
         $payment->save();
 
@@ -79,7 +82,7 @@ class SimulatedPaymentController extends Controller
     public function twallet($username){
         $currentUser = \Auth::user();
 
-        $transactions = SimulatedPayment::where('paid_id', '=', $currentUser->id)->get();
+        $transactions = SimulatedPayment::with('paidtask', 'paidby')->where('paid_id', '=', $currentUser->id)->get();
 
         $data = [
             'transactions' => $transactions,
@@ -90,7 +93,7 @@ class SimulatedPaymentController extends Controller
     public function cwallet($username){
         $currentUser = \Auth::user();
 
-        $transactions = SimulatedPayment::where('payer_id', '=', $currentUser->id)->get();
+        $transactions = SimulatedPayment::with('paidtask', 'paidto')->where('payer_id', '=', $currentUser->id)->get();
 
         $data = [
             'transactions' => $transactions,

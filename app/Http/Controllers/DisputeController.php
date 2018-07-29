@@ -18,6 +18,10 @@ class DisputeController extends Controller
         $this->middleware('auth');
     }
 
+    public function disputeform($id){
+        return view('users.dispute');
+    }
+
     public function raiseDispute(Request $request, $id){
         $dispute = new Dispute();
 

@@ -297,12 +297,12 @@
 
             <div class="row text-center">
                 <div class="col-sm-6">
-                    <a href="signup.html" class="tasker-signup">
+                    <a href="{{ url('/account/tasker') }}" class="tasker-signup">
                         <h4>ChoreWeasel for Taskers</h4>
                     </a>
                 </div>
                 <div class="col-sm-6">
-                    <a href="signup.html" class="homeowner-signup">
+                    <a href="{{ url('/account/client') }}" class="homeowner-signup">
                         <h4>ChoreWeasel for Homeowners</h4>
                     </a>
                 </div>

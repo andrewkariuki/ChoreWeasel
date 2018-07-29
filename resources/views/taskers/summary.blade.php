@@ -1,6 +1,8 @@
 @extends('layouts.usermaster')
 @section('styles')
 <link href="{{ asset('css/summary.css') }}" rel="stylesheet">
+<link href="{{ asset('dashboard/css/light-bootstrap-dashboard.css?v=2.0.1') }}" rel="stylesheet">
+<link href="{{ asset('dashboard/css/demo.css') }}" rel="stylesheet">
 @stop
 @section('content')
 
@@ -229,11 +231,8 @@
                                     </div>
 
                                     <div class="pull-left">
-                                        <form action="{{ url('/raisedispute/'.$assignedtask->id) }}" method="post">
-                                            @csrf
-                                            @method('put')
-                                            <button type="submit" class="btn-link">Rais Dispute on this task</button>
-                                        </form>
+                                        <a href="" style="font-size: 15px">Rais A dispute</a>
+                                        <a href="" style="font-size: 15px">Cancel</a>
                                     </div>
 
                                     <div class="action-buttons pull-right">
@@ -259,6 +258,19 @@
                                                 Settled
                                             </button>
                                         @endif
+                                    </div>
+
+                                    <div class="dispute-section" id="dispute" style="margin-top: 10px;">
+                                        <div class="dispute-form">
+                                            <form action="url('/raisedispute/'.$assignedtask->id" method="post">
+                                                @csrf
+                                                @method('put')
+                                                <div class="form-group">
+                                                    <textarea name="complaint" id="complaint" style="height: 150px; resize:none;"></textarea>
+                                                </div>
+                                                <button type="submit" class="btn btn-primary">Rais Dispute on this task</button>
+                                            </form>
+                                        </div>
                                     </div>
 
                                 </div>

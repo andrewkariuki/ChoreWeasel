@@ -32,6 +32,7 @@ class AssignedTask extends Model
         'total_payable',
         'hours_worked',
         'paid',
+        'tasker_profile_id'
     ];
 
     public function assigner()

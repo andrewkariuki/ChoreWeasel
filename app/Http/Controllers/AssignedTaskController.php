@@ -107,7 +107,7 @@ class AssignedTaskController extends Controller
 
             $taskcategory = TaskCategory::find($task_category_id);
 
-            $taskers = Profile::with('user', 'taskcategory')->where([
+            $taskers = Profile::with('user', 'taskcategory', 'ratings')->where([
             ['task_category_id', $task_category_id], ['city', '=', $city_town]
             ])->get();
 
@@ -165,7 +165,8 @@ class AssignedTaskController extends Controller
             'task_date_time',
             'completed',
             'rates',
-            'paid'
+            'paid',
+            'tasker_profile_id'
         );
 
         $assignedTask = new AssignedTask();

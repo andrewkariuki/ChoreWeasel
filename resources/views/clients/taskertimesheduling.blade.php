@@ -75,6 +75,7 @@
 
                                                         <form action="{{ url('/client/assign/'.$task_category_id.'/to/'.$tasker->user->id) }}" method="post">
                                                             @csrf
+                                                            <input type="hidden" name="tasker_profile_id" id="" value="{{{ $tasker->id }}}">
                                                             <input type="hidden" name="task_category_id" id="" value="{{{ $task_category_id }}}">
                                                             <input type="hidden" name="task_date_time" id="task_date_time" value="{{ $taskdatetime }}">
                                                             <input type="hidden" name="task_requirements" id="task_requirements" value="{{ $task_requirements }}">
@@ -103,11 +104,11 @@
                                                             <span class="pull-right">${{ $tasker->rates }}/hr</span>
                                                         </div>
                                                         <div class="success-rates">
-                                                            <div class="tasks-complete">
+                                                            {{-- <div class="tasks-complete">
                                                                 <p>Has completed 9 Waiting in line Tasks</p>
-                                                            </div>
+                                                            </div> --}}
                                                             <div class="tasks-complete">
-                                                                <p>Has 9 Reviews on Waiting in line tasks</p>
+                                                                <p>{{ $tasker->ratings->count() }} Reviews on {{ $tasker->taskcategory->taskname }} Tasks</p>
                                                             </div>
                                                         </div>
 
@@ -126,17 +127,20 @@
                                                                     <div class="reviewer-image"></div>
                                                                 </div>
                                                                 <div class="col-sm-8">
-                                                                    @if($tasker->user->ratingstome() == null)
+                                                                    @if($tasker->ratings->first())
                                                                     <div class="review">
-                                                                        Not yet review - you can review this tasker after assigning tasks to improve their chances of being assign in the future.
+                                                                        {{ $tasker->ratings }}
                                                                     </div>
+                                                                    <div class="reviewer-name">
+                                                                        John Man - <span class="review-date">{{ $tasker->ratings->comment }}</span>
+                                                                    </div>
+
                                                                     @else {{-- @if($tasker->user->ratingstome->first) --}}
                                                                     <div class="review">
                                                                         {{-- {{ $tasker->user->ratingstome()->comment }} --}}
+                                                                        Not yet review - you can review this tasker after assigning tasks to improve their chances of being assign in the future.
                                                                     </div>
-                                                                    <div class="reviewer-name">
-                                                                        John Man - <span class="review-date">30-10-2018</span>
-                                                                    </div>
+
                                                                     {{-- @endif --}} @endif
                                                                 </div>
                                                             </div>

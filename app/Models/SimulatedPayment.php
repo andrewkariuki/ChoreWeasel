@@ -19,7 +19,8 @@ class SimulatedPayment extends Model
         'payer_id',
         'paid_id',
         'paid_task_id',
-        'amount_paid'
+        'amount_paid',
+        'type'
     ];
 
 

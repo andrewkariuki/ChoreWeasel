@@ -1,5 +1,7 @@
 @extends('layouts.usermaster')
 @section('styles')
+<link href="{{ asset('dashboard/css/light-bootstrap-dashboard.css?v=2.0.1') }}" rel="stylesheet">
+<link href="{{ asset('dashboard/css/demo.css') }}" rel="stylesheet">
 @stop
 @section('content')
 <div class="cw-container">

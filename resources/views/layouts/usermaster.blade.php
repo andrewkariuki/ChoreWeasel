@@ -30,6 +30,7 @@
     <link href="{{ asset('css/nav.css') }}" rel="stylesheet">
     <link href="{{ asset('css/userdashboard.css') }}" rel="stylesheet">
     <link href="{{ asset('css/navcustom.css') }}" rel="stylesheet">
+
     {{-- <link href="{{ asset('dashboard/css/light-bootstrap-dashboard.css?v=2.0.1') }}" rel="stylesheet">
     <link href="{{ asset('dashboard/css/demo.css') }}" rel="stylesheet"> --}}
      @yield('styles')
@@ -39,7 +40,7 @@
 <body>
     <nav class="navbar navbar-expand-md navbar-light fixed-top navbar-cw">
         <div class="container">
-            <a class="navbar-brand" href="{{ url('/home') }}">
+            <a class="navbar-brand" href="@auth{{ url('/home') }}@endauth @guest{{ url('/') }}@endguest">
                 <span class="navbar-brand-red">Chore</span>Weasel
             </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -77,7 +78,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/tasker/'.Auth::user()->name.'/wallet') }}">{{ __('Wallet') }}</a>
+                        <a class="nav-link" href="{{ url('/tasker/'.Auth::user()->name.'/finance') }}">{{ __('Wallet') }}</a>
                     </li>
 
                     <li class="nav-item">
@@ -235,6 +236,7 @@
 <script src="{{ asset('dashboard/js/plugins/bootstrap-notify.js') }}"></script>
 <script src="{{ asset('dashboard/js/light-bootstrap-dashboard.js?v=2.0.1s') }}"></script>
 <script src="{{ asset('dashboard/js/demo.js') }}"></script>
+
 
 
 @yield('scripts')
