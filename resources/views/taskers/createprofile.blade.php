@@ -221,6 +221,9 @@
 <script type="text/javascript">
     $(function () {
         $(function () {
+            var dt = new Date();
+            dt.setFullYear(new Date().getFullYear()-18);
+
             $('#dateofbirth').datetimepicker({
                 icons: {
                     time: "fa fa-clock-o",
@@ -228,7 +231,9 @@
                     up: "fa fa-arrow-up",
                     down: "fa fa-arrow-down"
                 },
-                minDate: new Date()
+                viewMode: "years",
+                maxDate: dt,
+                format: 'YYYY-MM-DD'
             });
         });
 

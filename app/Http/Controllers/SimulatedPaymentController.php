@@ -76,12 +76,25 @@ class SimulatedPaymentController extends Controller
     }
 
 
-    public function wallet($username){
+    public function twallet($username){
         $currentUser = \Auth::user();
-        $clienttransactions = SimulatedPayment::where('payer_id', '=', $currentUser->id)->get();
+
+        $transactions = SimulatedPayment::where('paid_id', '=', $currentUser->id)->get();
+
         $data = [
-            'clienttransactions' => $clienttransactions,
+            'transactions' => $transactions,
         ];
-        return view('users.wallet')->with($data);
+        return view('taskers.wallet')->with($data);
+    }
+
+    public function cwallet($username){
+        $currentUser = \Auth::user();
+
+        $transactions = SimulatedPayment::where('payer_id', '=', $currentUser->id)->get();
+
+        $data = [
+            'transactions' => $transactions,
+        ];
+        return view('clients.wallet')->with($data);
     }
 }

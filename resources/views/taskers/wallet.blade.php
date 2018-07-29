@@ -19,7 +19,7 @@
                 </div>
 
                 <div class="transactions_body">
-                    @if($clienttransactions != null)
+                    @if($transactions != null)
                     <div class="transactions">
                         <table class="table table-hover" id="transactionstable">
                             <thead>
@@ -30,12 +30,12 @@
                                 <th>Balance</th>
                             </thead>
                             <tbody>
-                                @foreach ($clienttransactions as $clienttransaction )
+                                @foreach ($transactions as $transaction )
                                 <tr>
-                                    <td>{{ $clienttransaction->created_at }}</td>
+                                    <td>{{ $transaction->created_at }}</td>
                                     <td></td>
                                     <td></td>
-                                    <td>${{ $clienttransaction->amount_paid }}</td>
+                                    <td>${{ $transaction->amount_paid }}</td>
                                     <td></td>
                                 </tr>
                                 @endforeach

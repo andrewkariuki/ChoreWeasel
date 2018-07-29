@@ -116,6 +116,9 @@ Route::group(['prefix' => 'account', 'middleware' => ['guest']], function () {
 
     Route::get('/live/chat', function () {
         return view('chat.messaging');
+
+
+    Route::put('/raisedispute/{id}', 'DisputeController@raiseDispute');
     });
 
 
@@ -175,6 +178,8 @@ Route::group(['prefix' => 'tasker', 'middleware' => ['auth' => 'role:tasker']], 
         'as' => '{username}',
         'uses' => 'AllTaskController@taskerActivityDashboard',
     ]);
+
+    Route::get('/{username}/finance', 'SimulatedPaymentController@twallet');
 
     // Show users account settings - viewable by other users.
     Route::get('/{username}/account', [
@@ -267,6 +272,8 @@ Route::group(['prefix' => 'client', 'middleware' => ['auth' => 'role:client']], 
         'as' => '{username}',
         'uses' => 'ProfileController@showUserAccount',
     ]);
+
+    Route::get('/{username}/finance', 'SimulatedPaymentController@cwallet');
 
     Route::delete('/account/delete/{id}', [
         'as' => '{id}',

@@ -228,6 +228,13 @@
                                         </table>
                                     </div>
 
+                                    <div class="pull-left">
+                                        <form action="{{ url('/raisedispute/'.$assignedtask->id) }}" method="post">
+                                            @csrf
+                                            @method('put')
+                                            <button type="submit" class="btn-link">Rais Dispute on this task</button>
+                                        </form>
+                                    </div>
 
                                     <div class="action-buttons pull-right">
                                         @if ($assignedtask->completed == 0)

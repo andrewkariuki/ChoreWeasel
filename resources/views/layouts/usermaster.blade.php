@@ -61,7 +61,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url('/'.Auth::user()->name.'/finance') }}">{{ __('Wallet') }}</a>
+                        <a class="nav-link" href="{{ url('/client/'.Auth::user()->name.'/finance') }}">{{ __('Wallet') }}</a>
                     </li>
 
                     <li class="nav-item">
