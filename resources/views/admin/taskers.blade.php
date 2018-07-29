@@ -39,6 +39,7 @@
                         <th class="hidden-xs">Full Name</th>
                         <th class="hidden-xs">Email</th>
                         <th class="hidden-xs">National Id</th>
+                        <th class="hidden-xs">Date of Birth</th>
                         <th>Postal Address</th>
                         <th class="hidden-xs">Location</th>
                         <th>Status</th>
@@ -52,6 +53,8 @@
                             <td>{{ $user -> firstname }} {{ $user -> secondname }}</td>
                             <td class="hidden-xs"><a href="mailto:{{ $user->email }}" title="email {{ $user->email }}">{{ $user->email }}</a></td>
                             <td>{{ $user->profile->nationalid }}</td>
+                            <td>dateofbirth</td>
+                            {{-- <td>{{ $user->profile->dateofbirth }}</td> --}}
                             <td>{{ $user->profile->postaladdress }}, {{ $user->profile->postalcode }}</td>
                             <td>{{ $user->profile->city }}, {{ $user->profile->locality }}</td>
                             <td>

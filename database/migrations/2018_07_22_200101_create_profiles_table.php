@@ -28,6 +28,7 @@ class CreateProfilesTable extends Migration
             $table->integer('postalcode')->nullable();
             $table->integer('phonenumber')->nullable();
             $table->integer('nationalid')->nullable();
+            $table->date('dateofbirth')->nullable();
             $table->string('avatar')->nullable();
             $table->boolean('avatar_status')->default(0);
             $table->timestamps();

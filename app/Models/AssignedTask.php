@@ -60,4 +60,8 @@ class AssignedTask extends Model
     public function dispute(){
         return $this->hasMany('ChoreWeasel\Models\Dispute', 'assigned_task_id');
     }
+
+    public function profile(){
+        return $this->belongsTo('ChoreWeasel\Models\Profile', 'tasker_profile_id');
+    }
 }

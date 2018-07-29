@@ -88,7 +88,7 @@
                             </a>
                     </li>
                     <li>
-                        <a class="nav-link" href="{{ url('/admin/clients') }}">
+                        <a class="nav-link" href="{{ url('/admin/assignedtasks') }}">
                                     <i class="nc-icon nc-settings-90"></i>
                                     <p>Assigned Tasks</p>
                                 </a>
@@ -100,6 +100,12 @@
                             </a>
                     </li>
 
+                    <li>
+                        <a class="nav-link" href="{{ url('/admin/disputes') }}">
+                            <i class="nc-icon nc-notification-70"></i>
+                            <p>Disputes</p>
+                        </a>
+                    </li>
 
                     <li class="nav-item active active-pro">
                         <a class="nav-link active" href="{{ url('/admin/addadmins') }}">
@@ -126,50 +132,17 @@
                         </button>
                     <div class="collapse navbar-collapse justify-content-end" id="navigation">
                         <ul class="nav navbar-nav mr-auto">
+
                             <li class="nav-item">
-                                <a href="#" class="nav-link" data-toggle="dropdown">
-                                        <i class="nc-icon nc-palette"></i>
+                                <a href="{{ url('/admin') }}" class="nav-link" data-toggle="dropdown">
                                         <span class="d-lg-none">Dashboard</span>
                                     </a>
                             </li>
-                            <li class="dropdown nav-item">
-                                <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                                        <i class="nc-icon nc-planet"></i>
-                                        <span class="notification">5</span>
-                                        <span class="d-lg-none">Notification</span>
-                                    </a>
-                                <ul class="dropdown-menu">
-                                    <a class="dropdown-item" href="#">
-                                            Notification 1
-                                        </a>
-                                    <a class="dropdown-item" href="#">
-                                            Notification 2
-                                        </a>
-                                    <a class="dropdown-item" href="#">Notification 3</a>
-                                    <a class="dropdown-item" href="#">Notification 4</a>
-                                    <a class="dropdown-item" href="#">Another notification</a>
-                                </ul>
-                            </li>
-                            <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                        <i class="nc-icon nc-zoom-split"></i>
-                                        <span class="d-lg-block">&nbsp;Search</span>
-                                    </a>
-                            </li>
+
+
                         </ul>
                         <ul class="navbar-nav ml-auto">
-                            <!--- <li class="nav-item">
-                                    <a class="nav-link" href="#pablo">
-                                        <span class="no-icon">Account</span>
-                                    </a>
-                                </li> --->
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ url('/admin/messages') }}">
-                                        <i class="nc-icon nc-email-85"></i>
-                                        <span class="notification">5</span>
-                                        <!--- <span class="">Log out</span> --->
-                                    </a>
-                            </li>
+
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
                                     aria-expanded="false">
@@ -218,23 +191,18 @@
                     <nav>
                         <ul class="footer-menu">
                             <li>
-                                <a href="#">
+                                <a href="{{ url('/admin') }}">
                                         Dashboard
                                     </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{ url('/policies') }}">
                                         Privacy Policy
                                     </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="{{ url('/terms') }}">
                                         {{ _('Terms of User') }}
-                                    </a>
-                            </li>
-                            <li>
-                                <a href="#">
-                                        Overview
                                     </a>
                             </li>
                         </ul>

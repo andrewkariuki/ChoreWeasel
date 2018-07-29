@@ -24,7 +24,7 @@ class Dispute extends Model
     ];
 
     public function disputer(){
-        return $this->belongsTo('ChoreWeasel\Models\Dispute', 'raised_by');
+        return $this->belongsTo('ChoreWeasel\User', 'raised_by');
     }
 
     public function taskdisputed(){

@@ -202,7 +202,7 @@
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary btn-block text-uppercase">{{ _('Save And Continue') }}</button>
                             </div>
-                            <a href="{{ url('/tasker/'.Auth::user()->name.'/profile/addcategory') }}">Task Category</a>
+
                         </div>
 
 

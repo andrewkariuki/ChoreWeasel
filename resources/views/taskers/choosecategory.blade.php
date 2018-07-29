@@ -7,11 +7,11 @@
 
 <div class="cw-container">
     <div class="cw-container-createprofile text-center" style="font-size: 32px;">
-        Create Your Profile
+       {{-- Choose Task Category --}}
     </div>
 
 
-    <div class="row">
+    <div class="row" style="margin-top: 60px;">
         <div class="col-sm-4">
             <div class="create-profile-side-container">
                 <div class="create-profile-side-content">

@@ -18,7 +18,17 @@
                     </div>
                     <div class="basic-details_body">
                         <div class="row">
-                            <div class="col-sm-3"></div>
+
+                            <div class="col-sm-3">
+                                <div class="profile-avatar">
+                                    @if($user->profile->avatar_status == true)
+                                    <img src="{{ $user->profile->avatar }}" alt="{{ $user->firstname }}-{{ $user->secondname }}-profile-image">
+                                    @else
+                                    <img height="200px" width="200px" src="{{ $user->profile->avatar }}" alt="{{ $user->firstname }}-{{ $user->secondname }}-profile-image">
+                                    @endif
+                                </div>
+                            </div>
+
                             <div class="col-sm-9">
                                 <div class="row">
 

@@ -20,7 +20,7 @@
                 </div>
 
 
-                <div class="sort-by">
+                {{-- <div class="sort-by">
                         <div class="row">
                             <div class="col-sm-4 m-auto">
                                 <div class="card">
@@ -40,64 +40,12 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
 
 
                 <div class="tasks-time-tasker_content">
                     <div class="row">
-                        {{--
-                        <div class="col-sm-4">
-                            <div class="time-sheduling">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="sort-by">
-                                            <div class="sort-by_header">Sort by:</div>
-                                            <div class="sort-by-action">
-                                                <div class="form-group">
-                                                    <select class="form-control" name="sort_by" id="sort_by">
-                                                        <option value="0">Recommended</option>
-                                                        <option value="1">Highest Price</option>
-                                                        <option value="0">Lowest Price</option>
-                                                        <option value="0">Highest Ratings</option>
-                                                        <option value="0">Most task Complete</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="task-date-time">
-                                            <div class="task-date-time_header">
-                                                Task Date & Time
-                                            </div>
-                                            <div class="task-date-time_body">
-                                                <div class="form-group">
-                                                    <div class="input-group date" id="datetimepicker7" data-target-input="nearest">
-                                                        <input type="text" class="form-control datetimepicker-input" data-target="datetimepicker7" />
-                                                        <div class="input-group-append" data-target="#datetimepicker7" data-toggle="datetimepicker">
-                                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> --}}
                         <div class="col-sm-8 m-auto">
-                            {{--
-                            <form action="" method="post">
-                                @csrf
-                                <input type="text" name="" id="" value="{{{ $task_category_id }}}">
-                                <input type="text" name="" id="" value="{{ $taskdatetime }}">
-                                <input type="text" name="" id="" value="{{ $task_requirements }}">
-                                <input type="text" name="" id="" value="{{ $apt_unit_no }}">
-                                <input type="text" name="" id="" value="{{ $apartment_unit }}">
-                                <input type="text" name="" id="" value="{{ $locality_street }}">
-                                <input type="text" name="" id="" value="{{ $city_town }}">
-                                <input type="text" name="" id="" value="{{ $task_size }}">
-                                <input type="text" name="" id="" value="{{ $task_description }}">
-                            </form> --}}
                             <div class="available-takers">
 
                                 @foreach ($taskers as $tasker)
@@ -108,8 +56,11 @@
                                                 <div class="col-sm-4 text-center">
                                                     <div class="tasker-secondary-attributes ">
                                                         <div class="tasker-image">
-                                                            <img class="rounded img-responsive " style="width:200px; height:200px;" src="{{ asset('/images/test/andy.jpg') }}" alt=""
-                                                                srcset="">
+                                                            @if($tasker->avatar_status == true)
+                                                            <img src="{{ $tasker->avatar }}" alt="{{ $tasker->user->firstname }}-{{ $tasker->user->secondname }}-profile-image">
+                                                            @else
+                                                            <img height="200px" width="200px" src="{{ $user->profile->avatar }}" alt="{{ $tasker->user->firstname }}-{{ $tasker->user->secondname }}-profile-image">
+                                                            @endif
                                                         </div>
                                                         <div class="preview-tasker">
                                                             <a href="#">Profile and Review</a>

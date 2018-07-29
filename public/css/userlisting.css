@@ -16,3 +16,6 @@ span.not-verified.indicator,
 span.banned.indicator {
     background: red;
 }
+input.form-control.form-control-sm {
+    height: 30px !important;
+}

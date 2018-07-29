@@ -19,6 +19,8 @@ class CreateAssignedTasksTable extends Migration
             $table->foreign('assigned_by')->references('id')->on('users')->onDelete('cascade');
             $table->integer('assigned_to')->unsigned()->index();
             $table->foreign('assigned_to')->references('id')->on('users')->onDelete('cascade');
+            $table->integer('tasker_profile_id')->unsigned()->index();
+            $table->foreign('tasker_profile_id')->references('id')->on('profiles')->onDelete('cascade');
             $table->integer('task_category_id')->unsigned();
             $table->foreign('task_category_id')->references('id')->on('task_categories');
             $table->string('city_town')->nullable();

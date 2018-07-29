@@ -455,7 +455,8 @@ class ProfileController extends Controller
 
             $filename = 'avatar' .'-'.rand().'.'. $avatar->getClientOriginalExtension();
 
-            $save_path = storage_path() . '/users/id/' . $currentUser->id . '/uploads/images/avatar/';
+            // $save_path = storage_path() . '/users/id/' . $currentUser->id . '/uploads/images/avatar/';
+            $save_path = public_path() . '/images/profile/' . $currentUser->id . '/avatar/';
 
             $path = $save_path . $filename;
 
@@ -465,7 +466,7 @@ class ProfileController extends Controller
             File::makeDirectory($save_path, $mode = 0755, true, true);
 
             // Save the file to the server
-            Image::make($avatar)->resize(300, 300)->save($save_path . $filename);
+            Image::make($avatar)->resize(200, 200)->save($save_path . $filename);
 
             // Save the public image path
             $currentUser->profile->avatar = $public_path;
@@ -517,7 +518,8 @@ class ProfileController extends Controller
 
             $filename = 'avatar' .'-'.rand().'.'. $avatar->getClientOriginalExtension();
 
-            $save_path = storage_path() . '/users/id/' . $currentUser->id . '/uploads/images/avatar/';
+            // $save_path = storage_path() . '/users/id/' . $currentUser->id . '/uploads/images/avatar/';
+            $save_path = public_path() . '/images/profile/' . $currentUser->id . '/avatar/';
 
             $path = $save_path . $filename;
 

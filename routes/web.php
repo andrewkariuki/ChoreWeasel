@@ -352,6 +352,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth' => 'role:admin']], fu
     Route::get('/upload', 'ProfileController@uploadAvatar');
     Route::post('/upload', 'ProfileController@upload');
 
+    //manipulating assigned tasks
+    Route::get('/assignedtasks', 'AdminController@getAllTasks');
+
+    // manipulating disputes
+    Route::get('/disputes', 'AdminController@getAllDisputes');
+    Route::get('/dispute/{id}', 'AdminController@viewDispute');
+    Route::put('/dispute/{id}', 'AdminController@markAsSolved');
 
     //add new administraters... however they will not be super admins
     Route::get('/addadmins', 'AdminController@create');

@@ -2,16 +2,19 @@
 
 namespace ChoreWeasel\Http\Controllers;
 
-use ChoreWeasel\Models\Profile;
 use ChoreWeasel\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use ChoreWeasel\Models\Dispute;
+use ChoreWeasel\Models\Profile;
+use ChoreWeasel\Models\AssignedTask;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use jeremykenedy\LaravelRoles\Models\Role;
-use Illuminate\Support\Carbon;
-use ChoreWeasel\Models\AssignedTask;
-use ChoreWeasel\Charts\TaskersToClientsChart;
 use ChoreWeasel\Charts\TaskCompletionRates;
+use ChoreWeasel\Charts\TaskersToClientsChart;
+use ChoreWeasel\Notifications\RegisteredAsAdmin;
+
 class AdminController extends Controller
 {
     //
@@ -144,9 +147,9 @@ class AdminController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'firstname' => 'required|string|max:120',
-                'secondname' => 'required|string|max:120',
-                'name' => 'required|string|max:120|unique:users',
+                'firstname' => 'required|string|max:120|alpha',
+                'secondname' => 'required|string|max:120|alpha',
+                'name' => 'required|string|max:120|unique:users|regex:/^[a-zA-Z0-9]*$/',
                 'email' => 'required|string|email|max:255|unique:users',
                 // 'nationalid' => 'required|string|min:8|max:8|unique:users',
                 'password' => 'required|string|min:6|confirmed',
@@ -162,16 +165,72 @@ class AdminController extends Controller
             'secondname' => $request['secondname'],
             'name' => $request['name'],
             'email' => $request['email'],
-            // 'nationalid' => $request['nationalid'],
-            // 'verified' => true,
+            'verified' => true,
             'password' => Hash::make($request['password']),
         ]);
 
         $role = Role::where('name', '=', 'Admin')->first(); //choose the default role upon user creation.
         $user->attachRole($role);
-        $user->profile()->save($profile);
+        // $user->profile()->save($profile);
         $user->save();
 
+        $user->notify(new RegisteredAsAdmin());
+
         return redirect('admin/admins');
+    }
+
+
+    /**
+     * Show the all the tasks that have ever been done.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getAllTasks(){
+        $alltasks = AssignedTask::with('assigner', 'assignee', 'taskcategory', 'dispute', 'profile')->get();
+
+        $data = [
+            'alltasks' => $alltasks
+        ];
+
+        return view('admin.assignedtasks')->with($data);
+    }
+
+    /**
+     * Show the all the disputes that have ever been done.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getAllDisputes(){
+
+        $disputes = Dispute::with('disputer', 'taskdisputed')->get();
+
+        $data =[
+            'disputes' => $disputes
+        ];
+
+        return view('admin.disputes')->with($data);
+
+    }
+
+    public function viewDispute($id){
+
+        $dispute = Dispute::whereId($id)->first();
+
+        $data = [
+            'dispute' => $dispute
+        ];
+
+        return view('admin.dispute')->with($data);
+
+    }
+
+    public function markAsSolved($id){
+        $dispute = Dispute::whereId($id)->first();
+
+        $dispute->solved = true;
+        $dispute->save();
+
+
+        return back()->with('solved', 'The dispute has been fully solved');
     }
 }

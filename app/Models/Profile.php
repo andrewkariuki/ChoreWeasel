@@ -32,6 +32,7 @@ class Profile extends Model
         'postalcode',
         'phonenumber',
         'nationalid',
+        'dateofbirth',
         'avatar',
         'avatar_status',
     ];
@@ -60,5 +61,9 @@ class Profile extends Model
 
     public function ratings(){
         return $this->hasMany('ChoreWeasel\Models\Rating', 'profile_id');
+    }
+
+    public function assignedtask(){
+        return $this->hasMany('ChoreWeasel\Models\AssignedTask' ,'tasker_profile_id');
     }
 }
