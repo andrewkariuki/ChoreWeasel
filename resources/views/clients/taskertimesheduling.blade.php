@@ -132,7 +132,7 @@
                                                                         {{ $tasker->ratings }}
                                                                     </div>
                                                                     <div class="reviewer-name">
-                                                                        John Man - <span class="review-date">{{ $tasker->ratings->comment }}</span>
+                                                                        John Man - <span class="review-date"></span>
                                                                     </div>
 
                                                                     @else {{-- @if($tasker->user->ratingstome->first) --}}

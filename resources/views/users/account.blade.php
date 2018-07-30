@@ -9,6 +9,23 @@
     <div class="row">
         <div class="col-sm-12">
             <div class="account-details">
+                    <div class="alerts">
+                        @if (Session::has('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                {{ Session::get('success') }}
+                                </div>
+                        @elseif(Session::has('error'))
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                {{ Session::get('error') }}
+                                </div>
+                        @endif
+                    </div>
                 <div class="basic-info">
                     <div class="row">
                         <div class="col-sm-6">

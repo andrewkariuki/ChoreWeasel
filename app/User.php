@@ -110,4 +110,8 @@ class User extends Authenticatable
          return $this->hasMany('ChoreWeasel\Models\Dispute', 'raised_by');
      }
 
+     public function clientvoucher(){
+         return $this->hasMany('ChoreWeasel\ClientVoucher', 'user_id');
+     }
+
 }

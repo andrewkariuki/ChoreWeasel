@@ -22,7 +22,7 @@
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="thin value">
-                                        0
+                                        {{ $futuretasks }}
                                     </div>
                                     <div class="small value_label">
                                         Future Tasks
@@ -43,7 +43,11 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="thin value">
-                                        $0.00
+                                            @if($accountbalance == null)
+                                            $0.00
+                                            @else
+                                            ${{ $accountbalance->balance }}.00
+                                            @endif
                                     </div>
                                     <div class="small value_label">
                                         Total Amount
@@ -73,6 +77,25 @@
 
     <div class="summary-container">
         <div class="summary-content">
+
+
+            <div class="alerts">
+                @if (Session::has('success'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ Session::get('success') }}
+                      </div>
+                @elseif(Session::has('error'))
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                        {{ Session::get('error') }}
+                      </div>
+                @endif
+            </div>
 
             <!--- Incase there is no tasks assigned to or by the user -->
 

@@ -112,7 +112,8 @@ class RatingController extends Controller
 
         $rating->save();
 
-        $tasker->notify(new YouHaveJustBeenRated());
+        $notifiedtasker = User::whereId($assigned_to)->first();
+        $taskernotifiedtasker ->notify(new YouHaveJustBeenRated());
 
         return redirect('client/' . $user->name . '/summary');
     }

@@ -9,9 +9,40 @@
 
 <div class="cw-container">
     <div class="cw-container_content">
+
+        <div class="row">
+            <div class="col-sm-9 m-auto">
+                <div class="voucher-container p-2 bg-white">
+                    <div class="transactions_header-main">
+                        Get a voucher
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4 m-auto">
+                            <div class="transactions_body">
+                                <div class="transactions">
+                                    <form action="{{ url('client/'.Auth::user()->name.'/apply') }}" method="post" >
+                                        @csrf
+                                        @method('put')
+                                        <div class="form-group">
+                                            <label for="amount">Amount</label>
+                                            <input id="amount" name="amount" type="number" class="form-control">
+                                        </div>
+                                        <div class="form-group row">
+                                            <button type="submit" class="btn btn-primary btn-block">GET</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
         <div class="row">
 
-            <div class="col-sm-9 m-auto transactions">
+            <div class="col-sm-9 transactions m-auto">
                 <div class="transactions_container">
                     <div class="trasactions_header">
                         <div class="transactions_header-main">

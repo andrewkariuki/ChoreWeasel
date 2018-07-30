@@ -174,7 +174,7 @@ class AssignedTaskController extends Controller
 
         $user->notify(new YouHaveBeenAssignedATask());
 
-        return redirect('client/' . $user->name . '/summary');
+        return redirect('client/' . $user->name . '/summary')->with('success', 'Task Assignment Process was successful');
     }
 
     /**
@@ -238,7 +238,7 @@ class AssignedTaskController extends Controller
 
             // incase the task is a future task
             if ($task_date_time >= Carbon::now()){
-                return back()->with('futuretask', "You can't complete future, wait and execute it first.");
+                return back()->with('error', "You can't complete future, wait and execute it first.");
             }
 
             $completedAt = Carbon::now();
@@ -267,20 +267,22 @@ class AssignedTaskController extends Controller
 
             $pdf = PDF::loadView('invoice.invoice', $data);
 
-            $pdf->save(public_path().'_filename.pdf');
+            $publicpath = public_path() . '/invoices/' .  $assignedtask->id. '/';
+
+            $pdf->save($publicpath . 'invoice.pdf');
 
             return $pdf->download('invoice.pdf');
 
+
+
             $client = $assignedtask->assigner()->first();
-
-
 
             $client->notify(new TaskComplete());
 
-            return back()->with('taskcompleted', 'Task Successfuly completed, And is now pending payment and review.');
+            return back()->with('success', 'Task Successfuly completed, And is now pending payment and review.');
         }
         else{
-            return back()->with('notask', 'Sorry no such task exists please contact our help center.');
+            return back()->with('error', 'Sorry no such task exists please contact our help center.');
         }
 
 

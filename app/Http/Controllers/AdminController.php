@@ -231,6 +231,6 @@ class AdminController extends Controller
         $dispute->save();
 
 
-        return back()->with('solved', 'The dispute has been fully solved');
+        return back()->with('success', 'The dispute has been fully solved');
     }
 }

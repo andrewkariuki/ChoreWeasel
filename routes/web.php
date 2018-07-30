@@ -29,6 +29,8 @@ Route::get('/chat', function () {
     return view('chat.messaging');
 });
 
+Route::get('/pdf', 'PdfGenerator@savePDF');
+
 
 /**
  *
@@ -120,6 +122,9 @@ Route::group(['prefix' => 'account', 'middleware' => ['guest']], function () {
 
 
     Route::put('/raisedispute/{id}', 'DisputeController@raiseDispute');
+
+
+
     });
 
 
@@ -275,6 +280,8 @@ Route::group(['prefix' => 'client', 'middleware' => ['auth' => 'role:client']], 
     ]);
 
     Route::get('/{username}/finance', 'SimulatedPaymentController@cwallet');
+
+    Route::put('/{username}/apply', 'ClientVoucherController@getVoucher');
 
     Route::delete('/account/delete/{id}', [
         'as' => '{id}',

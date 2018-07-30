@@ -163,7 +163,7 @@ class AllTaskController extends Controller
             ]
         )->count();
 
-        $futuretasks = AssignedTask::with('assignee')->where(
+        $futuretasks = AssignedTask::with('assigner')->where(
             [
                 ['assigned_by', '=', $user->id],
                 ['created_at', '>', Carbon::now()],
@@ -178,13 +178,16 @@ class AllTaskController extends Controller
         //get all completed tasks
         $totalcompletedtasks = AssignedTask::with('assignee', 'assigner', 'taskcategory')->where('assigned_by', '=', $user->id)->get();
 
+        $accountbalance = FinancialAccount::where('user_id', '=', $user->id)->first();
+
         $data = [
             // 'tasker' => $tasker,
             'user' => $user,
             'totaltasksbyme' => $totaltasksbyme,
             'assignedbyme' => $assignedbyme,
             'completedtaks' => $completedtaks,
-            'futuretasks' =>$futuretasks
+            'futuretasks' =>$futuretasks,
+            'accountbalance' => $accountbalance
         ];
 
         return view('clients.summary')->with($data);

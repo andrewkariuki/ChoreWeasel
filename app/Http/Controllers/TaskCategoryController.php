@@ -82,6 +82,6 @@ class TaskCategoryController extends Controller
 
         $taskCategory->save();
 
-        return back();
+        return back()->with('success', 'Task Category Group added successgful');
     }
 }

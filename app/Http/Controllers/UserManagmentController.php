@@ -121,7 +121,7 @@ class UserManagmentController extends Controller
         $user->banned = false;
         $user->save();
 
-        return back()->with('user-ban-lifted', 'The ban lifting process was successful');
+        return back()->with('success', 'The ban lifting process was successful');
     }
 
     public function verifyUser(Request $request, $username, $id)
@@ -131,7 +131,7 @@ class UserManagmentController extends Controller
         $user->verified = true;
         $user->save();
 
-        return back()->with('user-verified', 'The verification process was successful');
+        return back()->with('success', 'The verification process was successful');
     }
 
 

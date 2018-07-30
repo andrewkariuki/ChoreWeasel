@@ -8,6 +8,7 @@ use ChoreWeasel\Models\AssignedTask;
 use Illuminate\Support\Facades\Auth;
 use ChoreWeasel\Models\FinancialAccount;
 use ChoreWeasel\Models\SimulatedPayment;
+use ChoreWeasel\Notifications\YouJustGotPaid;
 
 
 class SimulatedPaymentController extends Controller
@@ -49,32 +50,84 @@ class SimulatedPaymentController extends Controller
 
         $tasker = User::with('account')->whereId($tasker_id)->first();
 
+        $clientaccount = User::with('account')->whereId($user->id)->first();
+
         $task = AssignedTask::whereId($assigned_task_id)->first();
+        $clientblance = $clientaccount->account->balance;
 
-        $payment = new SimulatedPayment();
-        $payment->payer_id = $user->id;
-        $payment->paid_id = $tasker_id;
-        $payment->type = $type;
-        $payment->paid_task_id = $assigned_task_id;
-        $payment->amount_paid = $task->total_payable;
-        $payment->save();
+        $payableamount = $task->total_payable;
 
-
-        $task->paid = true;
-        $task->save();
-
-        if($tasker->account == null){
-            $account = new FinancialAccount();
-            $account->user_id = $tasker_id;
-            $account->balance = $task->total_payable;
-            $account->save();
+        if($payableamount >=  $clientblance ){
+            return back()->with('error', 'Your Account Balance can not allow you to pay for this task. Please apply for a voucher');
         }else{
-            $newblance = ($tasker->account->balance + $task->total_payable);
-            $tasker->account->balance = $newblance;
-            $tasker->account->save();
+
+            $payment = new SimulatedPayment();
+            $payment->payer_id = $user->id;
+            $payment->paid_id = $tasker_id;
+            $payment->type = $type;
+            $payment->paid_task_id = $assigned_task_id;
+            $payment->amount_paid = $task->total_payable;
+            $payment->save();
+
+
+            $task->paid = true;
+            $task->save();
+
+            if($tasker->account == null){
+                $account = new FinancialAccount();
+                $account->user_id = $tasker_id;
+                $account->balance = $task->total_payable;
+                $account->save();
+            }else{
+                $newblance = ($tasker->account->balance + $task->total_payable);
+                $tasker->account->balance = $newblance;
+                $tasker->account->save();
+            }
+
+            $newclientbalance = ($clientaccount->account->balance - $task->total_payable);
+            $clientaccount->account->balance =  $newclientbalance;
+            $clientaccount->account->save();
+
+            $notifieduser = User::whereId($tasker_id)->first();
+
+            $notifieduser->notify(new YouJustGotPaid());
+
+            return back()->with('success', 'Task payment was successful');
+
         }
 
-        return back()->with('paymentsuccess', 'Task payment was successful');
+        // $payment = new SimulatedPayment();
+        // $payment->payer_id = $user->id;
+        // $payment->paid_id = $tasker_id;
+        // $payment->type = $type;
+        // $payment->paid_task_id = $assigned_task_id;
+        // $payment->amount_paid = $task->total_payable;
+        // $payment->save();
+
+
+        // $task->paid = true;
+        // $task->save();
+
+        // if($tasker->account == null){
+        //     $account = new FinancialAccount();
+        //     $account->user_id = $tasker_id;
+        //     $account->balance = $task->total_payable;
+        //     $account->save();
+        // }else{
+        //     $newblance = ($tasker->account->balance + $task->total_payable);
+        //     $tasker->account->balance = $newblance;
+        //     $tasker->account->save();
+        // }
+
+        // $newclientbalance = ($clientaccount->account->balance - $task->total_payable);
+        // $clientaccount->account->balance =  $newclientbalance;
+        // $clientaccount->account->save();
+
+        // $notifieduser = User::whereId($tasker_id)->first();
+
+        // $notifieduser->notify(new YouJustGotPaid());
+
+        // return back()->with('paymentsuccess', 'Task payment was successful');
 
     }
 

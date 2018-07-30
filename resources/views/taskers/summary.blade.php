@@ -88,7 +88,23 @@
         <div class="summary-content">
 
             <!--- Incase there is no tasks assigned to or by the user -->
-
+            <div class="alerts">
+                    @if (Session::has('success'))
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                            {{ Session::get('success') }}
+                          </div>
+                    @elseif(Session::has('error'))
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                            {{ Session::get('error') }}
+                          </div>
+                    @endif
+            </div>
 
             @if (count($assignedtasks) != 0)
                 {{--  in case there are tasks assigned to this user or tasker the show the first 10 tasks  --}}
@@ -260,18 +276,7 @@
                                         @endif
                                     </div>
 
-                                    <div class="dispute-section" id="dispute" style="margin-top: 10px;">
-                                        <div class="dispute-form">
-                                            <form action="url('/raisedispute/'.$assignedtask->id" method="post">
-                                                @csrf
-                                                @method('put')
-                                                <div class="form-group">
-                                                    <textarea name="complaint" id="complaint" style="height: 150px; resize:none;"></textarea>
-                                                </div>
-                                                <button type="submit" class="btn btn-primary">Rais Dispute on this task</button>
-                                            </form>
-                                        </div>
-                                    </div>
+
 
                                 </div>
                             </div>
