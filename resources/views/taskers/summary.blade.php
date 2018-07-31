@@ -22,11 +22,9 @@
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="thin value">
-                                        @if ($futuretasks > 0)
+
                                             {{ $futuretasks }}
-                                        @else
-                                            0
-                                        @endif
+
                                     </div>
                                     <div class="small value_label">
                                         Future Tasks
@@ -47,7 +45,7 @@
                                 <div class="col-sm-4">
                                     <div class="thin value">
                                         @if($accountbalance == null)
-                                        $0.00
+                                        Ksh.0.00
                                         @else
                                         ${{ $accountbalance->balance }}.00
                                         @endif
@@ -244,11 +242,6 @@
                                                 </tr>
                                             </tbody>
                                         </table>
-                                    </div>
-
-                                    <div class="pull-left">
-                                        <a href="" style="font-size: 15px">Rais A dispute</a>
-                                        <a href="" style="font-size: 15px">Cancel</a>
                                     </div>
 
                                     <div class="action-buttons pull-right">

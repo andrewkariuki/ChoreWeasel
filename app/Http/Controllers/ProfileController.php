@@ -187,7 +187,7 @@ class ProfileController extends Controller
                 'dateofbirth' => 'required|date|date_format:Y-m-d',
                 'phonenumber' => 'unique:profiles|regex:/(07)[0-9]{8}/',
                 'phonenumber_confirmation' => 'same:phonenumber',
-                'nationalid' => 'unique:profiles|numeric|digits_between:1,10|digits:8',
+                'nationalid' => 'unique:profiles|numeric|digits_between:1,9|digits:8',
 
             ]);
     }

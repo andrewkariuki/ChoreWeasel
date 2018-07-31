@@ -114,9 +114,11 @@ class AllTaskController extends Controller
         $futuretasks = AssignedTask::with('assignee')->where(
             [
                 ['assigned_by', '=', $user->id],
-                ['created_at', '>', Carbon::now()],
+                ['task_date_time', '>', Carbon::now()],
             ]
         )->count();
+
+        $accountbalance = FinancialAccount::where('user_id', '=', $user->id)->first();
 
 
         $data = [
@@ -124,7 +126,8 @@ class AllTaskController extends Controller
             'assignedtasks' => $assignedtasks,
             'totaltaskstome' => $totaltaskstome,
             'completedtaks' => $completedtaks,
-            'futuretasks' => $futuretasks
+            'futuretasks' => $futuretasks,
+            'accountbalance' => $accountbalance
             // 'taskcategory' =>
             // 'currentTheme' => $currentTheme,
         ];
@@ -166,7 +169,7 @@ class AllTaskController extends Controller
         $futuretasks = AssignedTask::with('assigner')->where(
             [
                 ['assigned_by', '=', $user->id],
-                ['created_at', '>', Carbon::now()],
+                ['task_date_time', '>', Carbon::now()],
             ]
         )->count();
 
@@ -226,11 +229,32 @@ class AllTaskController extends Controller
         //get all completed tasks
         $totalcompletedtasks = AssignedTask::with('assignee', 'assigner', 'taskcategory')->where('assigned_by', '=', $user->id)->get();
 
+
+        $futuretasks = AssignedTask::with('assigner')->where(
+            [
+                ['assigned_by', '=', $user->id],
+                ['task_date_time', '>', Carbon::now()],
+            ]
+        )->count();
+
+
+        $completedtaks = AssignedTask::with('assigner')->where(
+            [
+                ['assigned_by', '=', $user->id],
+                ['completed', '=', true],
+            ]
+        )->count();
+
+        $accountbalance = FinancialAccount::where('user_id', '=', $user->id)->first();
+
         $data = [
             // 'tasker' => $tasker,
             'user' => $user,
             'totaltasksbyme' => $totaltasksbyme,
             'assignedbyme' => $assignedbyme,
+            'completedtaks' =>  $completedtaks,
+            'futuretasks' => $futuretasks,
+            'accountbalance' => $accountbalance
         ];
 
         return view('clients.activity')->with($data);

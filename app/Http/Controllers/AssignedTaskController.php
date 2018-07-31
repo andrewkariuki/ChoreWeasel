@@ -267,15 +267,15 @@ class AssignedTaskController extends Controller
 
             $pdf = PDF::loadView('invoice.invoice', $data);
 
-            $publicpath = public_path() . '/invoices/' .  $assignedtask->id. '/';
+            // $publicpath = public_path() . '/invoices/' .  $assignedtask->id. '/';
 
-            $pdf->save($publicpath . 'invoice.pdf');
+            // $pdf->save($publicpath . 'invoice.pdf');
 
             return $pdf->download('invoice.pdf');
 
 
 
-            $client = $assignedtask->assigner()->first();
+            $client = $assignedtask->assigner->first();
 
             $client->notify(new TaskComplete());
 

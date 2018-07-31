@@ -124,15 +124,17 @@
                                                         <div class="tasker-top-review">
                                                             <div class="row">
                                                                 <div class="col-sm-4">
-                                                                    <div class="reviewer-image"></div>
+                                                                    <div class="reviewer-image" >
+                                                                        {{--  <img height: 50px; with: 50px; src="{{ $tasker->ratings->first()->ratingclient->profile->avatar }}" alt="{{ $tasker->ratings->first()->ratingclient->firstname }}" style="border-radius: 50%;">  --}}
+                                                                    </div>
                                                                 </div>
                                                                 <div class="col-sm-8">
                                                                     @if($tasker->ratings->first())
                                                                     <div class="review">
-                                                                        {{ $tasker->ratings }}
+                                                                        {{ $tasker->ratings->first()->comment }}
                                                                     </div>
-                                                                    <div class="reviewer-name">
-                                                                        John Man - <span class="review-date"></span>
+                                                                    <div class="reviewer-name text-capitalize">
+                                                                        {{ $tasker->ratings->first()->ratingclient->firstname }} {{ $tasker->ratings->first()->ratingclient->secondname }}- <span class="review-date"> {{ \Carbon\Carbon::parse($tasker->ratings->first()->created_at)->diffForHumans() }}</span>
                                                                     </div>
 
                                                                     @else {{-- @if($tasker->user->ratingstome->first) --}}

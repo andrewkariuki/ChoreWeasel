@@ -22,7 +22,7 @@
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="thin value">
-                                        0
+                                        {{ $futuretasks }}
                                     </div>
                                     <div class="small value_label">
                                         Future Tasks
@@ -30,7 +30,7 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="thin value">
-                                        0
+                                        {{ $completedtaks }}
                                     </div>
                                     <div class="small value_label">
                                         Tasks Completed
@@ -38,7 +38,7 @@
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="thin value">
-                                        $0.00
+                                        ${{ $accountbalance->balance }}.00
                                     </div>
                                     <div class="small value_label">
                                         Total Amount
